@@ -8,7 +8,7 @@
     {% block content %}
     <center>
     <h1>Delivery Route Table</h1>
-    <a href="/createdeliveryroute/" class="button">Add</a>
+    <a href="/create-delivery-route/" class="button">Add</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -24,8 +24,8 @@
             <td>{{ deliveryroute.to_city.name }}</td>
             <td>{{ deliveryroute.distance_km }}</td>
             <td>
-                <a href="/updatedeliveryroute/{{ deliveryroute.id }}/" class="button">Edit</a>
-                <a href="/deletedeliveryroute/{{ deliveryroute.id }}/" class="button">Delete</a>
+                <a href="/update-delivery-route/{{ deliveryroute.id }}/" class="button">Edit</a>
+                <a href="/delete-delivery-route/{{ deliveryroute.id }}/" class="button">Delete</a>
             </td>
         </tr>
         {% endfor %}

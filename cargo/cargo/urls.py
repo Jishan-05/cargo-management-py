@@ -23,7 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # HOME URL
-    path('dsbrd/',dsbrd),
     path('about/',about),
     path('company/',company),
     path('contact/',contact),
@@ -32,92 +31,91 @@ urlpatterns = [
     path('shop/',shop),
 
     #ADMIN SIDE URL 
-    path('login/', login_view,name='login'),
+    path('admin-login/', admin_login_view,name='admin-login'),
     # path('register/', register_view),
-    path('admin_dashboard/', admin_dashboard),
-    path('adminprofile/',admin_profile),
-    path('adminedit/',admin_edit_profile),
-    path('acp/',acpassword),
+    path('admin-dashboard', admin_dashboard_view),
+    path('admin-profile/',admin_profile),
+    path('admin-profile-edit/',admin_edit_profile),
+    path('admin-change-password/',admin_change_password),
 
     # user 
-    path('userlist/',list_users),
+    path('user-list/',user_list),
     
     # emp
-    path('emplist/',employee_list),
-    path('createemp/',create_employee),
-    path('updateemp/<int:id>/',update_employee),
-    path('deleteemp/<int:id>/',delete_employee),
+    path('employee-list/',employee_list),
+    path('create-employee/',create_employee),
+    path('update-employee/<int:id>/',update_employee),
+    path('delete-employee/<int:id>/',delete_employee),
 
     # admin
-    path('adminlist/',admin_list),
+    path('admin-list/',admin_list),
 
     # customer
-    path('customerlist/',customer_list),
+    path('customer-list/',customer_list),
 
     # country
-    path('countrylist/',country_list, name='countrylist'),
-    path('createcountry/',create_country),
-    path('deletecountry/<int:id>/',delete_country),
-    path('updatecountry/<int:id>/',update_country, name='updatecountry'),
+    path('country-list/',country_list, name='country-list'),
+    path('create-country/',create_country),
+    path('delete-country/<int:id>/',delete_country),
+    path('update-country/<int:id>/',update_country, name='update-country'),
 
     # state
-    path('statelist/',state_list,name='statelist'),
-    path('createstate/',create_state),
-    path('updatestate/<int:id>/',update_state ,name='updatestate'),
-    path('deletestate/<int:id>/',delete_state),
+    path('state-list/',state_list,name='state-list'),
+    path('create-state/',create_state),
+    path('update-state/<int:id>/',update_state ,name='update-state'),
+    path('delete-state/<int:id>/',delete_state),
 
     # city
-    path('citylist/',city_list,name='citylist'),   
-    path('createcity/',create_city) ,
-    path('updatecity/<int:id>/',update_city,name='updatecity'),
-    path('deletecity/<int:id>/',delete_city),
+    path('city-list/',city_list,name='city-list'),   
+    path('create-city/',create_city) ,
+    path('update-city/<int:id>/',update_city,name='update-city'),
+    path('delete-city/<int:id>/',delete_city),
 
     # parcelstatus
-    path('parcelstatuslist/',parcelstatus_list,name='parcelstatuslist'),
-    path('createparcelstatus/',create_parcelstatus),
-    path('updateparcelstatus/<int:id>/',update_parcelstatus),
-    path('deleteparcelstatus/<int:id>/',delete_parcelstatus),
+    path('parcel-status-list/',parcelstatus_list,name='parcel-status-list'),
+    path('create-parcel-status/',create_parcelstatus),
+    path('update-parcel-status/<int:id>/',update_parcelstatus),
+    path('delete-parcel-status/<int:id>/',delete_parcelstatus),
     
     # pricing
-    path('pricinglist/',pricing_list,name='pricinglist'),
-    path('createpricing/',create_pricing),
-    path('updatepricing/<int:id>/',update_pricing,name='updatepricing'),
-    path('deletepricing/<int:id>/',delete_pricing),
+    path('pricing-list/',pricing_list,name='pricing-list'),
+    path('create-pricing/',create_pricing),
+    path('update-pricing/<int:id>/',update_pricing,name='update-pricing'),
+    path('delete-pricing/<int:id>/',delete_pricing),
 
     # deliveryroute 
-    path('deliveryroutelist/',deliveryroute_list,name='deliveryroutelist'),
-    path('createdeliveryroute/',create_deliveryroute),
-    path('updatedeliveryroute/<int:id>/',update_deliveryroute,name='updatedeliveryroute'),
-    path('deletedeliveryroute/<int:id>/',delete_deliveryroute),
+    path('delivery-route-list/',deliveryroute_list,name='delivery-route-list'),
+    path('create-delivery-route/',create_deliveryroute),
+    path('update-delivery-route/<int:id>/',update_deliveryroute,name='update-delivery-route'),
+    path('delete-delivery-route/<int:id>/',delete_deliveryroute),
 
     # booking
-    path('bookinglist/',booking_list,name='bookinglist'),
+    path('booking-list/',booking_list,name='booking-list'),
 
     # parcel
-    path('parcellist/',parcel_list),
+    path('parcel-list/',parcel_list),
 
     # feedback
-    path('feedbacklist/',feedback_list, name='feedbacklist'),
-    path('updatefeedback/<int:id>/',update_feedback, name='updatefeedback'),
-    path('deletefeedback/<int:id>/',delete_feedback),
+    path('feedback-list/',feedback_list, name='feedback-list'),
+    path('update-feedback/<int:id>/',update_feedback, name='update-feedback'),
+    path('delete-feedback/<int:id>/',delete_feedback),
 
 
     # EMPLOYEE  SIDE URL
-    path('emplogin/',emplogin,name='emplogin'),
-    path('empregister/',empregister),
-    path('employee_dashboard/',employee_dashboard ),
-    path('empprofile/',employee_profile),
-    path('empedit/',emp_edit_profile),
-    path('ecp/',ecpassword),
+    path('employee-login/',emplogin,name='employee-login'),
+    path('employee-register/',empregister),
+    path('employee-dashboard/',employee_dashboard ),
+    path('employee-profile/',employee_profile),
+    path('employee-profile-edit/',emp_edit_profile),
+    path('employee-change-password/',ecpassword),
 
     # CUSTOMER SIDE URL
-    path('custlogin/',custlogin, name='custlogin'),
-    path('custregister/',custregister),
-    path('custprofile/', customer_profile),
-    path('custedit/',cust_edit_profile),
-    path('ccp/', ccpassword),
-    path('book/', booking_view, name='booking'),
-    path('myorders/<str:username>/', my_orders),
+    path('customer-login/',custlogin, name='customer-login'),
+    path('customer-register/',custregister),
+    path('customer-profile/', customer_profile),
+    path('customer-profile-edit/',cust_edit_profile),
+    path('customer-change-password/', ccpassword),
+    path('customer-booking/', customer_booking_view, name='customer-booking'),
     
     path('feedback/', dofeedback, name='feedback'),
 

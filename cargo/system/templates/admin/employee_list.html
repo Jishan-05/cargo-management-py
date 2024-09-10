@@ -11,7 +11,7 @@
     <center>
     <h1>Employee Table
     </h1>
-    {% comment %} <a href="/createemp/" class="button">Add</a> {% endcomment %}
+    {% comment %} <a href="/create-employee/" class="button">Add</a> {% endcomment %}
     <table border="1">
         <tr>
             <th>Employee</th>
@@ -28,8 +28,8 @@
             <td>{{ employee.position }}</td>
             <td>{{ employee.address }}</td>
             {% comment %} <td>
-                <a href="/updateemp/{{ employee.employee_id }}/" class="button">Edit</a>
-                <a href="/deleteemp/{{ employee.employee_id }}/" class="button">Delete</a>
+                <a href="/update-employee/{{ employee.employee_id }}/" class="button">Edit</a>
+                <a href="/delete-employee/{{ employee.employee_id }}/" class="button">Delete</a>
             </td> {% endcomment %}
         </tr>
         {% endfor %}

@@ -8,7 +8,7 @@
     {% block content %}
     <center>
     <h1>Parcel Status Table</h1>
-    <a href="/createparcelstatus/" class="button">Add</a>
+    <a href="/create-parcel-status/" class="button">Add</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -27,8 +27,8 @@
             <td>{{ parcelstatus.updated_at }}</td>
             <td>
               
-                <a href="/updateparcelstatus/{{ parcelstatus.id }}/" class="button">Edit</a>
-                <a href="/deleteparcelstatus/{{ parcelstatus.id }}/" class="button">Delete</a>
+                <a href="/update-parcel-status/{{ parcelstatus.id }}/" class="button">Edit</a>
+                <a href="/delete-parcel-status/{{ parcelstatus.id }}/" class="button">Delete</a>
             </td>
         </tr>
         {% endfor %}

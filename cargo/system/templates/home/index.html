@@ -126,17 +126,17 @@
                                         <img src="/static/images/linkedin.png" alt="">
                                     </a>
                                 </div>
-                                <div class="dropdown">
+                                {% comment %} <div class="dropdown">
                                     <a href="#" class="dropdown-toggle" id="customDropdownMenuLink" data-toggle="dropdown">
                                         <img src="/static/images/square.png" alt="Menu" height="25px" width="25px">
                                     </a>
                                     <div class="dropdown-menu">                                  
-                                        <a class="dropdown-item" href="custprofile/">My Profile</a>
+                                        <a class="dropdown-item" href="customer-profile/">My Profile</a>
                                         <a class="dropdown-item" href="/feedback/">Give us FeedBack</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-danger" href="/signout">Sign out</a>
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
 
                                 {% comment %}
                                 <div class="nav-item dropdown">
@@ -519,7 +519,7 @@
 
                             Transportation services encompass the movement of goods and people from one location to another                        </p>
                         <div class="d-flex justify-content-end">
-                            <a href="/book/" class="service-btn">
+                            <a href="/customer-booking/" class="service-btn">
                 Book Now
               </a>
                         </div>
@@ -998,8 +998,8 @@
     </section>
     <!-- footer section -->
 
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
 
 
     <script>

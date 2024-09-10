@@ -10,7 +10,7 @@
     {% block content %}
     <center>
     <h1>City Table</h1>
-    <a href="/createcity/" class="button">Add</a>
+    <a href="/create-city/" class="button">Add</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -24,8 +24,8 @@
             <td>{{ city.name }}</td>
             <td>{{ city.state.name }}</td>
             <td>
-                <a href="/updatecity/{{ city.id }}/" class="button">Edit</a>
-                <a href="/deletecity/{{ city.id }}/" class="button">Delete</a> 
+                <a href="/update-city/{{ city.id }}/" class="button">Edit</a>
+                <a href="/delete-city/{{ city.id }}/" class="button">Delete</a> 
             </td>
         </tr>
         

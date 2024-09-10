@@ -8,7 +8,7 @@
     {% block content %}
     <center>
     <h1>Pricing Table</h1>
-    <a href="/createpricing/" class="button">Add</a>
+    <a href="/create-pricing/" class="button">Add</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -29,8 +29,8 @@
             <td>{{ pricing.created_at }}</td>
             <td>{{ pricing.updated_at }}</td>
             <td>
-                <a href="/updatepricing/{{ pricing.id }}/" class="button">Edit</a>
-                <a href="/deletepricing/{{ pricing.id }}/" class="button">Delete</a>
+                <a href="/update-pricing/{{ pricing.id }}/" class="button">Edit</a>
+                <a href="/delete-pricing/{{ pricing.id }}/" class="button">Delete</a>
             </td>
         </tr>
         {% endfor %}

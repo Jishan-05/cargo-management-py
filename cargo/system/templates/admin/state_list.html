@@ -9,7 +9,7 @@
     {% block content %}
     <center>
     <h1>State Table</h1>
-    <a href="/createstate/" class="button">Add</a>
+    <a href="/create-state/" class="button">Add</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -23,8 +23,8 @@
             <td>{{ state.name }}</td>
             <td>{{ state.country.name }}</td>
             <td>
-                <a href="/updatestate/{{ state.id }}/" class="button">Edit</a>
-                <a href="/deletestate/{{ state.id }}/" class="button">Delete</a>
+                <a href="/update-state/{{ state.id }}/" class="button">Edit</a>
+                <a href="/delete-state/{{ state.id }}/" class="button">Delete</a>
             </td>
         </tr>
         {% endfor %}

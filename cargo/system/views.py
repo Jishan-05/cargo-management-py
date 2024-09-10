@@ -38,41 +38,41 @@ def shop(request):
 #  End home page
 # Admin side starts 
 # admin 
-def login_view(request):
+def admin_login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         if not username :
             messages.error(request, 'username is required.')
-            return render(request, 'user/login.html')
-            # return redirect('login')
+            return render(request, 'user/admin-login.html')
+            # return redirect('admin-login')
         if not password :
             messages.error(request, 'password is required.')
-            return render(request, 'user/login.html')
-            # return redirect('login')
+            return render(request, 'user/admin-login.html')
+            # return redirect('admin-login')
 
         try:
             user = User.objects.get(username=username)
             if user.password == password:  
                 request.session['user_id'] = user.id  
                 if user.role == 'Admin':
-                    return redirect('/admin_dashboard/')
+                    return redirect('/admin-dashboard')
                 elif user.role == 'Employee':
-                    return redirect('/employee_dashboard/')
+                    return redirect('/employee-dashboard/')
                 elif user.role == 'Customer':
                     return redirect('/customer_profile/')
                 else:
                     messages.error(request, 'Invalid user role.')
-                    return redirect('login')
+                    return redirect('admin-login')
             else:
                 messages.error(request, 'Invalid credentials.')
-                return redirect('login')
+                return redirect('admin-login')
         except User.DoesNotExist:
             messages.error(request, 'User does not exist.')
-            return redirect('login')
+            return redirect('admin-login')
 
-    return render(request, 'user/login.html')
+    return render(request, 'user/admin-login.html')
 
 def register_view(request):
     if request.method == 'POST':
@@ -109,11 +109,11 @@ def register_view(request):
 
         User.objects.create(username=username, password=password, email=email, role=role)
         messages.success(request, 'Registration successful. Please log in.')
-        return redirect('/login/')
+        return redirect('/admin-login/')
 
     return render(request, 'user/register.html')
 
-def acpassword(request):
+def admin_change_password(request):
     if request.method == 'POST':
         old_password = request.POST.get('old_password')
         new_password = request.POST.get('new_password')
@@ -134,13 +134,13 @@ def acpassword(request):
             user.save()
             update_session_auth_hash(request, user)  # Keeps the user logged in after password change
             messages.success(request, 'Password changed successfully.')
-            return redirect('/admin_dashboard/')
+            return redirect('/admin-dashboard')
         else:
             messages.error(request, 'Old password is incorrect.')
 
     return render(request, 'user/admin_change_password.html')
 
-def admin_dashboard(request):
+def admin_dashboard_view(request):
     user_id = request.session.get('user_id')
     if user_id:
         try:
@@ -164,11 +164,11 @@ def admin_dashboard(request):
                 return render(request, 'user/admin_dashboard.html', {'user': user ,'admin': admin, 'bookingCounts': bookingCounts})
             else:
                 messages.error(request, 'Access denied')
-                return redirect('login')
+                return redirect('admin-login')
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('/login/')
-    return redirect('/login/')
+            return redirect('/admin-login/')
+    return redirect('/admin-login/')
 
 def admin_profile(request):
     user_id = request.session.get('user_id')
@@ -183,11 +183,11 @@ def admin_profile(request):
                 return render(request, 'user/admin_profile.html', {'user': user, 'admin': admin})
             else:
                 messages.error(request, 'Access denied')
-                return redirect('login')
+                return redirect('admin-login')
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('login')
-    return redirect('login')
+            return redirect('admin-login')
+    return redirect('admin-login')
 
 def admin_edit_profile(request):
     user_id = request.session.get('user_id')
@@ -227,7 +227,7 @@ def admin_edit_profile(request):
                 user.save()
                 admin.save()
                 messages.success(request, 'Profile updated successfully')
-                return redirect('/adminprofile/')
+                return redirect('/admin-profile/')
 
             # Load the existing profile data
             try:
@@ -239,11 +239,11 @@ def admin_edit_profile(request):
         
         else:
             messages.error(request, 'Access denied')
-            return redirect('login')
-    return redirect('login')
+            return redirect('admin-login')
+    return redirect('admin-login')
 
 # users
-def list_users(request):
+def user_list(request):
     users = User.objects.all()
     if request.method=="GET":
         cr = request.GET.get('searchinput')
@@ -251,7 +251,7 @@ def list_users(request):
             users = User.objects.filter(username__icontains = cr )
     return render(request, 'admin/users_list.html', {'users': users})
 
-# adminlist
+# admin-list
 def admin_list(request):
     admins = Admin.objects.all()
     if request.method=="GET":
@@ -260,7 +260,7 @@ def admin_list(request):
             admins = Admin.objects.filter(user__username__icontains = cr )
     return render(request, 'admin/admin_list.html', {'admins': admins})
 
-# customerlist
+# customer-list
 def customer_list(request):
     customers = Customer.objects.all()
     if request.method=="GET":
@@ -290,7 +290,7 @@ def create_employee(request):
             phone_number=phone_number,
             position=position
         )
-        return redirect('../emplist/')
+        return redirect('../employee-list/')
     return render(request, 'admin/create_employee.html')
 
 def update_employee(request, id):
@@ -299,14 +299,14 @@ def update_employee(request, id):
         employee.phone_number = request.POST.get('phone_number')
         employee.position = request.POST.get('position')
         employee.save()
-        return redirect('../emplist/')
+        return redirect('../employee-list/')
     return render(request, 'admin/update_employee.html', {'employee': employee})
 
 def delete_employee(request, id):
     employee = get_object_or_404(Employee, employee_id=id)
     if request.method == "POST":
         employee.delete()
-        return redirect('../emplist/')
+        return redirect('../employee-list/')
     return render(request, 'admin/delete_employee.html', {'employee': employee})
 
 # country list
@@ -324,10 +324,10 @@ def create_country(request):
         if name:
              if Country.objects.filter(name=name).exists():
                 messages.error(request, 'Country already exists')
-                return redirect('/createcountry/') 
+                return redirect('/create-country/') 
         Country.objects.create(name=name)
         messages.success(request, 'Country created successfully')
-        return redirect('countrylist')
+        return redirect('country-list')
     return render(request, 'admin/create_country.html')
 
 def update_country(request, id):
@@ -337,10 +337,10 @@ def update_country(request, id):
         if name : 
             if name != country.name and Country.objects.filter(name=name).exists():
                 messages.error(request, 'Country already exists')
-                return redirect('updatecountry', id=id) 
+                return redirect('update-country', id=id) 
         country.save()
         messages.success(request, 'Country updated successfully')
-        return redirect('countrylist')
+        return redirect('country-list')
     return render(request, 'admin/update_country.html', {'country': country})
 
 def delete_country(request, id):
@@ -348,10 +348,10 @@ def delete_country(request, id):
     if request.method == "POST":
         country.delete()
         messages.success(request, 'Country deleted successfully')
-        return redirect('countrylist')
+        return redirect('country-list')
     return render(request, 'admin/delete_country.html', {'country': country})
 
-# statelist
+# state-list
 def state_list(request):
     states = State.objects.all()
     if request.method=="GET":
@@ -367,10 +367,10 @@ def create_state(request):
         country = Country.objects.get(id=country_id)
         if State.objects.filter(name=name, country=country).exists():
             messages.error(request, 'State already exists in this country')
-            return redirect('/createstate/')
+            return redirect('/create-state/')
         State.objects.create(name=name, country=country)
         messages.success(request, 'State created successfully')
-        return redirect('statelist')
+        return redirect('state-list')
     countries = Country.objects.all()
     return render(request, 'admin/create_state.html', {'countries': countries})
 
@@ -382,10 +382,10 @@ def update_state(request, id):
         state.country = Country.objects.get(id=country_id)
         if State.objects.filter(name=state.name, country=state.country).exclude(id=id).exists():
             messages.error(request, 'State already exists in this country')
-            return redirect('updatestate', id=id)
+            return redirect('update-state', id=id)
         state.save()
         messages.success(request, 'State updated successfully')
-        return redirect('statelist')
+        return redirect('state-list')
     
     countries = Country.objects.all()
     return render(request, 'admin/update_state.html', {'state': state, 'countries': countries})
@@ -395,10 +395,10 @@ def delete_state(request, id):
     if request.method == "POST":
         state.delete()
         messages.success(request, 'State deleted successfully')
-        return redirect('statelist')
+        return redirect('state-list')
     return render(request, 'admin/delete_state.html', {'state': state})
 
-# citylist
+# city-list
 def city_list(request):
     cities = City.objects.all()
     if request.method=="GET":
@@ -415,10 +415,10 @@ def create_city(request):
 
         if City.objects.filter(name=name, state=state).exists():
             messages.error(request, 'City already exists in this state')
-            return redirect('/createcity/')
+            return redirect('/create-city/')
         City.objects.create(name=name, state=state)
         messages.success(request, 'City created successfully')
-        return redirect('citylist')
+        return redirect('city-list')
     
     states = State.objects.all()
     return render(request, 'admin/create_city.html', {'states': states})
@@ -431,10 +431,10 @@ def update_city(request, id):
         city.state = get_object_or_404(State, id=state_id)
         if City.objects.filter(name=city.name, state=city.state).exclude(id=id).exists():
             messages.error(request, 'City already exists in this state')
-            return redirect('updatecity', id=id)
+            return redirect('update-city', id=id)
         city.save()
         messages.success(request, 'City updated successfully')
-        return redirect('citylist')
+        return redirect('city-list')
     
     states = State.objects.all()
     return render(request, 'admin/update_city.html', {'city': city, 'states': states})
@@ -444,7 +444,7 @@ def delete_city(request, id):
     if request.method == "POST":
         city.delete()
         messages.success(request, 'City deleted successfully')
-        return redirect('citylist')
+        return redirect('city-list')
     return render(request, 'admin/delete_city.html', {'city': city})
 
 # parcelstatus list
@@ -473,7 +473,7 @@ def create_parcelstatus(request):
             updated_at=updated_at
         )
         messages.success(request, 'Parcel status created successfully')
-        return redirect('parcelstatuslist')
+        return redirect('parcel-status-list')
     
     parcels = Parcel.objects.all()
     users = User.objects.all()
@@ -489,7 +489,7 @@ def update_parcelstatus(request, id):
         parcelstatus.save()
         messages.success(request, 'Parcel status updated successfully')
 
-        return redirect('parcelstatuslist')
+        return redirect('parcel-status-list')
 
     parcels = Parcel.objects.all()
     users = User.objects.all()
@@ -500,7 +500,7 @@ def delete_parcelstatus(request, id):
     if request.method == "POST":
         parcelstatus.delete()
         messages.success(request, 'Parcel status deleted successfully')
-        return redirect('parcelstatuslist')
+        return redirect('parcel-status-list')
     return render(request, 'admin/delete_parcelstatus.html', {'parcelstatus': parcelstatus})
 
 # pricing list
@@ -522,7 +522,7 @@ def create_pricing(request):
 
         if Pricing.objects.filter(base_price=base_price,price_per_km=price_per_km,price_per_kg=price_per_kg).exists():
             messages.error(request, 'Prices Already Exists ')
-            return redirect('/createpricing/')
+            return redirect('/create-pricing/')
 
         Pricing.objects.create(
             base_price=base_price,
@@ -532,7 +532,7 @@ def create_pricing(request):
             updated_at=updated_at
         )
         messages.success(request, 'Prices created successfully.')
-        return redirect('pricinglist')
+        return redirect('pricing-list')
     
     return render(request, 'admin/create_pricing.html')
 
@@ -546,11 +546,11 @@ def update_pricing(request, id):
 
         if Pricing.objects.filter(base_price=pricing.base_price,price_per_km=pricing.price_per_km,price_per_kg=pricing.price_per_kg).exclude(id=id).exists():
             messages.error(request, 'Prices Already Exists')
-            return redirect('updatepricing', id=id)
+            return redirect('update-pricing', id=id)
 
         pricing.save()
         messages.success(request, 'Prices updated successfully.')
-        return redirect('pricinglist')
+        return redirect('pricing-list')
     return render(request, 'admin/update_pricing.html', {'pricing': pricing})
 
 def delete_pricing(request, id):
@@ -558,7 +558,7 @@ def delete_pricing(request, id):
     if request.method == "POST":
         pricing.delete()
         messages.success(request, 'Prices deleted successfully.')
-        return redirect('pricinglist')
+        return redirect('pricing-list')
     return render(request, 'admin/delete_pricing.html', {'pricing': pricing})
 
 # deliveryroute list
@@ -582,7 +582,7 @@ def create_deliveryroute(request):
         existing_route = Deliveryroute.objects.filter(from_city=from_city, to_city=to_city).first()
         if existing_route:
             messages.error(request, 'Route already exists')
-            return redirect('/createdeliveryroute/')
+            return redirect('/create-delivery-route/')
         
         Deliveryroute.objects.create(
             from_city=from_city,
@@ -590,7 +590,7 @@ def create_deliveryroute(request):
             distance_km=distance_km
         )
         messages.success(request, 'Delivery route created successfully.')
-        return redirect('deliveryroutelist')
+        return redirect('delivery-route-list')
     
     cities = City.objects.all()
     return render(request, 'admin/create_deliveryroute.html', {'cities': cities})
@@ -605,11 +605,11 @@ def update_deliveryroute(request, id):
         existing_route = Deliveryroute.objects.filter(from_city=deliveryroute.from_city, to_city=deliveryroute.to_city).first()
         if existing_route:
             messages.error(request, 'Route already exists')
-            return redirect('updatedeliveryroute',id=id)
+            return redirect('update-delivery-route',id=id)
         
         deliveryroute.save()
         messages.success(request, 'Delivery route updated successfully.')
-        return redirect('deliveryroutelist')
+        return redirect('delivery-route-list')
 
         
     cities = City.objects.all()
@@ -620,7 +620,7 @@ def delete_deliveryroute(request, id):
     if request.method == "POST":
         deliveryroute.delete()
         messages.success(request, 'Delivery route deleted successfully.')
-        return redirect('deliveryroutelist')
+        return redirect('delivery-route-list')
     return render(request, 'admin/delete_deliveryroute.html', {'deliveryroute': deliveryroute})
 
 # booking list
@@ -657,12 +657,12 @@ def update_feedback(request, id):
 
         if not feedback_text:
             messages.error(request, 'Feedback text is required.')
-            return redirect('updatefeedback', feedback_id=id)
+            return redirect('update-feedback', feedback_id=id)
 
         feedback.feedback_text = feedback_text
         feedback.save()
         messages.success(request, 'Feedback updated successfully!')
-        return redirect('feedbacklist')
+        return redirect('feedback-list')
 
     return render(request, 'admin/update_feedback.html', {'feedback': feedback})
 
@@ -671,7 +671,7 @@ def delete_feedback(request,id):
     if request.method == 'POST':
         feedback.delete()
         messages.success(request, 'Feedback deleted successfully!')
-        return redirect('feedbacklist')
+        return redirect('feedback-list')
 
     return render(request, 'admin/delete_feedback.html', {'feedback': feedback})
 
@@ -739,7 +739,7 @@ def empregister(request):
         )
 
         messages.success(request, 'Registration successful. Please log in.')
-        return redirect('/emplogin/')
+        return redirect('/employee-login/')
 
     return render(request, 'user/empregister.html')
 
@@ -760,7 +760,7 @@ def emplogin(request):
             user = User.objects.get(email=email.lower(), role='Employee')
             if user.password == password:  # Directly compare the password
                 request.session['user_id'] = user.id 
-                return redirect('/employee_dashboard/')  # Redirect to employee profile or dashboard
+                return redirect('/employee-dashboard/')  # Redirect to employee profile or dashboard
             else:
                 messages.error(request, 'Invalid credentials.')
         except User.DoesNotExist:
@@ -789,7 +789,7 @@ def ecpassword(request):
             user.save()
             update_session_auth_hash(request, user)  # Keeps the user logged in after password change
             messages.success(request, 'Password changed successfully.')
-            return redirect('/employee_dashboard/')
+            return redirect('/employee-dashboard/')
         else:
             messages.error(request, 'Old password is incorrect.')
 
@@ -818,11 +818,11 @@ def employee_dashboard(request):
                 return render(request, 'user/employee_dashboard.html', {'user': user ,'employee' : employee, 'bookingCounts': bookingCounts})
             else:
                 messages.error(request, 'Access denied')
-                return redirect('/emplogin/')
+                return redirect('/employee-login/')
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('/emplogin/')
-    return redirect('/emplogin/')
+            return redirect('/employee-login/')
+    return redirect('/employee-login/')
 
 def employee_profile(request):
     user_id = request.session.get('user_id')
@@ -837,8 +837,8 @@ def employee_profile(request):
             return render(request, 'user/employee_profile.html', {'user': user, 'employee': employee})
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('/emplogin/')
-    return redirect('/emplogin/')
+            return redirect('/employee-login/')
+    return redirect('/employee-login/')
 
 def emp_edit_profile(request):
     user_id = request.session.get('user_id')
@@ -887,11 +887,11 @@ def emp_edit_profile(request):
             
             user.save()
             messages.success(request, 'Profile updated successfully')
-            return redirect('/empprofile/')
+            return redirect('/employee-profile/')
 
         return render(request, 'user/emp_edit_profile.html', {'user': user, 'employee': employee})
     
-    return redirect('/emplogin/')
+    return redirect('/employee-login/')
 
 # Employee side ends
 
@@ -905,17 +905,17 @@ def custlogin(request):
 
         if not email:
             messages.error(request, 'Email is required.')
-            return render(request, 'user/login.html')
+            return render(request, 'user/admin-login.html')
         
         if not password:
             messages.error(request, 'Password is required.')
-            return render(request, 'user/login.html')
+            return render(request, 'user/admin-login.html')
 
         try:
             user = User.objects.get(email=email.lower(), role='Customer')
             if check_password(password, user.password):  # Use check_password to verify hashed password
                 request.session['user_id'] = user.id
-                return redirect('/custprofile/')
+                return redirect('/customer-profile/')
                 # return redirect('/booking/')
             else:
                 messages.error(request, 'Invalid credentials.')
@@ -974,7 +974,7 @@ def custregister(request):
             address=address
         )
         messages.success(request, 'Registration successful. Please log in.')
-        return redirect('/custlogin/')
+        return redirect('/customer-login/')
     return render(request, 'user/custregister.html')
 
 def ccpassword(request):
@@ -998,7 +998,7 @@ def ccpassword(request):
             user.save()
             update_session_auth_hash(request, user)  # Keeps the user logged in after password change
             messages.success(request, 'Password changed successfully.')
-            return redirect('/custprofile/')
+            return redirect('/customer-profile/')
         else:
             messages.error(request, 'Old password is incorrect.')
 
@@ -1015,15 +1015,15 @@ def logoutuser(request):
         currentuser = User.objects.get(id = user)
         if currentuser.role=='Customer':
             logout(request)
-            return redirect('custlogin')
+            return redirect('customer-login')
 
         elif currentuser.role=='Admin':
             logout(request)
-            return redirect('login')
+            return redirect('admin-login')
 
         elif currentuser.role=='Employee':
             logout(request)
-            return redirect('emplogin')
+            return redirect('employee-login')
         else :
             return render(request, '/')
     else:
@@ -1042,8 +1042,8 @@ def customer_profile(request):
             return render(request, 'user/customer_profile.html', {'user': user, 'customer': customer})
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('/custlogin/')
-    return redirect('/custlogin/')
+            return redirect('/customer-login/')
+    return redirect('/customer-login/')
 
 def cust_edit_profile(request):
     user_id = request.session.get('user_id')
@@ -1089,11 +1089,11 @@ def cust_edit_profile(request):
             
             user.save()
             messages.success(request, 'Profile updated successfully')
-            return redirect('/custprofile/')
+            return redirect('/customer-profile/')
 
         return render(request, 'user/cust_edit_profile.html', {'user': user, 'customer': customer})
     
-    return redirect('/custlogin/')
+    return redirect('/customer-login/')
 
 def my_orders(request, username):
     customer = get_object_or_404(Customer, user__username=username)
@@ -1205,7 +1205,7 @@ def custbooking_view(request):
             pricing = Pricing.objects.latest('created_at')
         except Pricing.DoesNotExist:
             messages.error(request, 'Pricing data is missing.')
-            return redirect('booking')
+            return redirect('customer-booking')
 
         estimated_price = (pricing.base_price +
                            (pricing.price_per_km * approx_distance) +
@@ -1232,12 +1232,12 @@ def custbooking_view(request):
         elif action == 'cancel':
             messages.error(request, 'Booking canceled.')
 
-        return redirect('booking')
+        return redirect('customer-booking')
     
     cities = City.objects.all()
     return render(request, 'customer/custbooking.html', {'cities': cities})
 
-def booking_view(request):
+def customer_booking_view(request):
   
     user_id = request.session.get('user_id')
     if user_id:
@@ -1247,13 +1247,13 @@ def booking_view(request):
                 customer = Customer.objects.get(user=user)
             except Customer.DoesNotExist:
                 messages.error(request, 'Customer profile not found.')
-                return redirect('custlogin')
+                return redirect('customer-login')
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('custlogin')
+            return redirect('customer-login')
     else:
         messages.error(request, 'You must be logged in to make a booking.')
-        return redirect('custlogin')
+        return redirect('customer-login')
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
         customer_phone = request.POST.get('customer_phone')
@@ -1265,14 +1265,14 @@ def booking_view(request):
 
         if not all([customer_name, customer_phone, pick_address_id, deliver_address_id, parcel_type, payment_type]):
             messages.error(request, "All fields are required.")
-            return redirect('booking')
+            return redirect('customer-booking')
 
         try:
             pick_city = City.objects.get(id=pick_address_id)
             deliver_city = City.objects.get(id=deliver_address_id)
         except City.DoesNotExist:
             messages.error(request, "Invalid city selected.")
-            return redirect('booking')
+            return redirect('customer-booking')
 
         if (pick_city == deliver_city):
             messages.error(request,"Pickup address and deliver address should not be same.")
@@ -1283,13 +1283,13 @@ def booking_view(request):
             distance = delivery_route.distance_km
         except Deliveryroute.DoesNotExist:
             messages.error(request, "No delivery route found.")
-            return redirect('booking')
+            return redirect('customer-booking')
 
         try:
             pricing = Pricing.objects.latest('created_at')
         except Pricing.DoesNotExist:
             messages.error(request, "Pricing details notvailable.")
-            return redirect('booking')
+            return redirect('customer-booking')
 
         base_price = pricing.base_price or 0
         price_per_km = pricing.price_per_km or 0
@@ -1308,7 +1308,7 @@ def booking_view(request):
 
         if action == 'estimate':
             messages.info(request, "Estimated price: Rs{:.2f}".format(estimated_price))
-            return redirect('booking')
+            return redirect('customer-booking')
         
         elif action == 'confirm':
             parcel = Parcel.objects.create(
@@ -1337,11 +1337,11 @@ def booking_view(request):
             )
 
             messages.success(request, "Booking confirmed. Your tracking ID is: {} and the estimated price is: Rs{:.2f}".format(tracking_id, estimated_price))
-            return redirect('booking')
+            return redirect('customer-booking')
 
         elif action == 'cancel':
             messages.info(request, "Booking has been canceled.")
-            return redirect('booking')
+            return redirect('customer-booking')
 
     cities = City.objects.all()
     return render(request, 'customer/booking.html', {'cities': cities})
@@ -1554,11 +1554,11 @@ def addAdminBookingView(request):
             )
 
             messages.success(request, "Booking confirmed. Your tracking ID is: {} and the estimated price is: Rs{:.2f}".format(tracking_id, estimated_price))
-            return redirect('bookinglist')
+            return redirect('booking-list')
 
         elif action == 'cancel':
             messages.info(request, "Booking has been canceled.")
-            return redirect('bookinglist')
+            return redirect('booking-list')
 
     
     return render(request,'admin/add-admin-booking.html', {'cities': cities,'form':form})

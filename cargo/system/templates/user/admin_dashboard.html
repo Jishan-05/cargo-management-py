@@ -94,8 +94,8 @@
                         <img src="\static\images\menu.jpg" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/adminprofile/">My Profile</a>
-                        <a class="dropdown-item" href="/acp/">Change Password</a>
+                        <a class="dropdown-item" href="/admin-profile/">My Profile</a>
+                        <a class="dropdown-item" href="/admin-change-password/">Change Password</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-danger" href="/signout">Sign out</a>
                     </div>
@@ -110,7 +110,7 @@
     
     <ul class="sidebar-nav">
         <li class="sidebar-nav-item">
-            <a href="/admin_dashboard/" class="sidebar-nav-link active">
+            <a href="/admin-dashboard" class="sidebar-nav-link active">
                 <span class="sidebar-nav-icon">
                     <i data-feather="home"></i>
                  </span>
@@ -153,7 +153,7 @@
             <ul class="sidebar-sub-nav collapse" id="navTables">
                         
                 <li class="sidebar-nav-item">
-                    <a href="/userlist/" class="sidebar-nav-link">
+                    <a href="/user-list/" class="sidebar-nav-link">
                         <span class="sidebar-nav-abbr">
                 {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                 </span>
@@ -163,7 +163,7 @@
                     </a>
                 </li>
                         <li class="sidebar-nav-item">
-                            <a href="/adminlist/" class="sidebar-nav-link">
+                            <a href="/admin-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -174,7 +174,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/customerlist/" class="sidebar-nav-link">
+                            <a href="/customer-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -185,7 +185,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/emplist/" class="sidebar-nav-link">
+                            <a href="/employee-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -196,7 +196,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/countrylist/" class="sidebar-nav-link">
+                            <a href="/country-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -207,7 +207,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/statelist/" class="sidebar-nav-link">
+                            <a href="/state-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -218,7 +218,7 @@
                         </li>
                         
                         <li class="sidebar-nav-item">
-                            <a href="/citylist/" class="sidebar-nav-link">
+                            <a href="/city-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -229,7 +229,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/parcelstatuslist/" class="sidebar-nav-link">
+                            <a href="/parcel-status-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -240,7 +240,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/pricinglist/" class="sidebar-nav-link">
+                            <a href="/pricing-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -252,7 +252,7 @@
 
                         
                         <li class="sidebar-nav-item">
-                            <a href="/deliveryroutelist/" class="sidebar-nav-link">
+                            <a href="/delivery-route-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -263,7 +263,7 @@
                         </li>
             
                         <li class="sidebar-nav-item">
-                            <a href="/bookinglist/" class="sidebar-nav-link">
+                            <a href="/booking-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -274,7 +274,7 @@
                         </li>
 
                         <li class="sidebar-nav-item">
-                            <a href="/parcellist/" class="sidebar-nav-link">
+                            <a href="/parcel-list/" class="sidebar-nav-link">
                                 <span class="sidebar-nav-abbr">
                         {% comment %} <img src="\static\images\customer.psng" alt="" height="25px" width="25px"> {% endcomment %}
                         </span>
@@ -316,7 +316,7 @@
                                 {% comment %} <p>Emil: {{ user.email }}</p>
                                 <p>Contact : {{admin.phone_number}}</p>
                                 <p>Address : {{admin.address}}</p> {% endcomment %}
-                                <a href="/adminprofile/" class="button">Go To Myprofile</a>
+                                <a href="/admin-profile/" class="button">Go To Myprofile</a>
 
                     <div class="pb-3">
                         <h1>Dashboard</h1>

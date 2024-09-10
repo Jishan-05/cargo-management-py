@@ -31,8 +31,8 @@
                     <td>{{ feedback.feedback_text }}</td>
                     {% comment %} <td>{{ feedback.created_at }}</td> {% endcomment %}
                     <td>
-                        <a href="/updatefeedback/{{ feedback.id }}/" class="button">Edit</a> 
-                        <a href="/deletefeedback/{{ feedback.id }}/" class="button">Delete</a>
+                        <a href="/update-feedback/{{ feedback.id }}/" class="button">Edit</a> 
+                        <a href="/delete-feedback/{{ feedback.id }}/" class="button">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
