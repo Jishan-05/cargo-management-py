@@ -1,0 +1,18 @@
+
+.nav-link {
+    color: #000000;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(0, 137, 249, 0.637);
+    border-radius: 5px;
+}
+
+
+.nav-link:active {
+    color: #ffffff;
+    background-color: #1ec9b2;
+    border-radius: 5px;
+}
