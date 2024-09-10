@@ -1,0 +1,83 @@
+{% extends "home/hf.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Page</title>
+</head>
+<body>
+    {% block page %}
+    <center>
+        <div class="d-flex justify-content-center">
+            <h2 class="heading_style">Booking Page</h2>
+        </div><br>
+        <form method="post" action="{% url 'booking' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="customer_name">Customer Name:</label>
+                <input type="text" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="customer_phone">Customer Phone:</label>
+                <input type="text" id="customer_phone" name="customer_phone" placeholder="Enter customer phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pick_address">Pick Address:</label>
+                <select id="pick_address" name="pick_address" required>
+                    <option value="">Select Pick Address</option>
+                    {% for city in cities %}
+                        <option value="{{ city.id }}">{{ city.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="deliver_address">Deliver Address:</label>
+                <select id="deliver_address" name="deliver_address" required>
+                    <option value="">Select Deliver Address</option>
+                    {% for city in cities %}
+                        <option value="{{ city.id }}">{{ city.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="parcel_type">Parcel Type:</label>
+                <select id="parcel_type" name="parcel_type" required>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Payment Type:</label>
+                <input type="radio" id="payment_online" name="payment_type" value="online" required>
+                <label for="payment_online">Online</label>
+                <input type="radio" id="payment_cod" name="payment_type" value="cod">
+                <label for="payment_cod">Cash on Delivery</label>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" name="action" value="estimate">Get Estimate</button>
+                <button type="submit" name="action" value="confirm">Confirm Booking</button>
+                <button type="submit" name="action" value="cancel">Cancel Booking</button>
+            </div>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </form>
+    </center>
+    {% endblock %}
+</body>
+</html>

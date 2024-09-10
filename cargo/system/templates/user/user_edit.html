@@ -1,0 +1,86 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    {% comment %} <style>
+        body {
+            background-color: #87CEEB; /* Sky Blue */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-container {
+            padding: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style> {% endcomment %}
+</head>
+<body>
+    {% block content %}
+    <div class="profile-container">
+        <h1>Edit Your Profile</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" required>
+            
+            {% comment %} <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="{{ user.password }}" required> {% endcomment %}
+
+            {% comment %} <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required> {% endcomment %}
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br><br>
+
+            {% comment %} <label for="role">Role:</label>
+            <input type="text" id="role" name="role" value="{{ user.role }}"> {% endcomment %}
+
+            {% comment %} <label for="date_joined">Date Joined:</label>
+            <input type="datetime-local" id="date_joined" name="date_joined" value="{{ user.date_joined|date:'Y-m-dTH:i' }}"><br><br> {% endcomment %}
+
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+{% endblock %}
+</body>
+</html>

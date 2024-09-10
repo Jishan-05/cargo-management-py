@@ -1,0 +1,24 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Employee</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+    <h1>Update Employee</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="employee_id" value="{{ employee.employee_id }}">
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" value="{{ employee.phone_number }}"><br>
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" value="{{ employee.position }}"><br>
+        <button type="submit" onclick = "window.alert('Do You Want to Change The Data ?')">Update</button>
+    </form> 
+    <a href="/emplist/" class="button">Back</a>
+</center>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Country</title>
+</head>
+<body>
+    
+    {% block content %}
+    <center>
+    <h1>Are you sure you want to delete {{ country.name }}?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" onclick = "window.alert('Do You Want to Remove The Data ?')">Delete</button>
+    </form>
+    <a href="/countrylist/" class="button">Cancel</a>
+</center>
+{% endblock %}
+
+</body>
+</html>

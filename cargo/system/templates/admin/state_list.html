@@ -1,0 +1,50 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>State Table</title>
+</head>
+<body>
+    
+    {% block content %}
+    <center>
+    <h1>State Table</h1>
+    <a href="/createstate/" class="button">Add</a>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Actions</th>
+        </tr>
+        {% for state in states %}
+        <tr>
+            <td>{{ state.id }}</td>
+            <td>{{ state.name }}</td>
+            <td>{{ state.country.name }}</td>
+            <td>
+                <a href="/updatestate/{{ state.id }}/" class="button">Edit</a>
+                <a href="/deletestate/{{ state.id }}/" class="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+    {% for state in states %}
+    {% empty %}
+        No Data found
+    {% endfor %} 
+</center>
+{% endblock %}
+
+</body>
+</html>

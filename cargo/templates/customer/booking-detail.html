@@ -1,0 +1,62 @@
+{% extends 'admin/custdsbrd.html' %}
+{% block content %}
+
+
+<a class="button" href="/my-bookings/">Back</a>
+
+<h1>My Orders</h1>
+<div class="orders">
+    {% comment %} <a class="button" href="/my-bookings/">Back</a> {% endcomment %}
+    <div class="order">
+      <h2>Your Order is #<b>{{ booking.parcel.tracking_id }}</b></h2>
+      <p>
+        <b>Parcel Type:</b> {{ booking.parcel.parcel_type }}
+      </p>
+      <p>
+        <b>Amount Paid:</b>  {% if booking.payment_status != 'Pending' %} &#8377; {{ booking.amount_paid }} {% endif %}
+      </p>
+      <p>
+        <b>Payment Status:</b> {{ booking.payment_status }}
+      </p>
+      <p>
+        <b>Status:</b> {{ booking.parcel.status }}
+      </p>
+      <p>
+        <b>Booking Date:</b> {% if booking.payment_status != 'Pending' %} {{ booking.booking_date }} {% endif %}
+      </p>
+    </div>
+
+
+    <h2> Status:</h2>
+    <table border="1">
+        <thead>
+            <th>
+                Status
+            </th>
+                
+            <th>
+                Date
+            </th>
+        </thead>
+        <tbody>
+            {% for status in parcelStatuses %}
+            <tr>
+                <td>
+                    {{status.status}}
+                </td>
+                <td>
+                    {{ status.updated_at }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

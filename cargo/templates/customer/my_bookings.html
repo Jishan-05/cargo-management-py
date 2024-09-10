@@ -1,0 +1,33 @@
+{% extends 'admin/custdsbrd.html' %}
+{% block content %} 
+<h1>My Orders</h1>
+<table border=1>
+    <thead>
+        <tr>
+            <th>Tracking Id</th>
+            <th>Parcel Type</th>
+            <th>Amount Paid</th>
+            <th>Payment Status</th>
+            <th>Status</th>
+            <th>Booking Date</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.parcel.tracking_id }}</td>
+            <td>{{ booking.parcel.parcel_type }}</td>
+            <td>{% if booking.payment_status != 'Pending' %}  &#8377; {{ booking.amount_paid }} {% endif %}</td>
+            <td>{{ booking.payment_status }}</td>
+            <td>{{ booking.parcel.status }}</td>
+            <td>{% if booking.payment_status != 'Pending' %}  {{ booking.booking_date }}{% endif %}</td> 
+            
+
+            <td> <a class="button" href="/booking-detail/{{ booking.id }}/">Details</a>  </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+    <h1>Payment</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tracking Id</th>
+            <th>Status</td>    
+            <th>Parcel_Type</td>
+            <th>Price</th>
+            {% comment %} <th>Parcel Type</th>
+            <th>Booking date</th>
+            <th>Booking Status</th>
+            <th>Price</th>
+            <th>Actions</th> {% endcomment %}
+            <th>Actions</th> 
+        </tr>
+
+        {% for booking in bookings %}
+
+        <form method="POST" >
+        <tr>
+
+            <td> {{booking.id}} </td>
+            <td> {{booking.parcel.tracking_id}} </td>
+            <td> {{booking.payment_status}}</td>
+            <td> {{booking.parcel.parcel_type}} </td>
+            <td> &#8377; {{booking.parcel.price}} </td>
+            <td> 
+                <a class="button" href="/accept-payment/{{ booking.id }}/">Accept Payment</a> 
+            </td>
+
+            
+            {% comment %} <td>{{ pricing.id }}</td>
+            <td>{{ pricing.base_price }}</td>
+            <td>{{ pricing.price_per_km }}</td>
+            <td>{{ pricing.price_per_kg }}</td>
+            <td>{{ pricing.created_at }}</td>
+            <td>{{ pricing.updated_at }}</td>
+            <td>
+                <a href="/updatepricing/{{ pricing.id }}/" class="button">Edit</a>
+                <a href="/deletepricing/{{ pricing.id }}/" class="button">Delete</a>
+            </td> {% endcomment %}
+        </tr>
+    </form>
+   
+        {% endfor %}
+    </table>
+
+    {% for booking in bookings %}
+        {% empty %}
+        No pending payment found
+    {% endfor %}
+    
+   
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+  
+</center>
+{% endblock %}
+</body>
+</html>

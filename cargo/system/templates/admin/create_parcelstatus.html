@@ -1,0 +1,40 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Parcel Status</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+    <h1>Create Parcel Status</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="parcel">Parcel:</label>
+        <select id="parcel" name="parcel" required>
+            {% for parcel in parcels %}
+                <option value="{{ parcelstatus.parcel.parcel_type }}">{{ parcel.parcel_type }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br>
+        
+        <label for="updated_by_user">Updated By:</label>
+        <select id="updated_by_user" name="updated_by_user" required>
+            {% for user in users %}
+                <option value="{{ user.username}}">{{ user.username }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="updated_at">Updated At:</label>
+        <input type="datetime-local" id="updated_at" name="updated_at" required><br>
+        
+        <button type="submit" onclick = "window.alert('Do You Want to Add a New Data ?')">Save</button>
+    </form>
+    <a href="/parcelstatuslist/" class="button">Back</a>
+</center>
+{% endblock %}
+
+</body>
+</html>

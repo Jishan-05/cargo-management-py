@@ -1,0 +1,43 @@
+{% extends 'admin/dsbrd.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Table</title>
+    
+</head>
+<body>
+    {% block content %}
+    <center>
+        <h1>Admin Table</h1>
+        <table border="1">
+            <tr>
+                <th>Username</th>
+                <th>Admin Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Address</th>
+                
+            </tr>
+            {% for admin in admins %}
+            <tr>
+                <td>{{ admin.user.username }}</td>
+                <td>{{ admin.user.first_name }} {{ admin.user.last_name }}</td>
+                <td>{{ admin.phone_number }}</td>
+                <td>{{ admin.user.email }}</td>
+                <td>{{ admin.address }}</td>
+
+                
+                
+            </tr>
+            
+            {% endfor %}
+        </table>
+        {% for admin in admins %}
+        {% empty %}
+            No Data found
+        {% endfor %}
+    </center>
+    {% endblock %}
+</body>
+</html>

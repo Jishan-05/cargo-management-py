@@ -1,0 +1,32 @@
+{% extends 'admin/empdsbrd.html' %}
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+    <h1>My Profile</h1>
+    <img src="/static/images/user.png" alt="Employee Image" class="profile-image" height="50px" width="50px">
+
+    <p>Username: <b>{{ user.username }}</b></p>
+    <p>First Name: <b>{{ user.first_name }}</b></p>
+    <p>Last Name: <b>{{ user.last_name }}</b></p>
+    <p>Role : <b>{{user.role}}</b>
+    {% if employee %}
+        <p>position : <b>{{employee.position}}</b>
+        <p>Phone Number: <b>{{ employee.phone_number }}</b></p>
+        <p>Address: <b>{{ employee.address }}</b></p>
+    {% else %}
+        <p>No additional employee details available.</p>
+    {% endif %}
+    <a href="/empedit/" class="button">Edit Profile</a>
+    <a href="/employee_dashboard/" class="button">Back</a>
+</center>
+{% endblock %}
+</body>
+</html>

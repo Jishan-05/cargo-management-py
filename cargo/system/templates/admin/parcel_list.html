@@ -1,0 +1,37 @@
+{% extends 'admin/dsbrd.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parcel Table</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+        <h1>Parcel Table</h1>
+        <table border="1">
+            <tr>
+                <th>Customer</th>
+                <th>Tracking ID</th>
+                <th>Parcel Type</th>
+                <th>Status</th>
+            </tr>
+            {% for parcel in parcels %}
+            <tr>
+                <td>{{ parcel.customer.user.first_name }} {{ parcel.customer.user.last_name }}</td>
+                <td>{{ parcel.tracking_id }}</td>
+                <td>{{ parcel.parcel_type }}</td>
+                <td>{{ parcel.status }}</td>
+            </tr>
+            
+            {% endfor %}
+        </table>
+        {% for parcel in parcels %}
+        {% empty %}
+            No Data found
+        {% endfor %}
+    </center>
+
+    {% endblock %}
+</body>
+</html>

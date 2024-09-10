@@ -1,0 +1,28 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Employee</title>
+</head>
+<body>
+    
+    {% block content %}
+    <center>
+    <h1>Create Employee</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="user_id">User ID:</label>
+        <input type="text" id="user_id" name="user_id" required><br>
+        <label for="employee_id">Employee ID:</label>
+        <input type="text" id="employee_id" name="employee_id" required><br>
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number"><br>
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position"><br>
+        <button type="submit" onclick = "window.alert('Do You Want to Add a New Data ?')">Save</button>
+    </form>
+    <a href="/emplist/" class="button">Back</a>
+</center>
+    {% endblock %}
+</body>
+</html>

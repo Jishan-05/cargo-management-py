@@ -1,0 +1,48 @@
+{% extends 'admin/custdsbrd.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+    <h1>Edit Profile</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}"><br><br>
+
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br><br>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" value="{{ customer.phone_number }}"><br><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address">{{ customer.address }}</textarea><br><br>
+
+        {% comment %} <input type="submit" value="Update Profile"> {% endcomment %}
+        <button type="submit">Update Profile</button>
+        <a href="/custprofile/" class="button">Back</a>
+
+        {% if messages %}
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+        {% for message in messages %}
+            <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 5px;">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    </form>
+</center>
+{% endblock %}
+</body>
+</html>

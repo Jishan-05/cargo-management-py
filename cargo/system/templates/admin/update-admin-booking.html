@@ -1,0 +1,59 @@
+{% extends 'admin/dsbrd.html' %}
+
+{% block content %}
+
+    <form method="post" style="padding-top:10px" action="{% url 'update-admin-booking' id %}">
+        {% csrf_token %}    
+        <div class="form-group">
+        {% if booking.parcel.status == 'Booked' %}
+            <button type="submit" name="action" value="In Transit" >In Transit</button>
+            <button value="Arrived" style="background-color: gray;cursor: not-allowed;" disabled>Arrived</button>
+            <button value="Delivered" style="background-color: gray;cursor: not-allowed;" disabled>Delivered</button>
+        {% endif %}
+
+
+        {% if booking.parcel.status == 'In Transit' %}
+            <button value="In Transit" style="background-color: gray;cursor: not-allowed;" disabled>In Transit</button>
+            <button type="submit" name="action" value="Arrived" >Arrived</button>
+            <button value="Delivered" style="background-color: gray;cursor: not-allowed;" disabled>Delivered</button>
+        {% endif %}
+
+        {% if booking.parcel.status == 'Arrived' %}
+            <button value="In Transit" style="background-color: gray;cursor: not-allowed;" disabled >In Transit</button>
+            <button value="Arrived" style="background-color: gray;cursor: not-allowed;" disabled>Arrived</button>
+            <button type="submit" name="action" value="Delivered" >Delivered</button>
+        {% endif %}
+
+        </div>
+</form>
+
+<p><b>Order is </b> #{{booking.parcel.tracking_id}}
+    <p><b>Pickup Address is </b>{{booking.parcel.from_city.name}}
+    <p><b>Delivery Address is </b>{{booking.parcel.to_city.name}}
+
+    <table border="1">
+        <thead>
+            <th>
+                Status
+            </th>
+                
+            <th>
+                Date
+            </th>
+        </thead>
+        <tbody>
+            {% for status in parcelStatuses %}
+            <tr>
+                <td>
+                    {{status.status}}
+                </td>
+                <td>
+                    {{ status.updated_at }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

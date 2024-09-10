@@ -1,0 +1,39 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update City</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+    <h1>Update City</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ city.name }}" required><br>
+        
+        <label for="state">State:</label>
+        <select id="state" name="state" required>
+            {% for state in states %}
+                <option value="{{ state.id }}" {% if state.id == city.state.id %}selected{% endif %}>
+                    {{ state.name }}
+                </option>
+            {% endfor %}
+        </select><br>
+        
+        <button type="submit" onclick = "window.alert('Do You Want to Change The Data ?')">Update</button>
+    </form>
+    <a href="/citylist/" class="button">Back</a>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</center>
+{% endblock %}
+</body>
+</html>

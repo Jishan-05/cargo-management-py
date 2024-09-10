@@ -1,0 +1,44 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Table</title>
+
+</head>
+<body>
+    
+    {% block content %}
+    <center>
+    <h1>Employee Table
+    </h1>
+    {% comment %} <a href="/createemp/" class="button">Add</a> {% endcomment %}
+    <table border="1">
+        <tr>
+            <th>Employee</th>
+            <th>Phone Number</th>
+            <th>Position</th>
+            <th>Address</th>
+            {% comment %} <th>Actions</th> {% endcomment %}
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            {% comment %} <td>{{ employee.employee_id }} {% endcomment %}
+            <td>{{ employee.user.first_name }} {{ employee.user.last_name }}</td>
+            <td>{{ employee.phone_number }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.address }}</td>
+            {% comment %} <td>
+                <a href="/updateemp/{{ employee.employee_id }}/" class="button">Edit</a>
+                <a href="/deleteemp/{{ employee.employee_id }}/" class="button">Delete</a>
+            </td> {% endcomment %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% for employee in employees %}
+        {% empty %}
+            No Data found
+        {% endfor %}
+</center>
+    {% endblock %}
+</body>
+</html>
