@@ -1348,21 +1348,23 @@ def customer_booking_view(request):
 
 
 def dofeedback(request):
-    customer = request.session.get('customer_id')
+    user_id = request.session.get('user_id')
 
     if request.method == 'POST':
-        customer_name = request.POST.get('customer_name')
-        customer_contact = request.POST.get('customer_contact')
-        customer_email = request.POST.get('customer_email')
         feedback_text = request.POST.get('feedback_text')
 
+        userDetail = User.objects.get(id=user_id)
+       
+        customerDetail = Customer.objects.get(user = userDetail) 
+        print(customerDetail.id)
     
-        if not (customer_name and customer_contact and customer_email and feedback_text):
+        # if not (customer_name and customer_contact and customer_email and feedback_text):
+        if not (feedback_text):
             messages.error(request, 'All fields are required.')
             return redirect('feedback')
         
         Feedback.objects.create(
-            createdby=customer,
+            createdby=customerDetail,
             feedback_text=feedback_text,
             created_at=timezone.now()
         )

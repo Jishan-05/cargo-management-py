@@ -18,6 +18,7 @@
             <tr>
                 <th>ID</th>
                 <th>Customer Name</th>
+                <th>Contact</th>
                 <th>Feedback</th>
                 {% comment %} <th>Created At</th> {% endcomment %}
                 <th>Actions</th>
@@ -28,6 +29,7 @@
                 <tr>
                     <td>{{ feedback.id }}</td>
                     <td>{{ feedback.createdby.user.first_name }} {{ feedback.createdby.user.last_name }}</td>
+                    <td>{{ feedback.createdby.phone_number }}</td>
                     <td>{{ feedback.feedback_text }}</td>
                     {% comment %} <td>{{ feedback.created_at }}</td> {% endcomment %}
                     <td>
