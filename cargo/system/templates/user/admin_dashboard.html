@@ -23,7 +23,7 @@
                 <img src="\static\images\logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt=""> Shubh Laxmi Cargo Movers
             </a>
 
-            <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
+            {% comment %} <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-icon">
@@ -32,7 +32,7 @@
                     </div>
                     <input type="text" class="form-control" id="search" placeholder="Type to search...">
                 </div>
-            </form>
+            </form> {% endcomment %}
 
             <div class="d-flex flex-1 d-block d-md-none">
                 <a href="#" class="sidebar-toggle ml-3">
@@ -299,15 +299,13 @@
 
                 <div class="container-fluid">
                     <!-- BreadCrumb -->
-                    <nav aria-label="breadcrumb" role="navigation">
+                    {% comment %} <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb adminx-page-breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Dashboard</li> 
-                            <li class="breadcrumb-item active" aria-current="page"></li>
-                            <li class="breadcrumb-item active" aria-current="page"></li>
                         </ol>
                         
-                    </nav>
+                    </nav> 
                     <h6>Welcome to Admin Dashboard</h6>
                     <img src="/static/images/user.png" alt="Employee Image" class="profile-image" height="50px" width="50px">
 
@@ -315,9 +313,9 @@
                                 <p>Role: {{ user.role }}</p>
                                 {% comment %} <p>Emil: {{ user.email }}</p>
                                 <p>Contact : {{admin.phone_number}}</p>
-                                <p>Address : {{admin.address}}</p> {% endcomment %}
+                                <p>Address : {{admin.address}}</p> 
                                 <a href="/admin-profile/" class="button">Go To Myprofile</a>
-
+                                {% endcomment %}
                     <div class="pb-3">
                         <h1>Dashboard</h1>
                     </div>

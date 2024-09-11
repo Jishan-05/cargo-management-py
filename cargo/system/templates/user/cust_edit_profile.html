@@ -5,32 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+   
 </head>
 <body>
     {% block content %}
-    <center>
-    <h1>Edit Profile</h1>
-    
-    <form method="post">
+    {% comment %} <center> {% endcomment %}
+    <div class="container">
+        {% comment %} <h1>Edit Profile</h1> {% endcomment %}
+        <form method="post">
         {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="{{ user.username }}"><br><br>
+        <div class="row">
 
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br><br>
+            <div class="col-25">
+                <label for="username">Username:</label>
+            </div>   
 
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br><br>
+            <div class="col-75"> 
+                <input type="text" id="username" name="username" value="{{ user.username }}"><br><br>
+            </div> 
 
-        <label for="phone_number">Phone Number:</label>
-        <input type="text" id="phone_number" name="phone_number" value="{{ customer.phone_number }}"><br><br>
+            <div class="col-25">    
+                <label for="first_name">First Name:</label>
+            </div>
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address">{{ customer.address }}</textarea><br><br>
+            <div class="col-75">
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br><br>
+            </div>
+
+            <div class="col-25">
+                <label for="last_name">Last Name:</label>
+            </div>
+
+            <div class="col-75">
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br><br>
+            </div>
+
+            <div class="col-25">
+                <label for="phone_number">Phone Number:</label>
+            </div>
+
+            <div class="col-75">
+                <input type="text" id="phone_number" name="phone_number" value="{{ customer.phone_number }}"><br><br>
+            </div>
+
+            <div class ="col-25">
+                <label for="address">Address:</label>
+            </div>
+            
+            <div class="col-75">
+                <textarea id="address" name="address">{{ customer.address }}</textarea><br><br>
+            </div>
 
         {% comment %} <input type="submit" value="Update Profile"> {% endcomment %}
         <button type="submit">Update Profile</button>
-        <a href="/customer-profile/" class="button">Back</a>
+        <a href="/customer-profile/" class="link-button ml-6">Back</a>
+       
+
 
         {% if messages %}
     <ul style="list-style-type: none; padding: 0; margin: 0;">
@@ -41,8 +71,9 @@
         {% endfor %}
     </ul>
 {% endif %}
+    <div>
     </form>
-</center>
+{% comment %} </center> {% endcomment %}
 {% endblock %}
 </body>
 </html>

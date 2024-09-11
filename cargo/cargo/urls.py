@@ -138,6 +138,8 @@ urlpatterns = [
     
     path('update-admin-booking/<int:id>/',updatebooking,name='update-admin-booking'),
 
-    path('invoice/<int:id>/',invoice)
+    path('invoice/<int:id>/',invoice),
+
+    path('booking-estimate/',customerEstimateView,name='booking-estimate')
 
 ]

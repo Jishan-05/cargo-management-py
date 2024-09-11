@@ -2,13 +2,14 @@
 {% block content %}
 
 
-<a class="button" href="/my-bookings/">Back</a>
-
-<h1>My Orders</h1>
-<div class="orders">
+<div class="orders mt-4">
     {% comment %} <a class="button" href="/my-bookings/">Back</a> {% endcomment %}
     <div class="order">
-      <h2>Your Order is #<b>{{ booking.parcel.tracking_id }}</b></h2>
+      <div class="d-flex justify-content-between">
+
+        <h2>Your Order is #<b>{{ booking.parcel.tracking_id }}</b></h2>
+        <a class="button" href="/my-bookings/" class="mr-4">Back</a>
+      </div>
       <p>
         <b>Parcel Type:</b> {{ booking.parcel.parcel_type }}
       </p>
@@ -24,33 +25,44 @@
       <p>
         <b>Booking Date:</b> {% if booking.payment_status != 'Pending' %} {{ booking.booking_date }} {% endif %}
       </p>
+
+      <p>
+        <b>From:</b> {{ booking.parcel.from_city.name }} ({{booking.parcel.from_city.address}})
+      </p>
+
+      <p>
+        <b>To:</b> {{ booking.parcel.to_city.name }} ({{booking.parcel.to_city.address}})
+      </p>
     </div>
 
+    <div class="">
 
-    <h2> Status:</h2>
-    <table border="1">
-        <thead>
-            <th>
-                Status
-            </th>
-                
-            <th>
-                Date
-            </th>
-        </thead>
-        <tbody>
-            {% for status in parcelStatuses %}
-            <tr>
-                <td>
-                    {{status.status}}
-                </td>
-                <td>
-                    {{ status.updated_at }}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+      {% comment %} <h2> Status:</h2> {% endcomment %}
+      <table border="1" class="w-50 m-0">
+          <thead>
+              <th>
+                  Status
+              </th>
+                  
+              <th>
+                  Date
+              </th>
+          </thead>
+          <tbody>
+              {% for status in parcelStatuses %}
+              <tr>
+                  <td>
+                      {{status.status}}
+                  </td>
+                  <td>
+                      {{ status.updated_at }}
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+    
 </div>
 {% if messages %}
   <ul class="messages">

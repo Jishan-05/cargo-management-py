@@ -98,6 +98,7 @@ class Booking(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=255)
+    address = models.CharField(db_column='Address', max_length=1000)  # Field name made lowercase.
     state = models.ForeignKey('State', models.CASCADE, blank=True, null=True)
 
     class Meta:

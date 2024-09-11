@@ -12314,7 +12314,7 @@ span.flatpickr-weekday {
 .adminx-sidebar {
     background: #fff;
     position: fixed;
-    width: 100px,
+    width: 100px;
     top: 3.5rem;
     bottom: 0;
     left: 0;
@@ -13456,7 +13456,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
 }
 
 .page-login {
-    max-width: 25rem
+    max-width: 35rem
 }
 
 .page-error,

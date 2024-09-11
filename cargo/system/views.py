@@ -27,15 +27,18 @@ def contact(request):
     return render(request,"home/contact.html")
 
 def index(request):
-    return render(request, "home/index.html")
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id != None
+
+    return render(request, "home/index.html", {'isUserLoggedIn': isUserLoggedIn})
 
 def service(request):
     return render(request,"home/service.html")
 
 def shop(request):
     return render(request, "home/shop.html")
-
 #  End home page
+
 # Admin side starts 
 # admin 
 def admin_login_view(request):
@@ -45,12 +48,12 @@ def admin_login_view(request):
 
         if not username :
             messages.error(request, 'username is required.')
-            return render(request, 'user/admin-login.html')
-            # return redirect('admin-login')
-        if not password :
+            # return render(request, 'user/admin-login.html')
+            return redirect('admin-login')
+        elif not password :
             messages.error(request, 'password is required.')
-            return render(request, 'user/admin-login.html')
-            # return redirect('admin-login')
+            # return render(request, 'user/admin-login.html')
+            return redirect('admin-login')
 
         try:
             user = User.objects.get(username=username)
@@ -411,12 +414,13 @@ def create_city(request):
     if request.method == "POST":
         name = request.POST.get('name')
         state_id = request.POST.get('state')
+        address = request.POST.get('address')
         state = get_object_or_404(State, id=state_id)
 
         if City.objects.filter(name=name, state=state).exists():
             messages.error(request, 'City already exists in this state')
             return redirect('/create-city/')
-        City.objects.create(name=name, state=state)
+        City.objects.create(name=name, state=state, address = address)
         messages.success(request, 'City created successfully')
         return redirect('city-list')
     
@@ -428,15 +432,19 @@ def update_city(request, id):
     if request.method == "POST":
         city.name = request.POST.get('name')
         state_id = request.POST.get('state')
+        address = request.POST.get('address')
         city.state = get_object_or_404(State, id=state_id)
-        if City.objects.filter(name=city.name, state=city.state).exclude(id=id).exists():
+
+        if City.objects.exclude(pk=id).filter(name=city.name, state=city.state).exists():
             messages.error(request, 'City already exists in this state')
             return redirect('update-city', id=id)
+        city.address = address
         city.save()
         messages.success(request, 'City updated successfully')
         return redirect('city-list')
     
     states = State.objects.all()
+    print(city.address)
     return render(request, 'admin/update_city.html', {'city': city, 'states': states})
 
 def delete_city(request, id):
@@ -1651,3 +1659,65 @@ def invoice(request,id):
     }
 
     return render(request, 'customer/invoice.html',invoice)
+
+
+def customerEstimateView(request):
+    cities = City.objects.all()
+    form = {'pick_address':'', 'deliver_address':'',
+              'parcel_type':'','action':''}
+    
+    context= { 'form':form,'cities':cities}
+    if request.method == 'POST':
+        pick_address_id = request.POST.get('pick_address')
+        deliver_address_id = request.POST.get('deliver_address')
+        parcel_type = request.POST.get('parcel_type')
+        action = request.POST.get('action')
+
+        form = { 
+              'pick_address':pick_address_id, 'deliver_address':deliver_address_id,
+              'parcel_type':parcel_type,'action':action}
+            
+        if not all([ pick_address_id, deliver_address_id, parcel_type]):
+            messages.error(request, "All fields are required.")
+            context= { 'form':form,'cities':cities}
+            return render(request,'customer/booking-estimate.html',context)
+
+        try:
+            pick_city = City.objects.get(id=pick_address_id)
+            deliver_city = City.objects.get(id=deliver_address_id)
+        except City.DoesNotExist:
+            messages.error(request, "Invalid city selected.")
+            context= { 'form':form,'cities':cities}
+            return render(request,'customer/booking-estimate.html',context)
+
+        if (pick_city == deliver_city):
+            messages.error(request,"Pickup address and deliver address should not be same.")
+            context= { 'form':form,'cities':cities}
+            return render(request,"customer/booking-estimate.html",context)
+
+        try:
+            delivery_route = Deliveryroute.objects.get(from_city=pick_city, to_city=deliver_city)
+            distance = delivery_route.distance_km
+        except Deliveryroute.DoesNotExist:
+            messages.error(request, "No delivery route found.")
+            context= { 'form':form,'cities':cities}
+            return render(request,'customer/booking-estimate.html',context)
+
+        try:
+            pricing = Pricing.objects.latest('created_at')
+        except Pricing.DoesNotExist:
+            messages.error(request, "Pricing details notvailable.")
+            context= { 'form':form,'cities':cities}
+            return render(request,'customer/booking-estimate.html',context)
+
+        base_price = pricing.base_price or 0
+        price_per_km = pricing.price_per_km or 0
+        estimated_price = base_price + (price_per_km * distance)
+
+        if action == 'estimate':
+            messages.info(request, "Estimated price: Rs{:.2f}".format(estimated_price))
+            context= { 'form':form,'cities':cities}
+            return render(request,'customer/booking-estimate.html', context)
+    
+    # return render(request,'admin/add-admin-booking.html', {'cities': cities,'form':form})
+    return render(request,'customer/booking-estimate.html', context)

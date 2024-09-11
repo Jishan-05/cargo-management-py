@@ -6,6 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css" href="/static/dist/css/adminx.css" media="screen" />
+    <style>
+      a.button {
+        display: inline-block;
+        background-color: #87cefa; 
+        color: #fff;
+        padding: 11px 12px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        border: 1px solid #87cefa; 
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    a.button:hover {
+        background-color: #4682b4; 
+        border-color: #4682b4; 
+    }
+
+    button {
+      background-color: #87cefa; 
+      border: none;
+      color: #fff;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+  button:hover {
+      background-color: #4682b4; 
+  }
+  </style>
   </head>
   <body>
     <div class="adminx-container d-flex justify-content-center align-items-center">
@@ -33,45 +67,45 @@
                 {% csrf_token %}
               <div class="form-group">
                 <label>Username</label><br>
-                <input type="text" name="username" placeholder="Username">
+                <input type="text" name="username" class="form-control" placeholder="Username">
               </div>
               <div class="form-group">
                 <label>First Name</label><br>
-                <input type="text" name="first_name" placeholder="First Name">
+                <input type="text" name="first_name" class="form-control" placeholder="First Name">
               </div>
 
               <div class="form-group">
                 <label>Last Name</label><br>
-                <input type="text" name="last_name" placeholder="Last Name">
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name">
               </div>
               
               <div class="form-group">
                 <label>Phone Number</label><br>
-                <input type="text" name="phone_number" placeholder="Phone Number">
+                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number">
               </div>
               
               <div class="form-group">
                 <label>Email</label><br>
-                <input type="email" name="email" placeholder="Email">
+                <input type="email" name="email" class="form-control" placeholder="Email">
               </div>
               
               <div class="form-group">
                 <label>Position</label><br>
-                <input type="text" name="position" placeholder="Position">
+                <input type="text" name="position"  class="form-control" placeholder="Position">
 
               </div>
               
               <div class="form-group">
                 <label>Password</label><br>
-                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="password" class="form-control" placeholder="Password">
               </div>
               
               <div class="form-group">
                 <label>Confirm Password</label><br>
-                <input type="password" name="confirm_password" placeholder="Confirm Password">
+                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
 
               </div>
-              <button type="submit" class="btn btn-sm btn-block btn-primary">Register</button>
+              <button type="submit" class="w-100 mb-2" >Register</button>
               Already Have An Account ? <a href ="/employee-login/">Log In</a>
               {% if messages %}
               <ul style="list-style-type: none; padding: 0; margin: 0;">

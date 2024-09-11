@@ -16,6 +16,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>State</th>
+            <th>Address</th>
             <th>Actions</th>
         </tr>
         {% for city in cities %}
@@ -23,6 +24,7 @@
             <td>{{ city.id }}</td>
             <td>{{ city.name }}</td>
             <td>{{ city.state.name }}</td>
+            <td>{{ city.address }}</td>
             <td>
                 <a href="/update-city/{{ city.id }}/" class="button">Edit</a>
                 <a href="/delete-city/{{ city.id }}/" class="button">Delete</a> 
