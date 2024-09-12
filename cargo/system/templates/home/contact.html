@@ -88,11 +88,9 @@
 
                                 <a href="" class="ml-4">
                                     <div>
-                                        <img src="/static/images/phone.png" alt="" />
+                                        {% comment %} <img src="/static/images/phone.png" alt="" /> {% endcomment %}
                                     </div>
-                                    <span>
-                    (+91) 258964785
-                  </span>
+                                    
                                 </a>
                                 <a href="" class="ml-4">
                                     <div>
@@ -124,18 +122,6 @@
                                     <a href="">
                                         <img src="/static/images/linkedin.png" alt="">
                                     </a>
-                                </div>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" id="customDropdownMenuLink" data-toggle="dropdown">
-                                        <img src="/static/images/square.png" alt="Menu" height="25px" width="25px">
-                                </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/"><a class="dropdown-item" href="/customer-profile/">My Profile</a></a>
-                                        <a class="dropdown-item" href="/feedback/">Give us FeedBack</a>
-                                        
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="/signout">Sign out</a> 
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -215,9 +201,9 @@
                                 <input type="text" class="message_input" placeholder="Message">
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="submit " class="">
-                  Send
-                </button>
+                                <button type="submit " class="" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled>
+                                    Send
+                                  </button>
                             </div>
                         </form>
                     </div>
@@ -328,9 +314,9 @@
                             <input type="email" placeholder="Email">
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit">
-                Subscribe
-              </button>
+                            <button type="submit" style ="cursor: not-allowed; " disabled>
+                                Subscribe
+                              </button>
                         </div>
                     </form>
                 </div>

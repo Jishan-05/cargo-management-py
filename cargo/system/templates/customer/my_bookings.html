@@ -25,7 +25,12 @@
             <td>{% if booking.payment_status != 'Pending' %}  {{ booking.booking_date }}{% endif %}</td> 
             
 
-            <td> <a class="button" href="/booking-detail/{{ booking.id }}/">Details</a>  </td>
+            <td> 
+                <a class="button" href="/booking-detail/{{ booking.id }}/">Details</a>  
+                {% if booking.payment_status != 'Pending' %}
+                <a class="button" href="/invoice/{{ booking.id }}/">Invoice</a>  
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

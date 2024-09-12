@@ -181,7 +181,6 @@ class DjangoSession(models.Model):
 
 class Employee(models.Model):
     user = models.ForeignKey('User', models.CASCADE, blank=True, null=True)
-    employee_id = models.CharField(unique=True, max_length=50)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     position = models.CharField(max_length=255, blank=True, null=True)
     address = models.TextField()
@@ -266,3 +265,26 @@ class Feedback(models.Model):
     class Meta:
         managed = False
         db_table = 'feedback'
+
+class Contactus(models.Model):
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=50)  # Field name made lowercase.
+    email = models.CharField(db_column='Email', max_length=50)  # Field name made lowercase.
+    phonenumber = models.CharField(db_column='PhoneNumber', max_length=15)  # Field name made lowercase.
+    message = models.CharField(db_column='Message', max_length=255)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'contactus'
+
+class Invoice(models.Model):
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    createdon = models.DateField(db_column='CreatedOn')  # Field name made lowercase.
+    customername = models.CharField(db_column='CustomerName', max_length=255)  # Field name made lowercase.
+    description = models.CharField(db_column='Description', max_length=255)  # Field name made lowercase.
+    price = models.CharField(db_column='Price', max_length=255)  # Field name made lowercase.
+    bookingid = models.ForeignKey(Booking, models.CASCADE, db_column='BookingId')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'invoice'

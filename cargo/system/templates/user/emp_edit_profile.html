@@ -1,4 +1,4 @@
-{% extends 'admin/empdsbrd.html' %}
+{% extends 'admin/custdsbrd.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,44 +8,84 @@
 </head>
 <body>
     {% block content %}
-    <center>
-    <h1>Edit Profile</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="{{ user.username }}">
+    {% comment %} <center> {% endcomment %}
+    {% comment %} <h1>Edit Profile</h1> {% endcomment %}
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-25">   
+                    <label for="username">Username:</label>
+                </div>
+                <div class="col-75"> 
+                    <input type="text" id="username" name="username" value="{{ user.username }}">
+                </div>
+            </div>
+             
+            <div class="row">
+                <div class="col-25">   
+                    <label for="first_name">First Name:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                </div>
+            </div> 
 
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+            <div class="row">
+                <div class="col-25">    
+                    <label for="last_name">Last Name:</label>
+                </div>
 
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                <div class="col-75">
+                    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                </div>
+            </div>
 
-        <label for="phone_number">Phone Number:</label>
-        <input type="text" id="phone_number" name="phone_number" value="{{ employee.phone_number }}">
+            <div class="row">
+                <div class="col-25">
+                    <label for="phone_number">Phone Number:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="phone_number" name="phone_number" value="{{ employee.phone_number }}">
+                </div>
+            </div>
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address">{{ employee.address }}</textarea>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="address">Address:</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="address" name="address">{{ employee.address }}</textarea>
+                    </div>
+                </div>
 
-        <label for="position">Position:</label>
-        <input type="text" id="position" name="position" value="{{ employee.position }}"><br><br>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="position">Position:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="position" name="position" value="{{ employee.position }}">
+                    </div>
+                </div>
 
-        {% comment %} <input type="submit" value="Update Profile"> {% endcomment %}
-        <button type="submit">Update Profile</button>
-        <a href="/employee-profile/" class="button">Back</a>
+                <div class="row">
+                    {% comment %} <input type="submit" value="Update Profile"> {% endcomment %}
+                    <button type="submit">Update Profile</button>
+                    <a href="/employee-profile/" class="link-button ml-6">Back</a>
+                </div>
 
-        {% if messages %}
-        <ul style="list-style-type: none; padding: 0; margin: 0;">
-            {% for message in messages %}
-                <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 5px;">
-                    {{ message }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    </form>
-</center>
+            {% if messages %}
+            <ul style="list-style-type: none; padding: 0; margin: 0;">
+                {% for message in messages %}
+                    <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 5px;">
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </form>
+    </div>
+{% comment %} </center> {% endcomment %}
 {% endblock %}
 </body>
 </html>

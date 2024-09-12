@@ -18,12 +18,14 @@
 
             <div class="col-25">
                 <label for="username">Username:</label>
-            </div>   
-
+            </div>
             <div class="col-75"> 
                 <input type="text" id="username" name="username" value="{{ user.username }}"><br><br>
-            </div> 
+            </div>
+        </div> 
+        <div class="row">
 
+        
             <div class="col-25">    
                 <label for="first_name">First Name:</label>
             </div>
@@ -32,6 +34,10 @@
                 <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br><br>
             </div>
 
+        </div>
+
+        <div class="row">
+
             <div class="col-25">
                 <label for="last_name">Last Name:</label>
             </div>
@@ -39,15 +45,18 @@
             <div class="col-75">
                 <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br><br>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-25">
                 <label for="phone_number">Phone Number:</label>
             </div>
-
             <div class="col-75">
                 <input type="text" id="phone_number" name="phone_number" value="{{ customer.phone_number }}"><br><br>
             </div>
+        </div>
 
+        <div class="row">
             <div class ="col-25">
                 <label for="address">Address:</label>
             </div>
@@ -55,24 +64,27 @@
             <div class="col-75">
                 <textarea id="address" name="address">{{ customer.address }}</textarea><br><br>
             </div>
+        </div>
 
         {% comment %} <input type="submit" value="Update Profile"> {% endcomment %}
-        <button type="submit">Update Profile</button>
-        <a href="/customer-profile/" class="link-button ml-6">Back</a>
-       
+        <div class="row">
 
+            <button type="submit">Update Profile</button>
+            <a href="/customer-profile/" class="link-button ml-6">Back</a>
+        </div>       
 
+    
         {% if messages %}
-    <ul style="list-style-type: none; padding: 0; margin: 0;">
-        {% for message in messages %}
+            <ul style="list-style-type: none; padding: 0; margin: 0;">
+            {% for message in messages %}
             <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 5px;">
                 {{ message }}
             </li>
         {% endfor %}
     </ul>
 {% endif %}
-    <div>
     </form>
+</div>
 {% comment %} </center> {% endcomment %}
 {% endblock %}
 </body>

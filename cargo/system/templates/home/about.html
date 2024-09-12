@@ -87,11 +87,9 @@
 
                                 <a href="" class="ml-4">
                                     <div>
-                                        <img src="/static/images/phone.png" alt="" />
+                                        {% comment %} <img src="/static/images/phone.png" alt="" /> {% endcomment %}
                                     </div>
-                                    <span>
-                    (+91) 258964785
-                  </span>
+                                   
                                 </a>
                                 <a href="" class="ml-4">
                                     <div>
@@ -199,13 +197,8 @@
                             <li>Shubhlaxmi cargo movers in narol has a wide range of products and services to requirement of their customer.</li>
                         </p>
                         <div class="d-flex  justify-content-end">
-                            <a href="/company/" class="quote-btn about-btn">
-                                <img src="/static/images/white-next.png" alt="">
-                                <span>
-                  About More
-                </span>
-
-                            </a>
+                            <button value="about more" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled><img src="/static/images/white-next.png" alt="">
+                                About More</button>
                         </div>
                     </div>
                 </div>
@@ -319,7 +312,7 @@
                             <input type="email" placeholder="Email">
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit">
+                            <button type="submit" style ="cursor: not-allowed; " disabled>
                 Subscribe
               </button>
                         </div>

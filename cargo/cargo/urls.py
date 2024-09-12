@@ -42,7 +42,7 @@ urlpatterns = [
     path('user-list/',user_list),
     
     # emp
-    path('employee-list/',employee_list),
+    path('employee-list/',employee_list, name='employee-list'),
     path('create-employee/',create_employee),
     path('update-employee/<int:id>/',update_employee),
     path('delete-employee/<int:id>/',delete_employee),
@@ -138,8 +138,10 @@ urlpatterns = [
     
     path('update-admin-booking/<int:id>/',updatebooking,name='update-admin-booking'),
 
-    path('invoice/<int:id>/',invoice),
+    path('booking-estimate/',customerEstimateView,name='booking-estimate'),
 
-    path('booking-estimate/',customerEstimateView,name='booking-estimate')
+    path('invoice/<int:id>/',invoice_View,name='invoice'),
+    path('booking-report/',bookingReportView,name='booking-report'),
+    path('customer-report/',customerReportView,name='customer-report')
 
 ]

@@ -102,21 +102,22 @@
                     </div>
                 </nav>
                 <div class="header_container ">
-                    <div class="logo-box">
+                    <div class="logo-box" style="font-size : 0 rem ;">
                         <img src="/static/images/logo.png" alt="">
-                        <span>Shubh Laxmi Cargo Movers </span>
+                        {% comment %} <span>Shubh Laxmi Cargo Movers </span>         {% endcomment %}
+                        <span style=" font-size: 1rem;">Shubh Laxmi Cargo Movers</span>
+
                     </div>
+                
                     <div>
                         <div class="header_top">
                             <div class="header_top-contact">
 
                                 <a href="" class="ml-4">
                                     <div>
-                                        <img src="/static/images/phone.png" alt="" />
+                                        {% comment %} <img src="/static/images/phone.png" alt="" /> {% endcomment %}
                                     </div>
-                                    <span>
-                    (+91) 258964785
-                  </span>
+                                    
                                 </a>
                                 <a href="" class="ml-4">
                                     <div>
@@ -142,31 +143,9 @@
                                         <img src="/static/images/linkedin.png" alt="">
                                     </a>
                                 </div>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" id="customDropdownMenuLink" data-toggle="dropdown">
-                                        <img src="/static/images/square.png" alt="Menu" height="25px" width="25px">
-                                    </a>
-                                    <div class="dropdown-menu">                                  
-                                        <a class="dropdown-item" href="custprofile/">My Profile</a>
-                                        <a class="dropdown-item" href="/feedback/">Give us FeedBack</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="/signout">Sign out</a>
-                                    </div>
-                                </div>
+                                
 
-                                {% comment %}
-                                <div class="nav-item dropdown">
-                                    <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
-                                        <img src="\static\images\square.png" class="d-inline-block align-top" alt="" height="25px" width="25px">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">My Profile</a>
-                                        <a class="dropdown-item" href="#">My Tasks</a>
-                                        <a class="dropdown-item" href="#">Settings</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="//">Sign out</a>
-                                    </div>
-                                </div> {% endcomment %}
+                                
                             </div>
                         </div>
                         <div class="header_btm">
@@ -251,16 +230,16 @@
 
                                                 <div class="d-flex">
                                                     <div>
-                                                        <a href="/service/" class="read-btn">
+                                                        <a href="/booking-estimate/" class="read-btn">
 
                                                             <span>
-                                View Services
+                                Inquiry
                               </span>
                                                             <img src="/static/images/white-next.png" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="ml-3">
-                                                        <a href="/shop/" class="quote-btn">
+                                                        <a href="/customer-booking/" class="quote-btn">
 
                                                             <span>
                                 Book Order
@@ -309,16 +288,16 @@
 
                                                 <div class="d-flex">
                                                     <div>
-                                                        <a href="/service/" class="read-btn">
+                                                        <a href="/booking-estimate/" class="read-btn">
 
                                                             <span>
-                                View Services
+                                Inquiry
                               </span>
                                                             <img src="/static/images/white-next.png" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="ml-3">
-                                                        <a href="/shop/" class="quote-btn">
+                                                        <a href="/customer-booking/" class="quote-btn">
                                                             <span>
                                 Book Order
                               </span>
@@ -366,16 +345,16 @@
 
                                                 <div class="d-flex">
                                                     <div>
-                                                        <a href="" class="read-btn">
+                                                        <a href="/booking-estimate/" class="read-btn">
 
                                                             <span>
-                                View Services
+                                Inquiry
                               </span>
                                                             <img src="/static/images/white-next.png" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="ml-3">
-                                                        <a href="/shop/" class="quote-btn">
+                                                        <a href="/customer-booking/" class="quote-btn">
 
                                                             <span>
                                 Book Order
@@ -423,16 +402,16 @@
 
                                                 <div class="d-flex">
                                                     <div>
-                                                        <a href="/service/" class="read-btn">
+                                                        <a href="/booking-estimate/" class="read-btn">
 
                                                             <span>
-                                View Services 
+                                Inquiry 
                               </span>
                                                             <img src="/static/images/white-next.png" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="ml-3">
-                                                        <a href="/shop/" class="quote-btn">
+                                                        <a href="/customer-booking/" class="quote-btn">
 
                                                             <span>
                                 Book Now
@@ -498,13 +477,8 @@
                             <li>Shubhlaxmi cargo movers in narol has a wide range of products and services to requirement of their customer.</li>
                         </p>
                         <div class="d-flex  justify-content-end">
-                            <a href="/company/" class="quote-btn about-btn">
-                                <img src="/static/images/white-next.png" alt="">
-                                <span>
-                  About More
-                </span>
-
-                            </a>
+                            <button value="about more" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled><img src="/static/images/white-next.png" alt="">
+                                About More</button>
                         </div>
                     </div>
                 </div>
@@ -540,7 +514,7 @@
 
                             Transportation services encompass the movement of goods and people from one location to another                        </p>
                         <div class="d-flex justify-content-end">
-                            <a href="/book/" class="service-btn">
+                            <a href="/customer-booking/"class="service-btn">
                 Book Now
               </a>
                         </div>
@@ -561,9 +535,9 @@
                         <p>
                             warehouse is a large building or facility used for the storage and distribution of goods and materials.                        </p>
                         <div class="d-flex justify-content-end">
-                            <a href="/service/" class="service-btn">
-                Comming Soon
-              </a>
+                            
+              <button value="comming soon" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled>Cooming Soon</button>
+
                         </div>
                     </div>
 
@@ -584,9 +558,8 @@
                         <p>
                             we helps in the shipping of goods from one place to another.                        </p>
                         <div class="d-flex justify-content-end">
-                            <a href="/shop/" class="service-btn">
-                Comming Soon
-              </a>
+                            <button value="comming soon" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled>Cooming Soon</button>
+
                         </div>
                     </div>
                 </div>
@@ -634,7 +607,7 @@
                     </div>
                     <br>
                     <div class="ml-3">
-                        <a href="/shop/" class="quote-btn">
+                        <a href="/customer-booking/" class="quote-btn">
                             <span>
                 Book Now
               </span>
@@ -886,9 +859,10 @@
                                 <input type="text" class="message_input" placeholder="Message">
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="submit " class="">
+                                <button type="submit " class="" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled>
                   Send
                 </button>
+
                             </div>
                         </form>
                     </div>
@@ -997,9 +971,9 @@
                             <input type="email" placeholder="Email">
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit">
-                Subscribe
-              </button>
+                            <button type="submit" style ="cursor: not-allowed; " disabled>
+                                Subscribe
+                              </button>
                         </div>
                     </form>
                 </div>

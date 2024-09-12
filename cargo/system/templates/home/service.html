@@ -95,11 +95,9 @@
 
                                 <a href="" class="ml-4">
                                     <div>
-                                        <img src="/static/images/phone.png" alt="" />
+                                        {% comment %} <img src="/static/images/phone.png" alt="" /> {% endcomment %}
                                     </div>
-                                    <span>
-                    (+91) 258964785
-                  </span>
+                                    
                                 </a>
                                 <a href="" class="ml-4">
                                     <div>
@@ -132,18 +130,7 @@
                                         <img src="/static/images/linkedin.png" alt="">
                                     </a>
                                 </div>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" id="customDropdownMenuLink" data-toggle="dropdown">
-                                        <img src="/static/images/square.png" alt="Menu" height="25px" width="25px">
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        {% comment %} <a class="dropdown-item" href="/"><a class="dropdown-item" href="/customer-profile/">My Profile</a></a>
-                                        <a class="dropdown-item" href="/feedback/">Give us FeedBack</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="/signout">Sign out</a> {% endcomment %}
-
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="header_btm">
@@ -237,9 +224,8 @@
                       <p>
                         warehouse is a large building or facility used for the storage and distribution of goods and materials.                      </p>
                       <div class="d-flex justify-content-end">
-                          <a href="/service/" class="service-btn">
-              Comming Soon
-            </a>
+                        <button value="comming soon" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled>Cooming Soon</button>
+
                       </div>
                   </div>
 
@@ -260,9 +246,8 @@
                       <p>
                         we helps in the shipping of goods from one place to another.                       </p>
                       <div class="d-flex justify-content-end">
-                          <a href="/shop/" class="service-btn">
-              Comming Soon
-            </a>
+                        <button value="comming soon" style=" padding: 7px 12px;background-color: #0a0057;color: #fff; cursor: not-allowed;" disabled>Cooming Soon</button>
+
                       </div>
                   </div>
               </div>
@@ -378,9 +363,9 @@
                             <input type="email" placeholder="Email">
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit">
-                Subscribe
-              </button>
+                            <button type="submit" style ="cursor: not-allowed; " disabled>
+                                Subscribe
+                              </button>
                         </div>
                     </form>
                 </div>

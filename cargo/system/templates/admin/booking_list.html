@@ -18,6 +18,7 @@
                 <th>Booking Date</th>
                 <th>Amount Paid</th>
                 <th>Payment Status</th>
+                <th>Status</th>
                 <th>Action</th>            
             </tr>
             {% for booking in bookings %}
@@ -29,8 +30,12 @@
                 <td>{{ booking.booking_date }}</td>
                 <td>{{ booking.amount_paid }}</td>
                 <td>{{ booking.payment_status }}</td>
+                <td>{{ booking.parcel.status }}</td>
                 <td>
                     <a href="/update-admin-booking/{{ booking.id}}/" class="button">Update</a>
+                    {% if booking.payment_status != 'Pending' %}
+                        <a class="button" href="/invoice/{{ booking.id }}/">Invoice</a>  
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

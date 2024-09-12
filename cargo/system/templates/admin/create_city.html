@@ -1,40 +1,68 @@
-{% extends 'admin/dsbrd.html' %}
+{% extends 'admin/custdsbrd.html' %}
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create City</title>
+    <link rel="stylesheet" href="/static/css/createstyles.css">
+
+
 </head>
 <body>
     {% block content %}
-    <center>
-    <h1>Add</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-        
-        <label for="state">State:</label>
-        <select id="state" name="state" required>
-            {% for state in states %}
-                <option value="{{ state.id }}">{{ state.name }}</option>
-            {% endfor %}
-        </select><br>
+    <div class="container">        
+        {% comment %} <h1>Add City</h1> {% endcomment %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-25">
+                    <label for="name">Name:</label>
+                </div>
+                <div class="col-75">
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" required>{{ city.address }}</textarea><br>
-        
-        <button type="submit" onclick = "window.alert('Do You Want to Add a New Data ?')">Save</button>
-    </form>
-    <a href="/city-list/" class="button">Back</a>
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+                    <input  class="form-control" type="text" id="name" name="name" required><br>
+                </div>
             </div>
-        {% endfor %}
-    {% endif %}
-</center>
-{% endblock %}
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="state">State:</label>
+                </div>
+                <div class="col-75">
+                    <select id="state" name="state" required>
+                        {% for state in states %}
+                            <option value="{{ state.id }}">{{ state.name }}</option>
+                        {% endfor %}
+                    </select><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="address">Address:</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="address"   class="form-control" name="address" required>{{ city.address }}</textarea><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Save</button> 
+                <a href="/city-list/" class="link-button ml-6">Back</a>
+            </div>
+
+            {% if messages %}
+            <div class="alert alert-{{ message.tags }}">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+    {% endblock %}
 </body>
 </html>

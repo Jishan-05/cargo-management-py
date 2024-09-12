@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <script>
+            function printpage() {
+                //Get the print button and put it into a variable
+                var printButton = document.getElementById("printpagebutton");
+                //Set the print button visibility to 'hidden' 
+                printButton.style.visibility = 'hidden';
+                //Print the page content
+                window.print()
+                printButton.style.visibility = 'visible';
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .header, .footer {
+            text-align: center;
+        }
+        .invoice-info, .customer-info {
+            margin-bottom: 20px;
+        }
+        .invoice-info table, .customer-info table, .item-list table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .invoice-info th, .customer-info th, .item-list th {
+            background-color: #f4f4f4;
+            text-align: left;
+            padding: 10px;
+        }
+        .invoice-info td, .customer-info td, .item-list td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .item-list th, .item-list td {
+            border: 1px solid #ddd;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .print-button{
+                align-content:center;
+                align-items:center;
+                text-align: center;
+                border: none;
+                background-color:#1187d0;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius:6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Invoice</h1>
+        </div>
+
+        <div class="invoice-info">
+            <table>
+                <tr>
+                    <th>Invoice Number:</th>
+                    <td>INV-{{invoice.id}}</td>
+                </tr>
+                <tr>
+                    <th>Invoice Date:</th>
+                    <td>{{invoice.createdon}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="customer-info">
+            <h2>Customer Information</h2>
+            <table>
+                <tr>
+                    <th>Customer Name:</th>
+                    <td>{{invoice.customername}}</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>{{invoice.bookingid.customer.address}}</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>{{invoice.bookingid.customer.user.email}}</td>
+                </tr>
+                <tr>
+                    <th>Phone:</th>
+                    <td>{{invoice.bookingid.customer.phone_number}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="item-list">
+            <h2>Invoice Items</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{invoice.description}}</td>
+                        <td>&#8377; {{invoice.price}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                   
+                    <tr>
+                        <td colspan="1" class="total">Total:</td>
+                        <td>&#8377; {{invoice.price}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for your business!</p>
+        </div>
+    </div>
+    <center>
+    <button id="printpagebutton" class="print-button" onclick="printpage()" >Print</button>
+    </center>
+
+</body>
+</html>

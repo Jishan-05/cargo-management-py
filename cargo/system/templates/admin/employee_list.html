@@ -11,14 +11,14 @@
     <center>
     <h1>Employee Table
     </h1>
-    {% comment %} <a href="/create-employee/" class="button">Add</a> {% endcomment %}
+    <a href="/create-employee/" class="button">Add</a>
     <table border="1">
         <tr>
             <th>Employee</th>
             <th>Phone Number</th>
             <th>Position</th>
             <th>Address</th>
-            {% comment %} <th>Actions</th> {% endcomment %}
+            <th>Actions</th>
         </tr>
         {% for employee in employees %}
         <tr>
@@ -27,10 +27,10 @@
             <td>{{ employee.phone_number }}</td>
             <td>{{ employee.position }}</td>
             <td>{{ employee.address }}</td>
-            {% comment %} <td>
-                <a href="/update-employee/{{ employee.employee_id }}/" class="button">Edit</a>
-                <a href="/delete-employee/{{ employee.employee_id }}/" class="button">Delete</a>
-            </td> {% endcomment %}
+             <td>
+                <a href="/update-employee/{{ employee.id }}/" class="button">Edit</a>
+                <a href="/delete-employee/{{ employee.id }}/" class="button">Delete</a>
+             </td>
         </tr>
         {% endfor %}
     </table>
