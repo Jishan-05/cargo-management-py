@@ -9,6 +9,7 @@
     {% block content %}
     <center>
         <h1>Customer Table</h1>
+        <a href="/create-customer/" class="button">Add</a>
         <table border="1">
             <tr>
                 <th>Username</th>
@@ -16,6 +17,7 @@
                 <th>Password</th>
                 <th>Phone Number</th>
                 <th>Address</th>
+                <th>Action</th>
             </tr>
             {% for customer in customers %}
             <tr>
@@ -24,6 +26,10 @@
                 <td>{{ customer.user.password }}</td>
                 <td>{{ customer.phone_number }}</td>
                 <td>{{ customer.address }}</td>
+                
+                <td>
+                    <a href="/update-customer/{{ customer.id }}/" class="button">Edit</a>
+                </td>
                 
             </tr>
             

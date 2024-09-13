@@ -12,10 +12,11 @@
         <div class="d-flex justify-content-center">
             <h2 class="heading_style">Inquiry</h2>
         </div><br>
+        
         <form method="post" action="{% url 'booking-estimate'%}">
             {% csrf_token %}
             <div class="form-group">
-                <label for="pick_address">From:</label>
+                <label for="pick_address">From City:</label>
                 <select id="pick_address" name="pick_address" required>
                     <option value="">From City</option>
                     {% for city in cities %}

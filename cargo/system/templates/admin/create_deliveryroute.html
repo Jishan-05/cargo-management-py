@@ -1,62 +1,52 @@
 {% extends 'admin/dsbrd.html' %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Delivery Route</title>
-    <link rel="stylesheet" href="/static/css/createstyles.css">
+    <link rel="stylesheet" href="/static/css/createstyles.css"> <!-- Include the same CSS -->
 </head>
 <body>
     {% block content %}
-    <div class="container">
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Create Delivery Route</h1>
 
-        {% comment %} <h1>Create Delivery Route</h1> {% endcomment %}
-        <form method="post">
-            {% csrf_token %}
+            <form method="post">
+                {% csrf_token %}
 
-            <div class="row">
-                <div class="col-25">
+                <div class="form-group">
                     <label for="from_city">From City:</label>
+                    <select id="from_city" name="from_city" class="form-control" required>
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="col-75">
-                    <select id="from_city" name="from_city" required>
-                    {% for city in cities %}
-                        <option value="{{ city.id }}">{{ city.name }}</option>
-                    {% endfor %}
-                    </select><br>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-25">
+
+                <div class="form-group">
                     <label for="to_city">To City:</label>
+                    <select id="to_city" name="to_city" class="form-control" required>
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="col-75">
-                    <select id="to_city"  class="form-control" name="to_city" required>
-                    {% for city in cities %}
-                    <option value="{{ city.id }}">{{ city.name }}</option>
-                    {% endfor %}
-                    </select><br>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="distance_km" >Distance (km):</label>  
+                <div class="form-group">
+                    <label for="distance_km">Distance (km):</label>
+                    <input type="number" id="distance_km" name="distance_km" class="form-control" required>
                 </div>
-                <div class="col-75">
-                    <input type="number"   class="form-control" id="distance_km" name="distance_km" required><br>
-                </div>
-            </div>
 
-            <div class="row">            
-                <button type="submit" onclick = "window.alert('Do You Want to Add a New Data ?')">Save</button>
-                <a href="/delivery-route-list/" class="button">Back</a>
-        
-            
-            {% if messages %}
-                <div class="alert alert-{{ message.tags }}">
+                <div class="form-group">
+                    <button type="submit" class="mb-2" onclick="return confirm('Do You Want to Add a New Data?')">Save</button>
+                    <a href="/delivery-route-list/" class="button">Back</a>
+                </div>
+
+                {% if messages %}
+                <div class="alert alert-{{ messages.tags }}">
                     <ul>
                         {% for message in messages %}
                             <li>{{ message }}</li>
@@ -64,8 +54,9 @@
                     </ul>
                 </div>
                 {% endif %}
-        </form>
+            </form>
+        </div>
     </div>
-{% endblock %}
+    {% endblock %}
 </body>
 </html>

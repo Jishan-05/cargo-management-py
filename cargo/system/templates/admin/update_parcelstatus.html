@@ -1,59 +1,69 @@
 {% extends 'admin/dsbrd.html' %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Update Parcel Status</title>
+    <link rel="stylesheet" href="/static/css/createstyles.css"> <!-- Ensure the CSS file is included -->
 </head>
 <body>
     {% block content %}
-    <center>
-    <h1>Update Parcel Status</h1>
-    <form method="post">
-        {% csrf_token %}
-        {% comment %} <label for="parcel">Parcel:</label>
-        <select id="parcel" name="parcel" required>
-            {% for parcel in parcels %}
-                <option value="{{ parcel.id }}" {% if parcel.id == parcelstatus.parcel.id %}selected{% endif %}>
-                    {{ parcel }}
-                </option>
-            {% endfor %}
-        </select><br> {% endcomment %}
-        
-
-        <label for="parcel">Parcel:</label>
-        <select id="parcel" name="parcel" required>
-            {% for parcel in parcels %}
-                <option value="{{ parcelstatus.parcel.parcel_type }}">{{ parcel.parcel_type }}</option>
-            {% endfor %}
-        </select><br>
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status" value="{{ parcelstatus.status }}" required><br>
-        
-        {% comment %} <label for="updated_by_user">Updated By:</label>
-        <select id="updated_by_user" name="updated_by_user" required>
-            {% for user in users %}
-                <option value="{{ user.username }}" {% if user.username == parcelstatus.updated_by_user.username %}selected{% endif %}>
-                    {{ employee }}
-                </option>
-            {% endfor %}
-        </select><br>
-
-         {% endcomment %}
-        
-                 <label for="updated_by_user">Updated By:</label>
-        <select id="updated_by_user" name="updated_by_user" required>
-            {% for user in users %}
-                <option value="{{ user.username}}">{{ user.username }}</option>
-            {% endfor %}
-        </select><br>
-        <label for="updated_at">Updated At:</label>
-        <input type="datetime-local" id="updated_at" name="updated_at" value="{{ parcelstatus.updated_at|date:'Y-m-dTH:i' }}" required><br>
-        
-        <button type="submit" onclick = "window.alert('Do You Want to Change The Data ?')">Update</button>
-    </form>
-    <a href="/parcel-status-list/" class="button">Back</a>
-</center>
-{% endblock %}
-
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Update Parcel Status</h1>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="parcel">Parcel</label>
+                    <select id="parcel" name="parcel" class="form-control" required>
+                        {% for parcel in parcels %}
+                            <option value="{{ parcel.id }}" {% if parcel.id == parcelstatus.parcel.id %}selected{% endif %}>
+                                {{ parcel.parcel_type }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" id="status" name="status" class="form-control" value="{{ parcelstatus.status }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="updated_by_user">Updated By</label>
+                    <select id="updated_by_user" name="updated_by_user" class="form-control" required>
+                        {% for user in users %}
+                            <option value="{{ user.username }}" {% if user.username == parcelstatus.updated_by_user.username %}selected{% endif %}>
+                                {{ user.username }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="updated_at">Updated At</label>
+                    <input type="datetime-local" id="updated_at" name="updated_at" class="form-control" value="{{ parcelstatus.updated_at|date:'Y-m-dTH:i' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="mb-2" onclick="return confirm('Do You Want to Change The Data?')">Update</button>
+                    <a href="/parcel-status-list/" class="button">Back</a>
+                </div>
+                
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endblock %}
 </body>
 </html>

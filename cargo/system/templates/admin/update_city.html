@@ -1,4 +1,5 @@
-{% extends 'admin/custdsbrd.html' %}
+{% extends 'admin/dsbrd.html' %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,59 +10,48 @@
 </head>
 <body>
     {% block content %}
-    <div class="container">
-        <!-- <h1>Update City</h1> -->
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Update City</h1>
 
-        <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-25">
-                    <label for="name">Name:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="name" name="name" value="{{ city.name }}" required><br>
-                </div>
-            </div>
+            <form method="post">
+                {% csrf_token %}
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="state">State:</label>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ city.name }}" required placeholder="Name">
                 </div>
-                <div class="col-75">
-                    <select id="state" name="state" required>
+
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <select id="state" name="state" class="form-control" required>
                         {% for state in states %}
                             <option value="{{ state.id }}" {% if state.id == city.state.id %}selected{% endif %}>
                                 {{ state.name }}
                             </option>
                         {% endfor %}
-                    </select><br>
+                    </select>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="address">Address:</label>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" class="form-control" required placeholder="Address">{{ city.address }}</textarea>
                 </div>
-                <div class="col-75">
-                    <textarea id="address" name="address" required>{{ city.address }}</textarea><br>
-                </div>
-            </div>
 
-            <div class="row">
-                <button type="submit" onclick="return confirm('Do You Want to Change The Data?')">Update</button>
-                <a href="/city-list/" class="link-button ml-6">Back</a>
-            </div>
+                <button type="submit" class="mb-2" onclick="return confirm('Do You Want to Change The Data?')">Update</button>
+                <a href="/city-list/" class="button">Back</a>
 
-            {% if messages %}
-            <div class="messages">
-                <ul>
+                {% if messages %}
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
                     {% for message in messages %}
-                        <li>{{ message }}</li>
+                        <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 4px;">
+                            {{ message }}
+                        </li>
                     {% endfor %}
                 </ul>
-            </div>
-            {% endif %}
-        </form>
+                {% endif %}
+            </form>
+        </div>
     </div>
     {% endblock %}
 </body>

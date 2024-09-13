@@ -30,13 +30,13 @@
             </div>
 
             <div class="form-group">
-                <label for="pick_address">Pick Address:</label>
+                <label for="pick_address">From City:</label>
                 <select id="pick_address" name="pick_address" required>
                     {% comment %} <option value="">Select Pick Address</option> {% endcomment %}
 
                     {% comment %} <option value="" {% if form.pick_address == '' %}selected{% endif %}>Select Pick Address</option> {% endcomment %}
+                    <option value="">From City</option>
                     {% for city in cities %}
-                    
                     <option value="{{ city.id }}" {% if city.id == form.pick_address %}selected{% endif %}>
                         {{ city.name }}
                     </option>
@@ -46,11 +46,13 @@
             </div>
 
             <div class="form-group">
-                <label for="deliver_address">Deliver Address:</label>
+                <label for="deliver_address">To City:</label>
                 <select id="deliver_address" name="deliver_address" required>
                     {% comment %} <option value="">Select Deliver Address</option> {% endcomment %}
 
                     {% comment %} <option value="" {% if form.deliver_address == '' %}selected{% endif %}>Select Deliver Address</option> {% endcomment %}
+                    <option value="">To City</option>
+
                     {% for city in cities %}
                     <option value="{{ city.id }}" {% if city.id == form.deliver_address %}selected{% endif %}>
                         {{ city.name }}

@@ -25,7 +25,8 @@ urlpatterns = [
     # HOME URL
     path('about/',about),
     path('company/',company),
-    path('contact/',contact),
+    path('contact/',contact,name='contact'),
+    path('contactlist/',contactlist),
     path('',index),
     path('service/',service),
     path('shop/',shop),
@@ -34,6 +35,7 @@ urlpatterns = [
     path('admin-login/', admin_login_view,name='admin-login'),
     # path('register/', register_view),
     path('admin-dashboard', admin_dashboard_view),
+    path('admin-dashboard/', admin_dashboard_view),
     path('admin-profile/',admin_profile),
     path('admin-profile-edit/',admin_edit_profile),
     path('admin-change-password/',admin_change_password),
@@ -51,7 +53,7 @@ urlpatterns = [
     path('admin-list/',admin_list),
 
     # customer
-    path('customer-list/',customer_list),
+    path('customer-list/',customer_list, name='customer-list'),
 
     # country
     path('country-list/',country_list, name='country-list'),
@@ -142,6 +144,11 @@ urlpatterns = [
 
     path('invoice/<int:id>/',invoice_View,name='invoice'),
     path('booking-report/',bookingReportView,name='booking-report'),
-    path('customer-report/',customerReportView,name='customer-report')
+    path('customer-report/',customerReportView,name='customer-report'),
+    path('invoice-list/', invoice_list, name='invoice-list'),
+    path('create-customer/',add_Customer_AdminView, name="create-customer"),
+    path('update-customer/<int:id>/',edit_CustomerView, name="update-customer"),
+
+
 
 ]

@@ -1,37 +1,44 @@
-{% extends 'admin/dsbrd.html' %}<!DOCTYPE html>
+{% extends 'admin/dsbrd.html' %}
+
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Country</title>
+    <link rel="stylesheet" href="/static/css/createstyles.css"> <!-- Include CSS for consistent styling -->
 </head>
 <body>
     {% block content %}
-    <div class="container">
-                {% comment %} <h1>Update Country</h1> {% endcomment %}
-        <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-25">
-                    <label for="name">Name:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="name" name="name" value="{{ country.name }}" required><br>
-                </div>
-            </div>
-             
-            <div class="row">
-                <button type="submit" onclick = "window.alert('Do You Want to Change The Data ?')">Update</button>            
-                <a href="/country-list/" class="button">Back</a>
-            </div>
-                {% if messages %}
-                <div class="messages">
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-                {% endif %}
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Update Country</h1>
 
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ country.name }}" required placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="mb-2" onclick="return confirm('Do You Want to Change The Data?')">Update</button>
+                    <a href="/country-list/" class="button">Back</a>
+                </div>
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </form>
+        </div>
     </div>
-                {% endblock %}
+    {% endblock %}
 </body>
 </html>

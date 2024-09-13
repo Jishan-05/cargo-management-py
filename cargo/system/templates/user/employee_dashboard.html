@@ -18,7 +18,7 @@
 <body>
     <div class="adminx-container">
         <nav class="navbar navbar-expand justify-content-between fixed-top">
-            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/">
+            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/employee-dashboard/">
                 <img src="\static\images\logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt=""> Shubh Laxmi Cargo Movers
             </a>
 
@@ -103,178 +103,286 @@
         </nav>
 
         <!-- expand-hover push -->
-        <!-- Sidebar -->
-        <div class="adminx-sidebar expand-hover push">
+         <!-- Sidebar -->
+         <div class="adminx-sidebar expand-hover push">
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
-                    <a href="" class="sidebar-nav-link active">
-                        <span class="sidebar-nav-icon">
+                <a href="/employee-dashboard" class="sidebar-nav-link active">
+                <span class="sidebar-nav-icon">
                 <i data-feather="home"></i>
-              </span>
+                </span>
+                <span class="sidebar-nav-name">
+                Home
+                </span>
+                <span class="sidebar-nav-end">
+                </span>
+                </a>
+                </li>
+                <li class="sidebar-nav-item">
+                <a href="/booking-payment/" class="sidebar-nav-link active">
+                <span class="sidebar-nav-icon">
+                <strong>P</strong>
+                </span>
+                <span class="sidebar-nav-name">
+                Accept payment
+                </span>
+                </a>
+                </li>
+                <li class="sidebar-nav-item">
+                  <ul class="sidebar-nav">
+                     <li class="sidebar-nav-item">
+                         <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navConfigTables" aria-expanded="false" aria-controls="navTables">
+                         <span class="sidebar-nav-icon">
+                         <i data-feather="settings"></i>
+                         </span>
+                         <span class="sidebar-nav-name">
+                         Configurations
+                         </span>
+                         <span class="sidebar-nav-end">
+                         <i data-feather="chevron-right" class="nav-collapse-icon"></i>
+                         </span>
+                         </a>
+                         <ul class="sidebar-sub-nav collapse" id="navConfigTables">
+                             
+                             <li class="sidebar-nav-item">
+                             <a href="/country-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>Country</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/state-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>State</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/city-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>City</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/pricing-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>Pricing</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/delivery-route-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>Delivery Route</b>
+                             </span>
+                             </a>
+                             </li>
+                         </ul>
+                     </li>
+                 </ul>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navTables" aria-expanded="false" aria-controls="navTables">
+                        <span class="sidebar-nav-icon">
+                        <i data-feather="align-justify"></i>
+                        </span>
                         <span class="sidebar-nav-name">
-                Admin
-              </span>
+                        Tables
+                        </span>
                         <span class="sidebar-nav-end">
+                        <i data-feather="chevron-right" class="nav-collapse-icon"></i>
+                        </span>
+                        </a>
+                        <ul class="sidebar-sub-nav collapse" id="navTables">
+                            <li class="sidebar-nav-item">
+                            <a href="/user-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Users</b>
+                            </span>
+                            </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                            <a href="/admin-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Admin</b>
+                            </span>
+                            </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                            <a href="/customer-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Customer</b>
+                            </span>
+                            </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                            <a href="/employee-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Employee</b>
+                            </span>
+                            </a>
+                            </li>
+                            {% comment %} <li class="sidebar-nav-item">
+                            <a href="/country-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Country</b>
+                            </span>
+                            </a>
+                            </li> {% endcomment %}
+                            {% comment %} <li class="sidebar-nav-item">
+                            <a href="/state-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>State</b>
+                            </span>
+                            </a>
+                            </li> {% endcomment %}
+                            {% comment %} <li class="sidebar-nav-item">
+                            <a href="/city-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>City</b>
+                            </span>
+                            </a>
+                            </li> {% endcomment %}
+                          
+                            {% comment %} <li class="sidebar-nav-item">
+                            <a href="/pricing-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Price</b>
+                            </span>
+                            </a>
+                            </li> {% endcomment %}
 
-              </span>
-                    </a>
+                            {% comment %} <li class="sidebar-nav-item">
+                            <a href="/delivery-route-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Delivery Route</b>
+                            </span>
+                            </a>
+                            </li> {% endcomment %}
+
+                            <li class="sidebar-nav-item">
+                            <a href="/booking-list/" class="sidebar-nav-link">
+                            <span class="sidebar-nav-abbr">
+                            </span>
+                            <span class="sidebar-nav-name">
+                            <b>Bookings</b>
+                            </span>
+                            </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="/parcel-list/" class="sidebar-nav-link">
+                                    <span class="sidebar-nav-abbr">
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                        <b>Parcel</b>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="/feedback-list/" class="sidebar-nav-link">
+                                    <span class="sidebar-nav-abbr">
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                        <b>Feedback</b>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                              <a href="/invoice-list/" class="sidebar-nav-link">
+                                  <span class="sidebar-nav-abbr">
+                                  </span>
+                                  <span class="sidebar-nav-name">
+                                      <b>Invoice</b>
+                                  </span>
+                              </a>
+                          </li>
+                        </ul>
+                    </li>
+                </ul>
                 </li>
 
-
                 <li class="sidebar-nav-item">
-
                     <ul class="sidebar-nav">
-
                         <li class="sidebar-nav-item">
-                            <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navTables" aria-expanded="false" aria-controls="navTables">
-                                <span class="sidebar-nav-icon">
-                <i data-feather="align-justify"></i>
-              </span>
-                                <span class="sidebar-nav-name">
-                Tables
-              </span>
-                                <span class="sidebar-nav-end">
-                <i data-feather="chevron-right" class="nav-collapse-icon"></i>
-              </span>
+                            <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navReports" aria-expanded="false" aria-controls="navReports">
+                            <span class="sidebar-nav-icon">
+                            <i data-feather="file-text"></i>
+                            </span>
+                            <span class="sidebar-nav-name">
+                            Reports
+                            </span>
+                            <span class="sidebar-nav-end">
+                            <i data-feather="chevron-right" class="nav-collapse-icon"></i>
+                            </span>
                             </a>
-
-                    <ul class="sidebar-sub-nav collapse" id="navTables">
-                                
-                        <li class="sidebar-nav-item">
-                            <a href="/user-list/" class="sidebar-nav-link">
-                                <span class="sidebar-nav-abbr">
-                        {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
-                        </span>
-                                <span class="sidebar-nav-name">
-                        <b>Users</b>
-                        </span>
-                            </a>
-                        </li>
+                            <ul class="sidebar-sub-nav collapse" id="navReports">
+                                <li class="sidebar-nav-item">
+                                    <a href="/booking-report/" class="sidebar-nav-link">
+                                    <span class="sidebar-nav-abbr">
+                                    {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                    <b>Bookings</b>
+                                    </span>
+                                    </a>
+                                </li>
                                 <li class="sidebar-nav-item">
                                     <a href="/admin-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Admin</b>
-                                </span>
+                                    <span class="sidebar-nav-abbr">
+                                    {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                    <b>Admin</b>
+                                    </span>
                                     </a>
                                 </li>
-
                                 <li class="sidebar-nav-item">
                                     <a href="/customer-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Customer</b>
-                                </span>
+                                    <span class="sidebar-nav-abbr">
+                                    {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                    <b>Customer</b>
+                                    </span>
                                     </a>
                                 </li>
-
-                                <li class="sidebar-nav-item">
-                                    <a href="/employee-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Employee</b>
-                                </span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-nav-item">
-                                    <a href="/country-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Country</b>
-                                </span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-nav-item">
-                                    <a href="/state-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>State</b>
-                                </span>
-                                    </a>
-                                </li>
-                                
-                                <li class="sidebar-nav-item">
-                                    <a href="/city-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>City</b>
-                                </span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-nav-item">
-                                    <a href="/parcel-status-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Parcel Status</b>
-                                </span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-nav-item">
-                                    <a href="/pricing-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Price</b>
-                                </span>
-                                    </a>
-                                </li>
-
-                                
-                                <li class="sidebar-nav-item">
-                                    <a href="/delivery-route-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Delivery Route</b>
-                                </span>
-                                    </a>
-                                </li>
-                    
-                                <li class="sidebar-nav-item">
-                                    <a href="/booking-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Bookings</b>
-                                </span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-nav-item">
-                                    <a href="/parcel-list/" class="sidebar-nav-link">
-                                        <span class="sidebar-nav-abbr">
-                                {% comment %} <img src="\static\images\customer.psng" alt="" height="25px" width="25px"> {% endcomment %}
-                                </span>
-                                        <span class="sidebar-nav-name">
-                                <b>Parcel</b>
-                                </span>
-                                    </a>
-                                </li>
-
+                            </ul>
+                        </li>
                     </ul>
-                    </div>
-        <!-- Sidebar End -->
+                </li>
+            </ul>
+        </div>
+         <!-- Sidebar End -->
 
         <!-- adminx-content-aside -->
         <div class="adminx-content">
@@ -285,29 +393,7 @@
             <div class="adminx-main-content">
 
                 <div class="container-fluid">
-                    <!-- BreadCrumb -->
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb adminx-page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li> 
-                            {% comment %} <li class="breadcrumb-item active" aria-current="page"></li>
-                            <li class="breadcrumb-item active" aria-current="page"></li> {% endcomment %}
-                        </ol>
-                        
-                    </nav>
-                    <h6>Welcome to Employee Dashboard</h6>
-                    <img src="/static/images/user.png" alt="Employee Image" class="profile-image" height="50px" width="50px">
-
-                    <p>Username: {{ user.username }}</p>
-                    <p>Role: {{ user.role }}</p>
-                    {% comment %} <p>Emil: {{ user.email }}</p>
-                    <p>FirstName: {{ user.first_name }}</p>
-                    <p>LastName: {{ user.last_name }}</p>
-                    <p>Date of join: {{ user.date_joined }}</p> {% endcomment %}
-                    {% comment %} <a href="/employee-profile/" class="button">Go To Myprofile</a> {% endcomment %}
-                    <div class="pb-3">
-                        <h1>Dashboard</h1>
-                    </div>
+                   
 
                     <div class="row">
 

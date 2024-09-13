@@ -1,0 +1,38 @@
+{% extends 'admin/dsbrd.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Table</title>
+    
+</head>
+<body>
+    {% block content %}
+    <center>
+        <h1>Contact Table</h1>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Message</th>
+            </tr>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phonenumber }}</td>
+                    <td>{{ contact.message }}</td>
+                </tr>
+                {% endfor %} 
+        </table>
+        {% for contact in contacts %}
+        {% empty %}
+            No Data found
+        {% endfor %}
+    </center>
+    {% endblock %}
+</body>
+</html>

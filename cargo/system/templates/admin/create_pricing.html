@@ -1,43 +1,53 @@
 {% extends 'admin/dsbrd.html' %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Create Pricing</title>
+    <!-- Include the same CSS for consistent styling -->
+    <link rel="stylesheet" href="/static/css/createstyles.css">
 </head>
 <body>
     {% block content %}
-    <center>
-    <h1>Create Pricing</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-group">  
-        <label for="base_price">Base Price:</label>
-        <input type="number" class="form-control" step="0.01" id="base_price" name="base_price" required><br>
-        </div>
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Create Pricing</h1>
 
-        <div class="form-group">  
-        <label for="price_per_km">Price Per Km:</label>
-        <input type="number" class="form-control" id="price_per_km" name="price_per_km" required><br>
-        </div>
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="base_price">Base Price:</label>
+                    <input type="number" class="form-control" step="0.01" id="base_price" name="base_price" placeholder="Base Price" required>
+                </div>
 
-        <div class="form-group">  
-        <label for="price_per_kg">Price Per Kg:</label>
-        <input type="number" class="form-control" id="price_per_kg" name="price_per_kg" required><br>
-        
-        <button type="submit" onclick = "window.alert('Do You Want to Add a New Data ?')">Save</button>
-    </form>
-    <a href="/pricing-list/" class="button">Back</a>
-    
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
+                <div class="form-group">
+                    <label for="price_per_km">Price Per Km:</label>
+                    <input type="number" class="form-control" id="price_per_km" name="price_per_km" placeholder="Price Per Km" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price_per_kg">Price Per Kg:</label>
+                    <input type="number" class="form-control" id="price_per_kg" name="price_per_kg" placeholder="Price Per Kg" required>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="mb-2" onclick="return confirm('Do You Want to Add a New Data?')">Save</button>
+                    <a href="/pricing-list/" class="button">Back</a>
+                </div>
+
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
     </div>
-{% endif %}
-</center>
-{% endblock %}
+    {% endblock %}
 </body>
 </html>

@@ -23,14 +23,18 @@ def about(request):
 def company(request):
     return render(request, "home/company.html")
 
-def contact(request):
-    return render(request,"home/contact.html")
+# def contact(request):
+#     return render(request,"home/contact.html")
 
 def index(request):
     user_id = request.session.get('user_id')
     isUserLoggedIn = user_id != None
 
-    return render(request, "home/index.html", {'isUserLoggedIn': isUserLoggedIn})
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+    return render(request, "home/index.html", {'isUserLoggedIn': isUserLoggedIn,'username':username})
 
 def service(request):
     return render(request,"home/service.html")
@@ -145,6 +149,8 @@ def admin_change_password(request):
 
 def admin_dashboard_view(request):
     user_id = request.session.get('user_id')
+    isUserLoggedIn =user_id != None
+     
     if user_id:
         try:
             user = User.objects.get(id=user_id)
@@ -164,7 +170,7 @@ def admin_dashboard_view(request):
 
                 except Admin.DoesNotExist:
                     admin = None
-                return render(request, 'user/admin_dashboard.html', {'user': user ,'admin': admin, 'bookingCounts': bookingCounts})
+                return render(request, 'user/admin_dashboard.html', {'user': user ,'admin': admin, 'bookingCounts': bookingCounts, 'isUserLoggedIn':isUserLoggedIn})
             else:
                 messages.error(request, 'Access denied')
                 return redirect('admin-login')
@@ -278,7 +284,7 @@ def employee_list(request):
     if request.method=="GET":
         cr = request.GET.get('searchinput')
         if cr!= None:
-            employees = Employee.objects.filter(employee_id__icontains = cr )
+            employees = Employee.objects.filter(user__first_name__icontains = cr )
     return render(request, 'admin/employee_list.html', {'employees': employees})
 
 def create_employee(request):
@@ -407,7 +413,7 @@ def create_country(request):
     if request.method == "POST":
         name = request.POST.get('name')
         if name:
-             if Country.objects.filter(name=name).exists():
+            if Country.objects.filter(name=name).exists():
                 messages.error(request, 'Country already exists')
                 return redirect('/create-country/') 
         Country.objects.create(name=name)
@@ -983,6 +989,18 @@ def emp_edit_profile(request):
     
     return redirect('/employee-login/')
 
+
+def emp_user_list(request):
+    users = User.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            users = User.objects.filter(username__icontains = cr )
+    return render(request, 'employee/users_list.html', {'users': users})
+
+
+
+
 # Employee side ends
 
 # Customer side starts
@@ -1250,6 +1268,12 @@ def customer_booking_view(request):
 
         base_price = pricing.base_price or 0
         price_per_km = pricing.price_per_km or 0
+
+        if parcel_type == 'medium':
+            price_per_km = price_per_km * 2
+        elif parcel_type == 'large':
+            price_per_km = price_per_km * 4
+
         estimated_price = base_price + (price_per_km * distance)
 
         tracking_id = str(uuid.uuid4())
@@ -1461,6 +1485,12 @@ def addAdminBookingView(request):
 
         base_price = pricing.base_price or 0
         price_per_km = pricing.price_per_km or 0
+
+        if parcel_type == 'medium':
+            price_per_km = price_per_km * 2
+        elif parcel_type == 'large':
+            price_per_km = price_per_km * 4
+        
         estimated_price = base_price + (price_per_km * distance)
 
         tracking_id = str(uuid.uuid4())
@@ -1663,6 +1693,12 @@ def customerEstimateView(request):
 
         base_price = pricing.base_price or 0
         price_per_km = pricing.price_per_km or 0
+        
+        if parcel_type == 'medium':
+            price_per_km = price_per_km * 2
+        elif parcel_type == 'large':
+            price_per_km = price_per_km * 4
+
         estimated_price = base_price + (price_per_km * distance)
 
         if action == 'estimate':
@@ -1692,9 +1728,10 @@ def addInvoice(booking):
         )
      return booking
 
+from django.db.models import Q
+
 def bookingReportView(request):
     bookings = Booking.objects.all()
-
     bookings = {
         'bookedBookings':bookings.filter(parcel__status = 'Booked'),
         'inTransitBookings':bookings.filter(parcel__status = 'In Transit'),
@@ -1708,3 +1745,135 @@ def bookingReportView(request):
 def customerReportView(request):
     customers = Customer.objects.all()
     return render(request,'admin/customer-report.html',{'customers': customers})    
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phonenumber = request.POST.get('phonenumber')
+        message = request.POST.get('message')
+        Contactus.objects.create(
+            name=name,
+            email=email,
+            phonenumber=phonenumber,
+            message=message
+        )
+
+    return render(request, 'home/contact.html')
+
+def contactlist(request):
+    contact = Contactus.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            contact = Contactus.objects.filter(id__icontains = cr )
+    return render(request,'admin/contactlist.html', {'contacts': contact})
+
+def invoice_list(request):
+    invoices = Invoice.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            invoices = Invoice.objects.filter(customername__icontains = cr )
+    return render(request, 'admin/invoicelist.html', {'invoices': invoices})
+
+def add_Customer_AdminView(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        contact = request.POST.get('contact')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        if not username or not first_name or not last_name or not contact or not email or not address or not password or not confirm_password:
+            messages.error(request, 'All fields are required.')
+            return render(request, 'admin/add-customer.html')
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'admin/add-customer.html')
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'Invalid email format.')
+            return render(request, 'admin/add-customer.html')
+        if len(username) < 5:
+            messages.error(request, 'Username must be at least 5 characters long.')
+            return render(request, 'user/register.html')
+        if len(password) < 8:
+            messages.error(request, 'Password must be at least 8 characters long.')
+            return render(request, 'user/register.html')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists.')
+            return render(request, 'admin/add-customer.html')
+        if User.objects.filter(email=email.lower()).exists():
+            messages.error(request, 'Email already exists.')
+            return render(request, 'admin/add-customer.html')
+        hashed_password = make_password(password)
+        user = User.objects.create(
+            username=username,
+            password=hashed_password,
+            email=email.lower(),
+            first_name=first_name,
+            last_name=last_name,
+            role='Customer' ,
+            date_joined = timezone.now()
+
+        )
+        Customer.objects.create(
+            user=user,
+            phone_number=contact,
+            address=address
+        )
+        messages.success(request, 'Customer added successfully')
+        return redirect('/customer-list/')
+    return render(request, 'admin/add-customer.html')    
+
+def edit_CustomerView(request,id):
+    customer = Customer.objects.get(pk=id)
+
+    print(customer.user.email)
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        phone_number = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+
+        # Validate inputs
+        if not username or not first_name or not last_name or not phone_number or not email or not address:
+            messages.error(request, 'All fields are required.')
+            return render(request, 'admin/update_customer.html', {'customer': customer})
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'Invalid email format.')
+            return render(request, 'admin/update_customer.html', {'customer': customer})
+        if len(username) < 5:
+            messages.error(request, 'Username must be at least 5 characters long.')
+            return render(request, 'admin/update_customer.html', {'customer': customer})
+        if User.objects.filter(username=username).exclude(pk = customer.user.pk).exists():
+            messages.error(request, 'Username already exists.')
+            return render(request, 'admin/update_customer.html', {'customer': customer})
+        if User.objects.filter(email=email.lower()).exclude(pk = customer.user.pk).exists():
+            messages.error(request, 'Email already exists.')
+            return render(request, 'admin/update_customer.html', {'customer': customer})
+
+        user = User.objects.get(pk=customer.user.pk)
+        user.username=username
+        
+        user.email=email
+        user.first_name=first_name
+        user.last_name=last_name
+        user.role='Customer'
+
+        customer.phone_number = phone_number
+        customer.address = address
+
+        user.save()
+        customer.save()
+
+        return redirect('customer-list')
+    return render(request, 'admin/update_customer.html', {'customer': customer})

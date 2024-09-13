@@ -8,76 +8,87 @@
 </head>
 <body>
     {% block page %}
-    <center>
-        <div class="d-flex justify-content-center">
-            <h2 class="heading_style">Booking Page</h2>
-        </div><br>
-        <form method="post" action="{% url 'customer-booking' %}">
-            {% csrf_token %}
+        <div class="row">
+            <div class="col-2">
 
-            <div class="form-group">
-                <label for="customer_name">Customer Name:</label>
-                <input type="text" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
             </div>
+            <div class="col-8">
+                <div class="d-flex justify-content-center">
+                    <h2 class="heading_style">Booking Page</h2>
+                </div><br>
+            <form method="post" action="{% url 'customer-booking' %}">
+                {% csrf_token %}
 
-            <div class="form-group">
-                <label for="customer_phone">Customer Phone:</label>
-                <input type="text" id="customer_phone" name="customer_phone" placeholder="Enter customer phone number" required>
-            </div>
+                <div class="form-group">
+                    <label for="customer_name">Customer Name:</label>
+                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
+                </div>
 
-            <div class="form-group">
-                <label for="pick_address">Pick Address:</label>
-                <select id="pick_address" name="pick_address" required>
-                    <option value="">Select Pick Address</option>
-                    {% for city in cities %}
-                        <option value="{{ city.id }}">{{ city.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="customer_phone">Customer Phone:</label>
+                    <input type="text" id="customer_phone" class="form-control" name="customer_phone" placeholder="Enter customer phone number" required>
+                </div>
 
-            <div class="form-group">
-                <label for="deliver_address">Deliver Address:</label>
-                <select id="deliver_address" name="deliver_address" required>
-                    <option value="">Select Deliver Address</option>
-                    {% for city in cities %}
-                        <option value="{{ city.id }}">{{ city.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="pick_address">From City :</label>
+                    <select id="pick_address" class="form-control" name="pick_address" required>
+                        <option value="">From City</option>
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="parcel_type">Parcel Type:</label>
-                <select id="parcel_type" name="parcel_type" required>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="deliver_address">To City:</label>
+                    <select id="deliver_address" class="form-control" name="deliver_address" required>
+                        <option value="">To City </option>
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
+                <div class="form-group">
+                    <label for="parcel_type">Parcel Type:</label>
+                    <select id="parcel_type" class="form-control" name="parcel_type" required>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+
+                <label for="payment_cod">Payment Type:</label>
             
+                <div class="form-check">
+                    <input type="radio" id="payment_cod" class="form-check-input" name="payment_type" value="cod" required checked="true">
+                    <label class="form-check-label" for="payment_cod">Cash</label>
+                </div>
 
-            <div class="form-group">
-                <label>Payment Type:</label>
-                <input type="radio" id="payment_cod" name="payment_type" value="cod" required checked="true">
-                <label for="payment_cod">Cash</label>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" name="action" value="estimate">Get Estimate</button>
-                <button type="submit" name="action" value="confirm">Confirm Booking</button>
-                <button type="submit" name="action" value="cancel">Cancel Booking</button>
-            </div>
-
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
+                <div class="form-group">
+                    <button type="submit" name="action" value="estimate">Get Estimate</button>
+                    <button type="submit" name="action" value="confirm">Confirm Booking</button>
+                    <button type="submit" name="action" value="cancel">Cancel Booking</button>
+                </div>
+        
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
                     <li class="{{ message.tags }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
+                    {% endfor %}
+                </ul>
+                {% endif %}
         </form>
-    </center>
+
+        </div>
+           
+        </div>
+
+</div>
+<div class="col-2">
+
+</div>
+</div>
     {% endblock %}
 </body>
 </html>

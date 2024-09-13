@@ -1,67 +1,57 @@
-{% extends 'admin/custdsbrd.html' %}
+{% extends 'admin/dsbrd.html' %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create City</title>
-    <link rel="stylesheet" href="/static/css/createstyles.css">
-
-
+    <link rel="stylesheet" href="/static/css/createstyles.css"> <!-- Ensure this CSS has necessary styles -->
 </head>
 <body>
     {% block content %}
-    <div class="container">        
-        {% comment %} <h1>Add City</h1> {% endcomment %}
-        <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-25">
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Create City</h1>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
                     <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="City Name" required>
                 </div>
-                <div class="col-75">
 
-                    <input  class="form-control" type="text" id="name" name="name" required><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-25">
+                <div class="form-group">
                     <label for="state">State:</label>
-                </div>
-                <div class="col-75">
-                    <select id="state" name="state" required>
+                    <select id="state" name="state" class="form-control" required>
                         {% for state in states %}
                             <option value="{{ state.id }}">{{ state.name }}</option>
                         {% endfor %}
-                    </select><br>
+                    </select>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-25">
+                <div class="form-group">
                     <label for="address">Address:</label>
+                    <textarea id="address" name="address" class="form-control" placeholder="City Address" required>{{ city.address }}</textarea>
                 </div>
-                <div class="col-75">
-                    <textarea id="address"   class="form-control" name="address" required>{{ city.address }}</textarea><br>
+
+                <div class="form-group">
+                    <button type="submit" class="mb-2">Save</button>
+                    <a href="/city-list/" class="button">Back</a>
                 </div>
-            </div>
 
-            <div class="row">
-                <button type="submit">Save</button> 
-                <a href="/city-list/" class="link-button ml-6">Back</a>
-            </div>
-
-            {% if messages %}
-            <div class="alert alert-{{ message.tags }}">
-                <ul>
+                {% if messages %}
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
                     {% for message in messages %}
-                        <li>{{ message }}</li>
+                    <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 4px;">
+                        {{ message }}
+                    </li>
                     {% endfor %}
                 </ul>
-            </div>
-            {% endif %}
-        </form>
+                {% endif %}
+            </form>
+        </div>
     </div>
     {% endblock %}
 </body>

@@ -38,7 +38,7 @@
          margin: 5px;
          background-color: #1187d0; 
          color: #fff;
-         padding: 8px 12px;
+         padding: 10px 12px;
          text-align: center;
          text-decoration: none;
          border-radius: 4px;
@@ -51,6 +51,8 @@
          border-color: #4682b4; 
          }
          {% comment %} FORM CSS {% endcomment %}
+      
+      </style>
       <style>
          body {
          font-family: Arial, sans-serif;
@@ -66,7 +68,7 @@
          color: #333;
          }
          button {
-         background-color: #87cefa; 
+         background-color: #1187d0; 
          border: none;
          color: #fff;
          padding: 10px 15px;
@@ -85,6 +87,7 @@
          margin-top: 10px;
          color: #4682b4; 
          text-decoration: none;
+         padding: 10px 12px;
          }
          a:hover {
          text-decoration: underline;
@@ -98,7 +101,7 @@
    <body>
       <div class="adminx-container">
          <nav class="navbar navbar-expand justify-content-between fixed-top">
-            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/">
+            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/admin-dashboard">
             <img src="\static\images\logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt=""> Shubh Laxmi Cargo Movers
             </a>
             <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
@@ -118,7 +121,7 @@
             </div>
             <ul class="navbar-nav d-flex justify-content-end mr-2">
                <!-- Notificatoins -->
-               <li class="nav-item dropdown d-flex align-items-center mr-2">
+               {% comment %} <li class="nav-item dropdown d-flex align-items-center mr-2">
                   <a class="nav-link nav-link-notifications" id="dropdownNotifications" data-toggle="dropdown" href="#">
                   <i class="oi oi-bell display-inline-block align-middle"></i>
                   <span class="nav-link-notification-number">3</span>
@@ -156,7 +159,7 @@
                         <a href="#"><small>View all notifications</small></a>
                      </div>
                   </div>
-               </li>
+               </li> {% endcomment %}
                <!-- Notifications -->
                <li class="nav-item dropdown">
                   <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
@@ -182,7 +185,7 @@
                 <i data-feather="home"></i>
                 </span>
                 <span class="sidebar-nav-name">
-                Admin
+                Home
                 </span>
                 <span class="sidebar-nav-end">
                 </span>
@@ -199,6 +202,69 @@
                 </a>
                 </li>
                 <li class="sidebar-nav-item">
+                  <ul class="sidebar-nav">
+                     <li class="sidebar-nav-item">
+                         <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navConfigTables" aria-expanded="false" aria-controls="navTables">
+                         <span class="sidebar-nav-icon">
+                         <i data-feather="settings"></i>
+                         </span>
+                         <span class="sidebar-nav-name">
+                         Configurations
+                         </span>
+                         <span class="sidebar-nav-end">
+                         <i data-feather="chevron-right" class="nav-collapse-icon"></i>
+                         </span>
+                         </a>
+                         <ul class="sidebar-sub-nav collapse" id="navConfigTables">
+                             
+                             <li class="sidebar-nav-item">
+                             <a href="/country-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>Country</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/state-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>State</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/city-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>City</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/pricing-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>Pricing</b>
+                             </span>
+                             </a>
+                             </li>
+                             <li class="sidebar-nav-item">
+                             <a href="/delivery-route-list/" class="sidebar-nav-link">
+                             <span class="sidebar-nav-abbr">
+                             </span>
+                             <span class="sidebar-nav-name">
+                             <b>Delivery Route</b>
+                             </span>
+                             </a>
+                             </li>
+                         </ul>
+                     </li>
+                 </ul>
                 <ul class="sidebar-nav">
                     <li class="sidebar-nav-item">
                         <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navTables" aria-expanded="false" aria-controls="navTables">
@@ -216,7 +282,6 @@
                             <li class="sidebar-nav-item">
                             <a href="/user-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Users</b>
@@ -226,7 +291,6 @@
                             <li class="sidebar-nav-item">
                             <a href="/admin-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Admin</b>
@@ -236,7 +300,6 @@
                             <li class="sidebar-nav-item">
                             <a href="/customer-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Customer</b>
@@ -246,77 +309,63 @@
                             <li class="sidebar-nav-item">
                             <a href="/employee-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Employee</b>
                             </span>
                             </a>
                             </li>
-                            <li class="sidebar-nav-item">
+                            {% comment %} <li class="sidebar-nav-item">
                             <a href="/country-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Country</b>
                             </span>
                             </a>
-                            </li>
-                            <li class="sidebar-nav-item">
+                            </li> {% endcomment %}
+                            {% comment %} <li class="sidebar-nav-item">
                             <a href="/state-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>State</b>
                             </span>
                             </a>
-                            </li>
-                            <li class="sidebar-nav-item">
+                            </li> {% endcomment %}
+                            {% comment %} <li class="sidebar-nav-item">
                             <a href="/city-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>City</b>
                             </span>
                             </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/parcel-status-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Parcel Status</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
+                            </li> {% endcomment %}
+                          
+                            {% comment %} <li class="sidebar-nav-item">
                             <a href="/pricing-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Price</b>
                             </span>
                             </a>
-                            </li>
-                            <li class="sidebar-nav-item">
+                            </li> {% endcomment %}
+
+                            {% comment %} <li class="sidebar-nav-item">
                             <a href="/delivery-route-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Delivery Route</b>
                             </span>
                             </a>
-                            </li>
+                            </li> {% endcomment %}
+
                             <li class="sidebar-nav-item">
                             <a href="/booking-list/" class="sidebar-nav-link">
                             <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                             </span>
                             <span class="sidebar-nav-name">
                             <b>Bookings</b>
@@ -324,15 +373,32 @@
                             </a>
                             </li>
                             <li class="sidebar-nav-item">
-                            <a href="/parcel-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.psng" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Parcel</b>
-                            </span>
-                            </a>
+                                <a href="/parcel-list/" class="sidebar-nav-link">
+                                    <span class="sidebar-nav-abbr">
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                        <b>Parcel</b>
+                                    </span>
+                                </a>
                             </li>
+                            <li class="sidebar-nav-item">
+                                <a href="/feedback-list/" class="sidebar-nav-link">
+                                    <span class="sidebar-nav-abbr">
+                                    </span>
+                                    <span class="sidebar-nav-name">
+                                        <b>Feedback</b>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                              <a href="/invoice-list/" class="sidebar-nav-link">
+                                  <span class="sidebar-nav-abbr">
+                                  </span>
+                                  <span class="sidebar-nav-name">
+                                      <b>Invoice</b>
+                                  </span>
+                              </a>
+                          </li>
                         </ul>
                     </li>
                 </ul>
@@ -343,7 +409,7 @@
                         <li class="sidebar-nav-item">
                             <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navReports" aria-expanded="false" aria-controls="navReports">
                             <span class="sidebar-nav-icon">
-                            <i data-feather="align-justify"></i>
+                            <i data-feather="file-text"></i>
                             </span>
                             <span class="sidebar-nav-name">
                             Reports
@@ -369,7 +435,7 @@
                                     {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                                     </span>
                                     <span class="sidebar-nav-name">
-                                    <b>B</b>
+                                    <b>Admin</b>
                                     </span>
                                     </a>
                                 </li>
@@ -379,16 +445,16 @@
                                     {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                                     </span>
                                     <span class="sidebar-nav-name">
-                                    <b>C</b>
+                                    <b>Customer</b>
                                     </span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    </li>
+                </li>
             </ul>
-         </div>
+        </div>
          <!-- Sidebar End -->
          <!-- adminx-content-aside -->
          <div class="adminx-content">

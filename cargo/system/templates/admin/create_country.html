@@ -1,46 +1,45 @@
-{% extends 'admin/custdsbrd.html' %}
+{% extends 'admin/dsbrd.html' %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Country</title>
-    <link rel="stylesheet" href="/static/css/createstyles.css">
+    <link rel="stylesheet" href="/static/css/createstyles.css"> <!-- Ensure this CSS has the necessary styles -->
 </head>
 <body>
     {% block content %}
-    <div class="container">
-        <!-- Optional Heading: Uncomment if needed -->
-        <!-- <h1>Create Country</h1> -->
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1>Create Country</h1>
 
-        <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-25">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
                     <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Country Name" required>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="name" name="name" required><br>
+
+                <!-- Optional fields can be added here as needed -->
+
+                <div class="form-group">
+                    <button type="submit" onclick="return confirm('Do You Want to Add a New Data?')" class="mb-2">Save</button>
+                    <a href="/country-list/" class="button">Back</a>
                 </div>
-            </div>
 
-            <!-- Optional fields can be added here as needed -->
-
-            <div class="row">
-                <button type="submit" onclick="return confirm('Do You Want to Add a New Data?')">Save</button>
-                <a href="/country-list/" class="link-button ml-6">Back</a>
-            </div>
-
-            {% if messages %}
-            <div class="messages">
-                <ul>
+                {% if messages %}
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
                     {% for message in messages %}
-                        <li>{{ message }}</li>
+                        <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 4px;">
+                            {{ message }}
+                        </li>
                     {% endfor %}
                 </ul>
-            </div>
-            {% endif %}
-        </form>
+                {% endif %}
+            </form>
+        </div>
     </div>
     {% endblock %}
 </body>
