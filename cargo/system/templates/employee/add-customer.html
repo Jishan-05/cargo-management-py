@@ -1,0 +1,79 @@
+{% extends 'admin/empdsbrd.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Customer</title>
+</head>
+<body>
+    
+    {% block content %}
+    
+    <div class="d-flex justify-content-center">
+
+            <div>
+                <h1>Create Customer</h1>
+
+                <form method="post">
+                    {% csrf_token %}
+                <div class="form-group">
+                            <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Username">
+                </div>
+
+                <div class="form-group">
+                            <label>First Name</label>
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                    </div>
+                
+
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="contact" class="form-control" placeholder="Phone Number">
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea type="text" name="address" class="form-control" placeholder="Address"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+
+                </div>
+                <div class="form-group">
+                <button type="submit" class="mb-2" >Add</button>
+                <a href="/emp-customer-list/" class="button">Back</a>
+                </div>
+                    {% if messages %}
+                    <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        {% for message in messages %}
+                            <li style="color: red; background-color: pink; padding: 10px; margin-bottom: 5px; border-radius: 4px;">
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+            
+                </form>
+            </div>
+        
+    </div>
+    {% endblock %}
+</body>
+</html>

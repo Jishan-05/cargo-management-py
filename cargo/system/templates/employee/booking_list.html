@@ -1,0 +1,50 @@
+{% extends 'admin/empdsbrd.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Table</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+        <h1>Booking Table</h1>
+
+        <a class="button" href="/add-emp-booking/">Add</a>
+        <table border="1">
+            <tr><th>ID</th>
+                <th>Customer</th>
+                <th>Parcel Type</th>
+                <th>Booking Date</th>
+                <th>Amount Paid</th>
+                <th>Payment Status</th>
+                <th>Status</th>
+                <th>Action</th>            
+            </tr>
+            {% for booking in bookings %}
+            <tr>
+                {% comment %} <td>{{ booking.customer.user.first_name }} {{ booking.customer.user.last_name }}</td> {% endcomment %}
+                <td>{{booking.id}}</td>
+                <td>{{ booking.customer.user.username }}</td>
+                <td>{{ booking.parcel.parcel_type }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.amount_paid }}</td>
+                <td>{{ booking.payment_status }}</td>
+                <td>{{ booking.parcel.status }}</td>
+                <td>
+                    <a href="/update-emp-booking/{{ booking.id}}/" class="button">Update</a>
+                    {% if booking.payment_status != 'Pending' %}
+                        <a class="button" href="/emp-invoice/{{ booking.id }}/">Invoice</a>  
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% for booking in bookings %}
+        {% empty %}
+            No Data found
+        {% endfor %}
+    </center>
+    {% endblock %}
+</body>
+</html>

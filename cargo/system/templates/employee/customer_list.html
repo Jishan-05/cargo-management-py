@@ -1,0 +1,45 @@
+{% extends 'admin/empdsbrd.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Table</title>
+</head>
+<body>
+    {% block content %}
+    <center>
+        <h1>Customer Table</h1>
+        <a href="/emp-create-customer/" class="button">Add</a>
+        <table border="1">
+            <tr>
+                <th>Username</th>
+                <th>Customer Name</th>
+                <th>Password</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                {% comment %} <th>Action</th> {% endcomment %}
+            </tr>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.user.username }}</td>
+                <td>{{ customer.user.first_name }} {{ customer.user.last_name }}</td>
+                <td>{{ customer.user.password }}</td>
+                <td>{{ customer.phone_number }}</td>
+                <td>{{ customer.address }}</td>
+                
+                {% comment %} <td>
+                    <a href="/update-customer/{{ customer.id }}/" class="button">Edit</a>
+                </td> {% endcomment %}
+                
+            </tr>
+            
+            {% endfor %}
+        </table>
+        {% for customer in customers %}
+        {% empty %}
+            No Data found
+        {% endfor %}
+    </center>
+    {% endblock %}
+</body>
+</html>

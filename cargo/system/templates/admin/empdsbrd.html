@@ -12,79 +12,66 @@
     {% comment %} TABLE CSS {% endcomment %}
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff; 
-            color: #333;
-        }
-        table {
-            width: 100%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: Center;
-            border: 1px solid #add8e6; 
-        }
-        th {
-            background-color: #87cefa; 
-            color: #fff;
-        }
-        tr:nth-child(even) {
-            background-color: #f0f8ff; 
-        }
-        tr:nth-child(odd) {
-            background-color: #ffffff; 
-        }
-        a.button {
-            display: inline-block;
-            margin: 5px;
-            background-color: #87cefa; 
-            color: #fff;
-            padding: 8px 12px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            border: 1px solid #87cefa; 
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        a.button:hover {
-            background-color: #4682b4; 
-            border-color: #4682b4; 
-        }
-{% comment %} FORM CSS {% endcomment %}
-<style>
-    body {
         font-family: Arial, sans-serif;
         background-color: #f0f8ff; 
         color: #333;
-    }
-    h1 {
-        color: #4682b4; 
-    }
-    {% comment %} form {
-        background-color: #ffffff; 
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
+        }
+        table {
+        width: 100%;
         margin: 20px auto;
-    } {% endcomment %}
-    label {
+        border-collapse: collapse;
+        }
+        th, td {
+        padding: 10px;
+        text-align: Center;
+        border: 1px solid #add8e6; 
+        }
+        th {
+        background-color: #1187d0; 
+        color: #fff;
+        }
+        tr:nth-child(even) {
+        background-color: #f0f8ff; 
+        }
+        tr:nth-child(odd) {
+        background-color: #ffffff; 
+        }
+        a.button {
+        display: inline-block;
+        margin: 5px;
+        background-color: #1187d0; 
+        color: #fff;
+        padding: 10px 12px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        border: 1px solid #1187d0; 
+        transition: background-color 0.3s, border-color 0.3s;
+        }
+        a.button:hover {
+        background-color: #4682b4; 
+        border-color: #4682b4; 
+        }
+        {% comment %} FORM CSS {% endcomment %}
+     
+     </style>
+     <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff; 
+        color: #333;
+        }
+        h1 {
+        color: #4682b4; 
+        }
+        label {
         display: block;
         margin-bottom: 8px;
         color: #333;
-    }
-    {% comment %} input[type="text"], select {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #87cefa; 
-        border-radius: 4px;
-    } {% endcomment %}
-    button {
-        background-color: #87cefa; 
+        }
+        button {
+        background-color: #1187d0; 
         border: none;
         color: #fff;
         padding: 10px 15px;
@@ -94,20 +81,21 @@
         font-size: 16px;
         border-radius: 4px;
         cursor: pointer;
-    }
-    button:hover {
+        }
+        button:hover {
         background-color: #4682b4; 
-    }
-    a {
+        }
+        a {
         display: inline-block;
         margin-top: 10px;
         color: #4682b4; 
         text-decoration: none;
-    }
-    a:hover {
+        padding: 10px 12px;
+        }
+        a:hover {
         text-decoration: underline;
-    }
-</style>
+        }
+     </style>
     <!--0
       # Optional Resources
       Feel free to delete these if you don't need them in your project
@@ -117,7 +105,7 @@
 <body>
     <div class="adminx-container">
         <nav class="navbar navbar-expand justify-content-between fixed-top">
-            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/">
+            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/employee-dashboard/">
                 <img src="\static\images\logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt=""> Shubh Laxmi Cargo Movers
             </a>
 
@@ -132,6 +120,7 @@
                     <input type="text" class="form-control" id="search" name="searchinput" placeholder="Type to search...">
                 </div>
             </form>
+
             <div class="d-flex flex-1 d-block d-md-none">
                 <a href="#" class="sidebar-toggle ml-3">
                     <i data-feather="menu"></i>
@@ -139,67 +128,21 @@
             </div>
 
             <ul class="navbar-nav d-flex justify-content-end mr-2">
-                <!-- Notificatoins -->
-                <li class="nav-item dropdown d-flex align-items-center mr-2">
-                    <a class="nav-link nav-link-notifications" id="dropdownNotifications" data-toggle="dropdown" href="#">
-                        <i class="oi oi-bell display-inline-block align-middle"></i>
-                        <span class="nav-link-notification-number">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications" aria-labelledby="dropdownNotifications">
-                        <div class="notifications-header d-flex justify-content-between align-items-center">
-                            <span class="notifications-header-title">
-                  Notifications
-                </span>
-                            <a href="#" class="d-flex"><small>Mark all as read</small></a>
-                        </div>
-
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action unread">
-                                <p class="mb-1">Invitation for <strong>Lunch</strong> on <strong>Jan 12th 2018</strong> by <strong>Laura</strong></p>
-
-                                <div class="mb-1">
-                                    <button type="button" class="btn btn-primary btn-sm">Accept invite</button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm">Decline</button>
-                                </div>
-
-                                <small>1 hour ago</small>
-                            </a>
-
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <p class="mb-1"><strong class="text-success">Goal completed</strong><br />1,000 new members today</p>
-                                <small>3 days ago</small>
-                            </a>
-
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <p class="mb-1 text-danger"><strong>System error detected</strong></p>
-                                <small>3 days ago</small>
-                            </a>
-
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <p class="mb-1">Your task <strong>Design Draft</strong> is due today.</p>
-                                <small>4 days ago</small>
-                            </a>
-                        </div>
-
-                        <div class="notifications-footer text-center">
-                            <a href="#"><small>View all notifications</small></a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Notifications -->
+                
                 <li class="nav-item dropdown">
-                    <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
-                        <img src="\static\images\menu.jpg" class="d-inline-block align-top" alt="">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/employee-profile/">My Profile</a>
-                        <a class="dropdown-item" href="/employee-change-password/">Change Password</a>
-                        {% comment %} <a class="dropdown-item" href="/employee-login/">Logout</a> {% endcomment %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="/signout">Sign out</a>
-                    </div>
+                   <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
+                   <img src="\static\images\menu.jpg" class="d-inline-block align-top" alt="">
+                   </a>
+                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/employee-profile/">My Profile</a>
+                      <a class="dropdown-item" href="/employee-change-password/">Change Password</a>
+                      {% comment %} <a class="dropdown-item" href="/admin-login/">Logout</a> {% endcomment %}
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-danger" href="/signout">Sign out</a>
+                   </div>
                 </li>
-            </ul>
+             </ul>
+        
         </nav>
 
         <!-- expand-hover push -->
@@ -207,19 +150,19 @@
         <div class="adminx-sidebar expand-hover push">
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
-                <a href="/admin-dashboard" class="sidebar-nav-link active">
+                <a href="/employee-dashboard/" class="sidebar-nav-link active">
                 <span class="sidebar-nav-icon">
                 <i data-feather="home"></i>
                 </span>
                 <span class="sidebar-nav-name">
-                Admin
+                Home
                 </span>
                 <span class="sidebar-nav-end">
                 </span>
                 </a>
                 </li>
                 <li class="sidebar-nav-item">
-                <a href="/booking-payment/" class="sidebar-nav-link active">
+                <a href="/emp-booking-payment/" class="sidebar-nav-link active">
                 <span class="sidebar-nav-icon">
                 <strong>P</strong>
                 </span>
@@ -244,129 +187,44 @@
                         </a>
                         <ul class="sidebar-sub-nav collapse" id="navTables">
                             <li class="sidebar-nav-item">
-                            <a href="/user-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Users</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/admin-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Admin</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/customer-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Customer</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/employee-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Employee</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/country-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Country</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/state-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>State</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/city-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>City</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/parcel-status-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Parcel Status</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/pricing-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Price</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/delivery-route-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Delivery Route</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                            <a href="/booking-list/" class="sidebar-nav-link">
-                            <span class="sidebar-nav-abbr">
-                            {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
-                            </span>
-                            <span class="sidebar-nav-name">
-                            <b>Bookings</b>
-                            </span>
-                            </a>
-                            </li>
-                            <li class="sidebar-nav-item">
-                                <a href="/parcel-list/" class="sidebar-nav-link">
-                                    <span class="sidebar-nav-abbr">
-                                        {% comment %} <img src="\static\images\customer.psng" alt="" height="25px" width="25px"> {% endcomment %}
-                                    </span>
-                                    <span class="sidebar-nav-name">
-                                        <b>Parcel</b>
-                                    </span>
+                                <a href="/emp-user-list/" class="sidebar-nav-link">
+                                <span class="sidebar-nav-abbr">
+                                </span>
+                                <span class="sidebar-nav-name">
+                                <b>Users</b>
+                                </span>
                                 </a>
                             </li>
                             <li class="sidebar-nav-item">
-                                <a href="/feedback-list/" class="sidebar-nav-link">
+                                <a href="/emp-customer-list/" class="sidebar-nav-link">
+                                <span class="sidebar-nav-abbr">
+                                </span>
+                                <span class="sidebar-nav-name">
+                                <b>Customer</b>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="/emp-employee-list/" class="sidebar-nav-link">
+                                <span class="sidebar-nav-abbr">
+                                </span>
+                                <span class="sidebar-nav-name">
+                                <b>Employee</b>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="/emp-booking-list/" class="sidebar-nav-link">
+                                <span class="sidebar-nav-abbr">
+                                </span>
+                                <span class="sidebar-nav-name">
+                                <b>Bookings</b>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="/emp-feedback-list/" class="sidebar-nav-link">
                                     <span class="sidebar-nav-abbr">
-                                        {% comment %} <img src="\static\images\customer.psng" alt="" height="25px" width="25px"> {% endcomment %}
                                     </span>
                                     <span class="sidebar-nav-name">
                                         <b>Feedback</b>
@@ -374,26 +232,25 @@
                                 </a>
                             </li>
                             <li class="sidebar-nav-item">
-                                <a href="/invoice-list/" class="sidebar-nav-link">
-                                    <span class="sidebar-nav-abbr">
-                                        {% comment %} <img src="\static\images\customer.psng" alt="" height="25px" width="25px"> {% endcomment %}
-                                    </span>
-                                    <span class="sidebar-nav-name">
-                                        <b>Invoice</b>
-                                    </span>
-                                </a>
-                            </li>
+                              <a href="/emp-invoice-list/" class="sidebar-nav-link">
+                                  <span class="sidebar-nav-abbr">
+                                  </span>
+                                  <span class="sidebar-nav-name">
+                                      <b>Invoice</b>
+                                  </span>
+                              </a>
+                          </li>
                         </ul>
                     </li>
                 </ul>
                 </li>
 
-                <li class="sidebar-nav-item">
+                {% comment %} <li class="sidebar-nav-item">
                     <ul class="sidebar-nav">
                         <li class="sidebar-nav-item">
                             <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navReports" aria-expanded="false" aria-controls="navReports">
                             <span class="sidebar-nav-icon">
-                            <i data-feather="align-justify"></i>
+                            <i data-feather="file-text"></i>
                             </span>
                             <span class="sidebar-nav-name">
                             Reports
@@ -406,7 +263,6 @@
                                 <li class="sidebar-nav-item">
                                     <a href="/booking-report/" class="sidebar-nav-link">
                                     <span class="sidebar-nav-abbr">
-                                    {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                                     </span>
                                     <span class="sidebar-nav-name">
                                     <b>Bookings</b>
@@ -416,7 +272,6 @@
                                 <li class="sidebar-nav-item">
                                     <a href="/admin-list/" class="sidebar-nav-link">
                                     <span class="sidebar-nav-abbr">
-                                    {% comment %} <img src="\static\images\admin.png" alt="" height="25px" width="25px"> {% endcomment %}
                                     </span>
                                     <span class="sidebar-nav-name">
                                     <b>Admin</b>
@@ -426,7 +281,6 @@
                                 <li class="sidebar-nav-item">
                                     <a href="/customer-list/" class="sidebar-nav-link">
                                     <span class="sidebar-nav-abbr">
-                                    {% comment %} <img src="\static\images\customer.png" alt="" height="25px" width="25px"> {% endcomment %}
                                     </span>
                                     <span class="sidebar-nav-name">
                                     <b>Customer</b>
@@ -436,7 +290,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> {% endcomment %}
             </ul>
         </div>
         <!-- Sidebar End -->

@@ -1,4 +1,4 @@
-{% extends 'admin/dsbrd.html' %}
+{% extends 'admin/empdsbrd.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-center">
                     <h2 class="heading_style">Booking Page</h2>
                 </div><br>
-            <form method="post" action="{% url 'add-admin-booking' %}">
+            <form method="post" action="{% url 'add-emp-booking' %}">
                 {% csrf_token %}
 
                 <div class="form-group">
@@ -55,10 +55,10 @@
                         {% comment %} <option value="">Select Deliver Address</option> {% endcomment %}
 
                         {% comment %} <option value="" {% if form.deliver_address == '' %}selected{% endif %}>Select Deliver Address</option> {% endcomment %}
-                        <option value="">To City</option>  
+                        <option value="">To City</option>
 
                         {% for city in cities %}
-                        <option value="{{ city.id }}" {% if city.id == form.deliver_address %} selected{% endif %}>
+                        <option value="{{ city.id }}" {% if city.id == form.deliver_address %}selected{% endif %}>
                             {{ city.name }}
                         </option>
                         {% endfor %}
@@ -68,9 +68,9 @@
                 <div class="form-group">
                     <label for="parcel_type">Parcel Type:</label>
                     <select id="parcel_type" class="form-control" name="parcel_type" value="{{ form.parcel_type }}" required>
-                        <option value="small" {% if form.parcel_type == 'small' %}selected{% endif %}>Small</option>
-                        <option value="medium" {% if form.parcel_type == 'medium'%}selected{% endif %}>Medium</option>
-                        <option value="large" {% if form.parcel_type == 'large' %}selected{% endif %}>Large</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
                     </select>
                 </div>
 
@@ -90,12 +90,10 @@
                 <div class="form-group">
                     <button type="submit" name="action" value="estimate">Get Estimate</button>
                     <button type="submit" name="action" value="confirm">Accept payment & Confirm Booking</button>
-                    <button type="submit" name="action" value="cancel">Cancel Booking</button>
-
                     {% comment %} <button type="submit" name="action" value="cancel">Cancel Booking</button> {% endcomment %}
-                    {% comment %} <a href = "/emp-booking-list/" class="button" style="background-color: #87cefa;border: none;color: 
+                    <a href = "/emp-booking-list/" class="button" style="background-color: #87cefa;border: none;color: 
                     #fff;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 
-                    16px;border-radius: 4px;cursor: pointer;"> Cancle</a> {% endcomment %}
+                    16px;border-radius: 4px;cursor: pointer;"> Cancle</a>
                 </div>
 
                 {% if messages %}

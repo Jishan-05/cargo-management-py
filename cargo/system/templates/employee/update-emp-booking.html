@@ -1,13 +1,13 @@
-{% extends 'admin/dsbrd.html' %}
+{% extends 'admin/empdsbrd.html' %}
 
 {% block content %}
 
 <div class="d-flex justify-content-between">
 
     <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2>
-    <a class="button" href="/booking-list/" class="mr-4">Back</a>
+    <a class="button" href="/emp-booking-list/" class="mr-4">Back</a>
 </div>
-    <form method="post" style="padding-top:10px" action="{% url 'update-admin-booking' id %}">
+    <form method="post" style="padding-top:10px" action="{% url 'update-emp-booking' id %}">
         {% csrf_token %}    
         <div class="form-group">
         {% if booking.parcel.status == 'Booked' %}
@@ -30,7 +30,7 @@
         {% endif %}
 
         </div>
-</form>
+    </form>
 
 {% comment %} <p><b>Order is </b> #{{booking.parcel.tracking_id}} {% endcomment %}
     <p><b>Pickup Address is </b>{{booking.parcel.from_city.name}}

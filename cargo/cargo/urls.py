@@ -26,34 +26,36 @@ urlpatterns = [
     path('about/',about),
     path('company/',company),
     path('contact/',contact,name='contact'),
-    path('contactlist/',contactlist),
     path('',index),
     path('service/',service),
     path('shop/',shop),
 
     #ADMIN SIDE URL 
     path('admin-login/', admin_login_view,name='admin-login'),
+
     # path('register/', register_view),
+    path('admin-change-password/',admin_change_password),
     path('admin-dashboard', admin_dashboard_view),
     path('admin-dashboard/', admin_dashboard_view),
     path('admin-profile/',admin_profile),
     path('admin-profile-edit/',admin_edit_profile),
-    path('admin-change-password/',admin_change_password),
-
+    
     # user 
     path('user-list/',user_list),
+
+    # admin
+    path('admin-list/',admin_list),
     
+    # customer
+    path('customer-list/',customer_list, name='customer-list'),
+    path('create-customer/',add_Customer_AdminView, name="create-customer"),
+    path('update-customer/<int:id>/',edit_CustomerView, name="update-customer"),
+
     # emp
     path('employee-list/',employee_list, name='employee-list'),
     path('create-employee/',create_employee),
     path('update-employee/<int:id>/',update_employee),
     path('delete-employee/<int:id>/',delete_employee),
-
-    # admin
-    path('admin-list/',admin_list),
-
-    # customer
-    path('customer-list/',customer_list, name='customer-list'),
 
     # country
     path('country-list/',country_list, name='country-list'),
@@ -94,6 +96,20 @@ urlpatterns = [
     # booking
     path('booking-list/',booking_list,name='booking-list'),
 
+    # path('add-admin-booking',addAdminBookingView, name="addadminbooking"),
+
+    path('add-admin-booking/',addAdminBookingView, name="add-admin-booking"),
+    path('update-admin-booking/<int:id>/',updatebooking,name='update-admin-booking'),
+
+    # payment
+    path('booking-payment/',bookingPaymentView, name="bookingpayment"),
+    path('update-payment/',bookingPaymentView, name="updatePayment"),
+    path('accept-payment/<int:id>/',acceptPaymentView,name='acceptPayment'),
+
+    # invoice
+    path('invoice/<int:id>/',invoice_View,name='invoice'),
+    path('invoice-list/', invoice_list, name='invoice-list'),
+
     # parcel
     path('parcel-list/',parcel_list),
 
@@ -102,23 +118,51 @@ urlpatterns = [
     path('update-feedback/<int:id>/',update_feedback, name='update-feedback'),
     path('delete-feedback/<int:id>/',delete_feedback),
 
+    # contactlist 
+    path('contactlist/',contactlist),
 
     # EMPLOYEE  SIDE URL
+    path('employee-register/',empregister),  
     path('employee-login/',emplogin,name='employee-login'),
-    path('employee-register/',empregister),
+    path('employee-change-password/',ecpassword),
     path('employee-dashboard/',employee_dashboard ),
     path('employee-profile/',employee_profile),
     path('employee-profile-edit/',emp_edit_profile),
-    path('employee-change-password/',ecpassword),
+    
+    path('emp-user-list/',emp_user_list),
+    
+    path('emp-employee-list/',emp_employee_list, name='emp-employee-list'),
+    
+    path('emp-customer-list/',emp_customer_list, name='emp-customer-list'),
+    path('emp-create-customer/',add_Customer_EmpView,name="emp-create-customer"),
+    
+    path('emp-booking-list/',emp_booking_list,name='emp-booking-list'),
+    path('add-emp-booking/',addEmpBookingView, name="add-emp-booking"),
+    path('update-emp-booking/<int:id>/',empupdatebooking,name='update-emp-booking'),
+    
+    path('emp-booking-payment/',empbookingPaymentView, name="empbookingpayment"),
+    path('emp-accept-payment/<int:id>/',empacceptPaymentView,name='empacceptPayment'),
+    
+     # feedback
+    path('emp-feedback-list/',emp_feedback_list, name='emp-feedback-list'),
+    path('emp-update-feedback/<int:id>/',emp_update_feedback, name='emp-update-feedback'),
+    path('emp-delete-feedback/<int:id>/',emp_delete_feedback),
+    
+    # invoice
+    path('emp-invoice/<int:id>/',emp_invoice_View,name='emp-invoice'),
+    path('emp-invoice-list/', emp_invoice_list, name='emp-invoice-list'),
 
     # CUSTOMER SIDE URL
     path('customer-login/',custlogin, name='customer-login'),
     path('customer-register/',custregister),
+    path('customer-change-password/', ccpassword),
     path('customer-profile/', customer_profile),
     path('customer-profile-edit/',cust_edit_profile),
-    path('customer-change-password/', ccpassword),
+    
+    # booking
     path('customer-booking/', customer_booking_view, name='customer-booking'),
     
+    # feedback
     path('feedback/', dofeedback, name='feedback'),
 
     path('signout/',logoutview,name='signout'),
@@ -128,27 +172,21 @@ urlpatterns = [
 
     path('update-payment/',bookingPaymentView, name="updatePayment"),
 
-    path('accept-payment/<int:id>/',acceptPaymentView,name='acceptPayment'),
-    
+    # cust_my_booking
     path('my-bookings/',my_BookingView, name="myBookings"),
     # path('accept-payment/',acceptPaymentView, name="acceptPayment")
-
+    
+    #  booking-detail
     path('booking-detail/<int:id>/',bookingDetailView, name='booking-detail'),
 
-    # path('add-admin-booking',addAdminBookingView, name="addadminbooking"),
-    path('add-admin-booking/',addAdminBookingView, name="add-admin-booking"),
-    
-    path('update-admin-booking/<int:id>/',updatebooking,name='update-admin-booking'),
-
+    # estimate 
     path('booking-estimate/',customerEstimateView,name='booking-estimate'),
 
-    path('invoice/<int:id>/',invoice_View,name='invoice'),
+    # reports
     path('booking-report/',bookingReportView,name='booking-report'),
     path('customer-report/',customerReportView,name='customer-report'),
-    path('invoice-list/', invoice_list, name='invoice-list'),
-    path('create-customer/',add_Customer_AdminView, name="create-customer"),
-    path('update-customer/<int:id>/',edit_CustomerView, name="update-customer"),
 
-
-
+    path('demo/',demo)
+    
+   
 ]

@@ -27,7 +27,7 @@
             border: 1px solid #add8e6; 
         }
         th {
-            background-color: #87cefa; 
+            background-color: #1187d0; 
             color: #fff;
         }
         tr:nth-child(even) {
@@ -53,38 +53,68 @@
             background-color: #4682b4; 
             border-color: #4682b4; 
         }
-{% comment %} FORM CSS {% endcomment %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f8ff; 
-        color: #333;
-    }
-    h1 {
-        color: #4682b4; 
-    }
-    {% comment %} form {
-        background-color: #ffffff; 
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        margin: 20px auto;
-    } {% endcomment %}
-    label {
-        display: block;
-        margin-bottom: 8px;
-        color: #333;
-    }
-    {% comment %} input[type="text"], select {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #87cefa; 
+
+    * {
+        box-sizing: border-box;
+      }
+      input[type=text],textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
         border-radius: 4px;
-    } {% endcomment %}
-    button {
-        background-color: #87cefa; 
+        resize: vertical;
+      }
+      
+      label {
+        padding: 10px 25px 10px -2px;
+        display: inline-block;
+        width: 100%;
+        padding: 12px;
+        margin-left : 150px;
+      }
+      
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+      
+      
+    .container {
+        {% comment %} background-color: #f2f2f2; {% endcomment %}
+        padding: 20px;
+        height: 100%;
+        width: 200%;
+    }
+      
+      .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+      }
+      
+      .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+      }
+      
+      /* Clear floats after the columns */
+      .row::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      
+      /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 600px) {
+        .col-25, .col-75, input[type=submit] {
+          width: 100%;
+          margin-top: 0;
+        }
+      }
+
+
+      button {
+        background-color: #1187d0; 
         border: none;
         color: #fff;
         padding: 10px 15px;
@@ -94,19 +124,49 @@
         font-size: 16px;
         border-radius: 4px;
         cursor: pointer;
+        margin-left : 450px;
     }
     button:hover {
         background-color: #4682b4; 
     }
-    a {
+    a.button {
         display: inline-block;
-        margin-top: 10px;
-        color: #4682b4; 
+        margin: 5px;
+        background-color: #1187d0; 
+        color: #fff;
+        padding: 10px 12px;
+        text-align: center;
         text-decoration: none;
+        border-radius: 4px;
+        font-size: 16px;
+        border: 1px solid #1187d0; 
+        transition: background-color 0.3s, border-color 0.3s;
     }
-    a:hover {
-        text-decoration: underline;
+    a.button:hover {
+        background-color: #4682b4; 
+        border-color: #4682b4; 
     }
+
+    a.link-button {
+        display: inline-block;
+        background-color: #1187d0; 
+        color: #fff;
+        padding: 8px 12px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        border: 1px solid #1187d0; 
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    .ml-6 {
+        margin-left: 6px;
+    }
+    a.link-button:hover {
+        background-color: #4682b4; 
+        border-color: #4682b4; 
+    }
+      
 </style>
     <!--0
       # Optional Resources
@@ -117,12 +177,12 @@
 <body>
     <div class="adminx-container">
         <nav class="navbar navbar-expand justify-content-between fixed-top">
-            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/">
+            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/employee-dashboard/">
                 <img src="\static\images\logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt=""> Shubh Laxmi Cargo Movers
             </a>
 
 
-            <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
+            {% comment %} <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-icon">
@@ -131,7 +191,7 @@
                     </div>
                     <input type="text" class="form-control" id="search" name="searchinput" placeholder="Type to search...">
                 </div>
-            </form>
+            </form> {% endcomment %}
             <div class="d-flex flex-1 d-block d-md-none">
                 <a href="#" class="sidebar-toggle ml-3">
                     <i data-feather="menu"></i>
@@ -140,7 +200,7 @@
 
             <ul class="navbar-nav d-flex justify-content-end mr-2">
                 <!-- Notificatoins -->
-                <li class="nav-item dropdown d-flex align-items-center mr-2">
+                {% comment %} <li class="nav-item dropdown d-flex align-items-center mr-2">
                     <a class="nav-link nav-link-notifications" id="dropdownNotifications" data-toggle="dropdown" href="#">
                         <i class="oi oi-bell display-inline-block align-middle"></i>
                         <span class="nav-link-notification-number">3</span>
@@ -185,7 +245,7 @@
                             <a href="#"><small>View all notifications</small></a>
                         </div>
                     </div>
-                </li>
+                </li> {% endcomment %}
                 <!-- Notifications -->
                 <li class="nav-item dropdown">
                     <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
