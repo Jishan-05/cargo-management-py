@@ -305,7 +305,7 @@ def admin_edit_profile(request):
                 user.save()
                 admin.save()
                 messages.success(request, 'Profile updated successfully')
-                return redirect('/admin-profile/')
+                return redirect('admin-profile')
 
             # Load the existing profile data
             try:

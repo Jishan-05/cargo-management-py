@@ -30,8 +30,8 @@
                     {% if customer %}
                     <p>Phone Number: <b>{{ customer.phone_number }}</b></p>
                     <p>Address: <b>{{ customer.address }}</b></p>
-                    {% else %}
-                    <p>No additional customer details available.</p>
+                    {% comment %} {% else %} {% endcomment %}
+                    {% comment %} <p>No additional customer details available.</p> {% endcomment %}
                     {% endif %}
                     <a href="/customer-profile-edit/" class="button" onclick="return confirm('do you want to Update the existing data?');" >Edit Profile</a>
                     <a href="/" class="button">Home</a>

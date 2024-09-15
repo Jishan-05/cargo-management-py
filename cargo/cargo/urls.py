@@ -35,7 +35,7 @@ urlpatterns = [
     path('admin-change-password/',admin_change_password),
     path('admin-dashboard', admin_dashboard_view),
     path('admin-dashboard/', admin_dashboard_view),
-    path('admin-profile/',admin_profile),
+    path('admin-profile/',admin_profile,name='admin-profile'),
     path('admin-profile-edit/',admin_edit_profile),
     # user 
     path('user-list/',user_list),
