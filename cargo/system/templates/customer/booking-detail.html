@@ -62,6 +62,14 @@
           </tbody>
       </table>
   </div>
+
+  <div class="mt-4">
+    {% if booking.parcel.status == 'Delivered' %}
+      <a href="/feedback/" class="button" style=""  disabled>Your parcel is Delivered So give Us Feedback</a>
+    {% else %}
+      <button class="button" style="background-color: gray;cursor: not-allowed;" onclick="alert('click')" value="Disabled Input Button"  disabled >You can give us Feedback after your parcel is Delivered</button>
+    {% endif %}
+  </div>
     
 </div>
 {% if messages %}
