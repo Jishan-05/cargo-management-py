@@ -8,8 +8,14 @@
     
     {% block content %}
     <center>
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
+        </div>
     <h1>State Table</h1>
-    <a href="/create-state/" class="button">Add</a>
+    <a href="/create-state/" class="button" onclick="return confirm('do you want to add new data?');">Add</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -23,8 +29,8 @@
             <td>{{ state.name }}</td>
             <td>{{ state.country.name }}</td>
             <td>
-                <a href="/update-state/{{ state.id }}/" class="button">Edit</a>
-                <a href="/delete-state/{{ state.id }}/" class="button">Delete</a>
+                <a href="/update-state/{{ state.id }}/" class="button" onclick="return confirm('do you want to Update the existing data?');">Edit</a>
+                <a href="/delete-state/{{ state.id }}/" class="button" onclick="return confirm('Do you want to Remove the existing data?');">Delete</a>
             </td>
         </tr>
         {% endfor %}

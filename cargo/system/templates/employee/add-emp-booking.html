@@ -9,6 +9,12 @@
 <body>
     {% block content %}
     {% comment %} <center> {% endcomment %}
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/emp-booking-list/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
+        </div>
     <div class="row">
         <div class="col-2">
     </div>
@@ -90,10 +96,10 @@
                 <div class="form-group">
                     <button type="submit" name="action" value="estimate">Get Estimate</button>
                     <button type="submit" name="action" value="confirm">Accept payment & Confirm Booking</button>
-                    {% comment %} <button type="submit" name="action" value="cancel">Cancel Booking</button> {% endcomment %}
-                    <a href = "/emp-booking-list/" class="button" style="background-color: #87cefa;border: none;color: 
+                    <button type="submit" name="action" value="cancel">Cancel Booking</button>
+                    {% comment %} <a href = "/emp-booking-list/" class="button" style="background-color: #87cefa;border: none;color: 
                     #fff;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 
-                    16px;border-radius: 4px;cursor: pointer;"> Cancle</a>
+                    16px;border-radius: 4px;cursor: pointer;"> Cancle</a> {% endcomment %}
                 </div>
 
                 {% if messages %}

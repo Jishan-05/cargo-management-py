@@ -8,8 +8,14 @@
 <body>
     {% block content %}
     <center>
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
+        </div>
         <h1>Customer Table</h1>
-        <a href="/create-customer/" class="button">Add</a>
+        <a href="/create-customer/" class="button" onclick="return confirm('do you want to add new data?');">Add</a>
         <table border="1">
             <tr>
                 <th>Username</th>
@@ -28,7 +34,7 @@
                 <td>{{ customer.address }}</td>
                 
                 <td>
-                    <a href="/update-customer/{{ customer.id }}/" class="button">Edit</a>
+                    <a href="/update-customer/{{ customer.id }}/" class="button" onclick="return confirm('do you want to Update the existing data?');">Edit</a>
                 </td>
                 
             </tr>

@@ -3,13 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Table</title>
+    <title>Message Table</title>
     
 </head>
 <body>
     {% block content %}
     <center>
-        <h1>Contact Table</h1>
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
+        </div>
+        <h1>Message Table</h1>
         <table border="1">
             <tr>
                 <th>ID</th>

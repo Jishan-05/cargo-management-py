@@ -9,6 +9,12 @@
     
     {% block content %}
     <center>
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/employee-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
+        </div>  
     <h1>Employee Table
     </h1>
     {% comment %} <a href="/create-employee/" class="button">Add</a> {% endcomment %}
@@ -28,8 +34,8 @@
             <td>{{ employee.position }}</td>
             <td>{{ employee.address }}</td>
              {% comment %} <td>
-                <a href="/update-employee/{{ employee.id }}/" class="button">Edit</a>
-                <a href="/delete-employee/{{ employee.id }}/" class="button">Delete</a>
+                <a href="/update-employee/{{ employee.id }}/" class="button" onclick="return confirm('do you want to Update the existing data?');">Edit</a>
+                <a href="/delete-employee/{{ employee.id }}/" class="button" onclick="return confirm('Do you want to Remove the existing data?');">Delete</a>
              </td> {% endcomment %}
         </tr>
         {% endfor %}

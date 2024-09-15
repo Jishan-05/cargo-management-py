@@ -59,6 +59,10 @@ def contact(request):
             phonenumber=phonenumber,
             message=message
         )
+        messages.success(request, 'Your message has been sent successfully!, Thanks for Contact Us')
+    else:
+        messages.error(request, 'Contact Us With Sending Message!.')
+
 
     return render(request, 'home/contact.html', {'isUserLoggedIn': isUserLoggedIn,'username':username})
 
@@ -231,6 +235,8 @@ def admin_dashboard_view(request):
 
 def admin_profile(request):
     user_id = request.session.get('user_id')
+    isUserLoggedIn =user_id != None
+
     if user_id:
         try:
             user = User.objects.get(id=user_id)
@@ -239,7 +245,7 @@ def admin_profile(request):
                     admin = Admin.objects.get(user=user)
                 except Admin.DoesNotExist:
                     admin = None
-                return render(request, 'user/admin_profile.html', {'user': user, 'admin': admin})
+                return render(request, 'user/admin_profile.html', {'user': user, 'admin': admin ,'isUserLoggedIn':isUserLoggedIn})
             else:
                 messages.error(request, 'Access denied')
                 return redirect('admin-login')
@@ -1368,15 +1374,18 @@ def employee_dashboard(request):
 
 def employee_profile(request):
     user_id = request.session.get('user_id')
+    isUserLoggedIn =user_id != None
+
     if user_id:
         try:
             user = User.objects.get(id=user_id)
-            try:
-                employee = Employee.objects.get(user=user)
-            except Employee.DoesNotExist:
-                employee = None
+            if user.role == 'Employee':
+                try:
+                    employee = Employee.objects.get(user=user)
+                except Employee.DoesNotExist:
+                    employee = None
             
-            return render(request, 'user/employee_profile.html', {'user': user, 'employee': employee})
+            return render(request, 'user/employee_profile.html', {'user': user, 'employee': employee,'isUserLoggedIn':isUserLoggedIn})
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
             return redirect('/employee-login/')
@@ -1656,11 +1665,11 @@ def addEmpBookingView(request):
             )
             addInvoice(booking)
             messages.success(request, "Booking confirmed. Your tracking ID is: {} and the estimated price is: Rs{:.2f}".format(tracking_id, estimated_price))
-            return redirect('emp-booking-list')
+            return redirect('add-emp-booking')
 
         elif action == 'cancel':
             messages.info(request, "Booking has been canceled.")
-            return redirect('emp-booking-list')
+            return redirect('add-emp-booking')
 
     
     return render(request,'employee/add-emp-booking.html', {'cities': cities,'form':form})
@@ -1830,6 +1839,15 @@ def emp_invoice_View(request,id):
     print(invoice)
     return render(request, 'employee/invoice.html',{'invoice':invoice})
 
+# contactlist
+def emp_contactlist(request):
+    contact = Contactus.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            contact = Contactus.objects.filter(id__icontains = cr )
+    return render(request,'employee/contactlist.html', {'contacts': contact})
+
 # Employee side ends
 
 # Customer side starts
@@ -1940,6 +1958,7 @@ def ccpassword(request):
 
     return render(request, 'user/cust_change_password.html')
 
+# LOGOUT FOR ALL USER
 from django.contrib.auth import logout
 
 def logoutview(request):
@@ -2032,15 +2051,251 @@ def cust_edit_profile(request):
     
     return redirect('/customer-login/')
 
-def my_orders(request, username):
-    customer = get_object_or_404(Customer, user__username=username)
-    
-    bookings = Booking.objects.filter(customer=customer)
+"""
+# def customerEstimateView(request):
+#     user_id = request.session.get('user_id')
+#     isUserLoggedIn = user_id != None
+#     username=''
+#     if isUserLoggedIn == True:
+#         userDetail = User.objects.get(pk=user_id)
+#         username = userDetail.username
 
-    return render(request, 'customer/my_orders.html', {
-        'customer': customer,
-        'bookings': bookings,
-    })
+#     cities = City.objects.all()
+#     form = {'pick_address':'', 'deliver_address':'',
+#               'parcel_type':'','action':''}
+    
+#     context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+#     if request.method == 'POST':
+#         pick_address_id = request.POST.get('pick_address')
+#         deliver_address_id = request.POST.get('deliver_address')
+#         parcel_type = request.POST.get('parcel_type')
+#         action = request.POST.get('action')
+
+#         form = { 
+#               'pick_address':pick_address_id, 'deliver_address':deliver_address_id,
+#               'parcel_type':parcel_type,'action':action}
+            
+#         if not all([ pick_address_id, deliver_address_id, parcel_type]):
+#             messages.error(request, "All fields are required.")
+#             context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+#             return render(request,'customer/booking-estimate.html',context)
+
+#         try:
+#             pick_city = City.objects.get(id=pick_address_id)
+#             deliver_city = City.objects.get(id=deliver_address_id)
+#         except City.DoesNotExist:
+#             messages.error(request, "Invalid city selected.")
+#             context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+#             return render(request,'customer/booking-estimate.html',context)
+
+#         if (pick_city == deliver_city):
+#             messages.error(request,"Pickup address and deliver address should not be same.")
+#             context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+#             return render(request,"customer/booking-estimate.html",context)
+
+#         try:
+#             delivery_route = Deliveryroute.objects.get(from_city=pick_city, to_city=deliver_city)
+#             distance = delivery_route.distance_km
+#         except Deliveryroute.DoesNotExist:
+#             messages.error(request, "No delivery route found.")
+#             context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+#             return render(request,'customer/booking-estimate.html',context)
+
+#         try:
+#             pricing = Pricing.objects.latest('created_at')
+#         except Pricing.DoesNotExist:
+#             messages.error(request, "Pricing details notvailable.")
+#             context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+#             return render(request,'customer/booking-estimate.html',context)
+
+#         base_price = pricing.base_price or 0
+#         price_per_km = pricing.price_per_km or 0
+        
+#         if parcel_type == 'medium':
+#             price_per_km = price_per_km * 2
+#         elif parcel_type == 'large':
+#             price_per_km = price_per_km * 4
+
+#         estimated_price = base_price + (price_per_km * distance)
+
+#         if action == 'estimate':
+#             messages.info(request, "Estimated price: Rs{:.2f}".format(estimated_price))
+#             context= { 'form':form,'cities':cities}
+#             # return render(request,'customer/booking-estimate.html', context)
+            
+    
+#     # return render(request,'admin/add-admin-booking.html', {'cities': cities,'form':form})
+#     return render(request,'customer/booking-estimate.html', context)
+"""
+
+def customerEstimateView(request):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id is not None
+    username = ''
+    if isUserLoggedIn:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+
+    cities = City.objects.all()
+    form = {'pick_address': '', 'deliver_address': '', 'parcel_type': '', 'action': ''}
+
+    context = {'form': form, 'cities': cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+
+    if request.method == 'POST':
+        pick_address_id = request.POST.get('pick_address')
+        deliver_address_id = request.POST.get('deliver_address')
+        parcel_type = request.POST.get('parcel_type')
+        action = request.POST.get('action')
+
+        form = {
+            'pick_address': pick_address_id, 'deliver_address': deliver_address_id,
+            'parcel_type': parcel_type, 'action': action
+        }
+
+        if not all([pick_address_id, deliver_address_id, parcel_type]):
+            messages.error(request, "All fields are required.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        try:
+            pick_city = City.objects.get(id=pick_address_id)
+            deliver_city = City.objects.get(id=deliver_address_id)
+        except City.DoesNotExist:
+            messages.error(request, "Invalid city selected.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        if pick_city == deliver_city:
+            messages.error(request, "Pickup address and deliver address should not be the same.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        try:
+            delivery_route = Deliveryroute.objects.get(from_city=pick_city, to_city=deliver_city)
+            distance = delivery_route.distance_km
+        except Deliveryroute.DoesNotExist:
+            messages.error(request, "No delivery route found.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        try:
+            pricing = Pricing.objects.latest('created_at')
+        except Pricing.DoesNotExist:
+            messages.error(request, "Pricing details not available.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        # base_price = pricing.base_price or 0
+        # base_price = pricing.base_price or 0
+        
+        # price_per_km = pricing.price_per_km or 0
+        
+        # if parcel_type == 'medium':
+        #     price_per_km *= 2
+        # elif parcel_type == 'large':
+        #     price_per_km *= 4
+
+        base_price = pricing.base_price or Decimal('0.00')
+        price_per_km = pricing.price_per_km or Decimal('0.00')
+        
+        if parcel_type == 'medium':
+            price_per_km *= Decimal('2.00')
+        elif parcel_type == 'large':
+            price_per_km *= Decimal('4.00')
+        estimated_price = base_price + (price_per_km * distance)
+
+        if action == 'estimate':
+            request.session['estimated_price'] = float(estimated_price) 
+            return redirect('estimate_success')  # Redirect to the success page
+
+    return render(request, 'customer/booking-estimate.html', context)
+
+def estimate_success(request):
+    estimated_price = request.session.get('estimated_price', None)
+    return render(request, 'customer/estimate-success.html', {'estimated_price': estimated_price})
+
+def customerEstimateView(request):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id is not None
+    username = ''
+    if isUserLoggedIn:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+
+    cities = City.objects.all()
+    form = {'pick_address': '', 'deliver_address': '', 'parcel_type': '', 'action': ''}
+
+    context = {'form': form, 'cities': cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
+
+    if request.method == 'POST':
+        pick_address_id = request.POST.get('pick_address')
+        deliver_address_id = request.POST.get('deliver_address')
+        parcel_type = request.POST.get('parcel_type')
+        action = request.POST.get('action')
+
+        form = {
+            'pick_address': pick_address_id, 'deliver_address': deliver_address_id,
+            'parcel_type': parcel_type, 'action': action
+        }
+
+        if not all([pick_address_id, deliver_address_id, parcel_type]):
+            messages.error(request, "All fields are required.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        try:
+            pick_city = City.objects.get(id=pick_address_id)
+            deliver_city = City.objects.get(id=deliver_address_id)
+        except City.DoesNotExist:
+            messages.error(request, "Invalid city selected.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        if pick_city == deliver_city:
+            messages.error(request, "Pickup address and deliver address should not be the same.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        try:
+            delivery_route = Deliveryroute.objects.get(from_city=pick_city, to_city=deliver_city)
+            distance = delivery_route.distance_km
+        except Deliveryroute.DoesNotExist:
+            messages.error(request, "No delivery route found.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        try:
+            pricing = Pricing.objects.latest('created_at')
+        except Pricing.DoesNotExist:
+            messages.error(request, "Pricing details not available.")
+            return render(request, 'customer/booking-estimate.html', context)
+
+        # base_price = pricing.base_price or 0
+        # base_price = pricing.base_price or 0
+        
+        # price_per_km = pricing.price_per_km or 0
+        
+        # if parcel_type == 'medium':
+        #     price_per_km *= 2
+        # elif parcel_type == 'large':
+        #     price_per_km *= 4
+
+        base_price = pricing.base_price or Decimal('0.00')
+        price_per_km = pricing.price_per_km or Decimal('0.00')
+        
+        if parcel_type == 'medium':
+            price_per_km *= Decimal('2.00')
+        elif parcel_type == 'large':
+            price_per_km *= Decimal('4.00')
+        estimated_price = base_price + (price_per_km * distance)
+
+        if action == 'estimate':
+            request.session['estimated_price'] = float(estimated_price) 
+            return redirect('estimate_success')  # Redirect to the success page
+
+    return render(request, 'customer/booking-estimate.html', context)
+
+def estimate_success(request):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id != None
+
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+    estimated_price = request.session.get('estimated_price', None)
+    return render(request, 'customer/estimate-success.html', {'estimated_price': estimated_price,'isUserLoggedIn': isUserLoggedIn,'username':username})
 
 def customer_booking_view(request):
     user_id = request.session.get('user_id')
@@ -2149,8 +2404,12 @@ def customer_booking_view(request):
                 created_at=timezone.now()
             )
 
-            messages.success(request, "Booking confirmed. Your tracking ID is: {} and the estimated price is: Rs{:.2f}".format(tracking_id, estimated_price))
-            return redirect('customer-booking')
+            request.session['tracking_id'] = tracking_id
+
+            return redirect('booking-success') 
+
+            # messages.success(request, "Booking confirmed. Your tracking ID is: {} and the estimated price is: Rs{:.2f}".format(tracking_id, estimated_price))
+            # return redirect('customer-booking')
 
         elif action == 'cancel':
             messages.info(request, "Booking has been canceled.")
@@ -2159,12 +2418,50 @@ def customer_booking_view(request):
     cities = City.objects.all()
     return render(request, 'customer/booking.html', {'cities': cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username})
 
+def booking_success_view(request):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id != None
+
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+
+    tracking_id = request.session.get('tracking_id')
+    if not tracking_id:
+        messages.error(request, "No booking found.")
+        return redirect('customer-booking',{'isUserLoggedIn': isUserLoggedIn,'username':username})
+
+    try:
+        booking = Booking.objects.get(parcel__tracking_id=tracking_id)
+    except Booking.DoesNotExist:
+        messages.error(request, "Booking not found.")
+        return redirect('customer-booking')
+
+    return render(request, 'customer/success.html', {'booking': booking,'isUserLoggedIn': isUserLoggedIn,'username':username})
+
+# invoice
+def cust_invoice_View(request,id):
+    booking = Booking.objects.get(id = id )
+
+    if booking == None:
+        return redirect('/')
+    invoice = Invoice.objects.get(bookingid=booking)
+    print(invoice)
+    return render(request, 'customer/invoice.html',{'invoice':invoice})
+
 def dofeedback(request):
     user_id = request.session.get('user_id')
+    isUserLoggedIn =user_id != None
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
 
+    
     if request.method == 'POST':
         feedback_text = request.POST.get('feedback_text')
-
+        
         userDetail = User.objects.get(id=user_id)
        
         customerDetail = Customer.objects.get(user = userDetail) 
@@ -2183,8 +2480,20 @@ def dofeedback(request):
 
         messages.success(request, 'Thank you for your feedback!')
         return redirect('feedback')
+    
+    if user_id:
+        try:
+            user = User.objects.get(id=user_id)
+            try:
+                customer = Customer.objects.get(user=user)
+            except Customer.DoesNotExist:
+                customer = None
+        except User.DoesNotExist:
+                messages.error(request, 'User not found.')
+                return redirect('/customer-login/')
+            # return redirect('/customer-login/')
 
-    return render(request, 'customer/feedback.html')
+    return render(request, 'customer/feedback.html',{'isUserLoggedIn':isUserLoggedIn,'customer' :customer,'username':username,'user' :  user})
 
 def my_BookingView(request):
     user_id = request.session.get('user_id')
@@ -2208,11 +2517,20 @@ def my_BookingView(request):
     return render(request, 'customer/my_bookings.html', {'isUserLoggedIn': isUserLoggedIn,'username':username, 'bookings':bookings})
 
 def bookingDetailView(request,id):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id != None
+
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+
+
     bookingDetail = Booking.objects.get(id=id)
     
     parcelStatuses = Parcelstatus.objects.filter(parcel__pk = bookingDetail.parcel.pk).order_by('-updated_at')
  
-    return render(request,'customer/booking-detail.html',{'booking':bookingDetail, 'parcelStatuses':parcelStatuses})  
+    return render(request,'customer/booking-detail.html',{'booking':bookingDetail, 'parcelStatuses':parcelStatuses,'isUserLoggedIn': isUserLoggedIn,'username':username})  
 
 def invoice(request,id):
     booking = Booking.objects.get(id = id)
@@ -2229,80 +2547,11 @@ def invoice(request,id):
 
     return render(request, 'customer/invoice.html',invoice)
 
-def customerEstimateView(request):
-    user_id = request.session.get('user_id')
-    isUserLoggedIn = user_id != None
-    username=''
-    if isUserLoggedIn == True:
-        userDetail = User.objects.get(pk=user_id)
-        username = userDetail.username
-
-    cities = City.objects.all()
-    form = {'pick_address':'', 'deliver_address':'',
-              'parcel_type':'','action':''}
-    
-    context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
-    if request.method == 'POST':
-        pick_address_id = request.POST.get('pick_address')
-        deliver_address_id = request.POST.get('deliver_address')
-        parcel_type = request.POST.get('parcel_type')
-        action = request.POST.get('action')
-
-        form = { 
-              'pick_address':pick_address_id, 'deliver_address':deliver_address_id,
-              'parcel_type':parcel_type,'action':action}
-            
-        if not all([ pick_address_id, deliver_address_id, parcel_type]):
-            messages.error(request, "All fields are required.")
-            context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
-            return render(request,'customer/booking-estimate.html',context)
-
-        try:
-            pick_city = City.objects.get(id=pick_address_id)
-            deliver_city = City.objects.get(id=deliver_address_id)
-        except City.DoesNotExist:
-            messages.error(request, "Invalid city selected.")
-            context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
-            return render(request,'customer/booking-estimate.html',context)
-
-        if (pick_city == deliver_city):
-            messages.error(request,"Pickup address and deliver address should not be same.")
-            context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
-            return render(request,"customer/booking-estimate.html",context)
-
-        try:
-            delivery_route = Deliveryroute.objects.get(from_city=pick_city, to_city=deliver_city)
-            distance = delivery_route.distance_km
-        except Deliveryroute.DoesNotExist:
-            messages.error(request, "No delivery route found.")
-            context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
-            return render(request,'customer/booking-estimate.html',context)
-
-        try:
-            pricing = Pricing.objects.latest('created_at')
-        except Pricing.DoesNotExist:
-            messages.error(request, "Pricing details notvailable.")
-            context= { 'form':form,'cities':cities, 'isUserLoggedIn': isUserLoggedIn, 'username': username}
-            return render(request,'customer/booking-estimate.html',context)
-
-        base_price = pricing.base_price or 0
-        price_per_km = pricing.price_per_km or 0
-        
-        if parcel_type == 'medium':
-            price_per_km = price_per_km * 2
-        elif parcel_type == 'large':
-            price_per_km = price_per_km * 4
-
-        estimated_price = base_price + (price_per_km * distance)
-
-        if action == 'estimate':
-            messages.info(request, "Estimated price: Rs{:.2f}".format(estimated_price))
-            context= { 'form':form,'cities':cities}
-            return render(request,'customer/booking-estimate.html', context)
-    
-    # return render(request,'admin/add-admin-booking.html', {'cities': cities,'form':form})
-    return render(request,'customer/booking-estimate.html', context)
-
+def delete_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.delete()
+    messages.success(request, 'Booking history deleted successfully.')
+    return redirect('myBookings')
 
 # Reports
 def bookingReportView(request):
@@ -2317,12 +2566,39 @@ def bookingReportView(request):
 
     return render(request,'admin/booking-report.html',{'bookings': bookings})    
 
+def adminReportView(request):
+    admins = Admin.objects.all()
+    return render(request, 'report/admin-report.html',{'admins':admins})
+
 def customerReportView(request):
     customers = Customer.objects.all()
-    return render(request,'admin/customer-report.html',{'customers': customers})    
+    return render(request,'report/customer-report.html',{'customers': customers})    
 
+def employeeReportView(request):
+    employees = Employee.objects.all()
+    return render(request,'report/employee-report.html',{'employees' :employees})
 
+def bookedBookingsReportView(request):
+    bookings = Booking.objects.filter(parcel__status='Booked')
+    return render(request, 'report/booked-bookings-report.html', {'bookings': bookings})
+
+def inTransitBookingsReportView(request):
+    bookings = Booking.objects.filter(parcel__status='In Transit')
+    return render(request, 'report/in-transit-bookings-report.html', {'bookings': bookings})
+
+def deliveredReportView(request):
+    bookings = Booking.objects.filter(parcel__status='Delivered')
+    return render(request, 'report/delivered-bookings-report.html', {'bookings': bookings})
+
+def pendingReportView(request):
+    bookings = Booking.objects.filter(payment_status='Pending')
+    return render(request, 'report/pending-report.html', {'bookings': bookings})
+
+def arrivedAtReportView(request):
+    bookings = Booking.objects.filter(parcel__status='Arrived')
+    return render(request, 'report/arrived-at-report.html', {'bookings': bookings})
 
 def demo(request):
     username = 'jishan'
     return render (request,'demo.html',{'username' : username})
+

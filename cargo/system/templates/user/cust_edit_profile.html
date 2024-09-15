@@ -12,6 +12,11 @@
     {% comment %} <center> {% endcomment %}
     <div class="container">
         {% comment %} <h1>Edit Profile</h1> {% endcomment %}
+        <div class="container">
+            <div class="col-12  ">
+                <div class="d-flex justify-content-center">
+                    <h2 class="heading_style">Edit Profile</h2>
+            </div>
         <form method="post">
         {% csrf_token %}
         <div class="row">
@@ -69,8 +74,8 @@
         {% comment %} <input type="submit" value="Update Profile"> {% endcomment %}
         <div class="row">
 
-            <button type="submit">Update Profile</button>
-            <a href="/customer-profile/" class="link-button ml-6">Back</a>
+            <button type="submit" onclick="return confirm('do you want to Update the existing data?');">Update Profile</button>
+            <a href="/customer-profile/" class="link-button ml-6" onclick="return confirm('Go Back to Previous Page');" >Back</a>
         </div>       
 
     

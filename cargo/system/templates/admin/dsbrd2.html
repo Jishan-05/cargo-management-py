@@ -10,35 +10,199 @@
     <link rel="stylesheet" type="text/css" href="/static/dist/css/adminx.css" media="screen" />
 
     {% comment %} TABLE CSS {% endcomment %}
-    <style>
+<style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f8ff; 
+                color: #333;
+            }
+            table {
+                width: 100%;
+                margin: 20px auto;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 10px;
+                text-align: Center;
+                border: 1px solid #add8e6; 
+            }
+            th {
+                background-color: #1187d0; 
+                color: #fff;
+            }
+            tr:nth-child(even) {
+                background-color: #f0f8ff; 
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff; 
+            }
+            a.button {
+                display: inline-block;
+                margin: 5px;
+                background-color: #1187d0; 
+                color: #fff;
+                padding: 8px 12px;
+                text-align: center;
+                text-decoration: none;
+                border-radius: 4px;
+                font-size: 14px;
+                border: 1px solid #1187d0; 
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+            a.button:hover {
+                background-color: #4682b4; 
+                border-color: #4682b4; 
+            }
+    {% comment %} FORM CSS {% endcomment %}
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f8ff; 
             color: #333;
         }
-        table {
-            width: 100%;
-            margin: 20px auto;
-            border-collapse: collapse;
+        h1 {
+            color: #4682b4; 
         }
-        th, td {
-            padding: 10px;
-            text-align: Center;
-            border: 1px solid #add8e6; 
-        }
-        th {
-            background-color: #1187d0; 
-            color: #fff;
-        }
-        tr:nth-child(even) {
-            background-color: #f0f8ff; 
-        }
-        tr:nth-child(odd) {
+        {% comment %} form {
             background-color: #ffffff; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px auto;
+        } {% endcomment %}
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        {% comment %} input[type="text"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #87cefa; 
+            border-radius: 4px;
+        } {% endcomment %}
+        button {
+            background-color: #87cefa; 
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4682b4; 
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #4682b4; 
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        input[type=text],textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        label {
+            padding: 10px 25px 10px -2px;
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            margin-left : 150px;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        
+        
+        .container {
+            {% comment %} background-color: #f2f2f2; {% endcomment %}
+            padding: 20px;
+            height: 100%;
+            width: 200%;
+        }
+        
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+        
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+        
+        /* Clear floats after the columns */
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .col-25, .col-75, input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+            }
+        }
+
+
+        button {
+            background-color: #1187d0; 
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left : 450px;
+        }
+        button:hover {
+            background-color: #4682b4; 
         }
         a.button {
             display: inline-block;
             margin: 5px;
+            background-color: #1187d0; 
+            color: #fff;
+            padding: 10px 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            border: 1px solid #1187d0; 
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        a.button:hover {
+            background-color: #4682b4; 
+            border-color: #4682b4; 
+        }
+
+        a.link-button {
+            display: inline-block;
             background-color: #1187d0; 
             color: #fff;
             padding: 8px 12px;
@@ -49,178 +213,16 @@
             border: 1px solid #1187d0; 
             transition: background-color 0.3s, border-color 0.3s;
         }
-        a.button:hover {
+        .ml-6 {
+            margin-left: 6px;
+        }
+        a.link-button:hover {
             background-color: #4682b4; 
             border-color: #4682b4; 
         }
-{% comment %} FORM CSS {% endcomment %}
-
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f8ff; 
-        color: #333;
-    }
-    h1 {
-        color: #4682b4; 
-    }
-    {% comment %} form {
-        background-color: #ffffff; 
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        margin: 20px auto;
-    } {% endcomment %}
-    label {
-        display: block;
-        margin-bottom: 8px;
-        color: #333;
-    }
-    {% comment %} input[type="text"], select {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #87cefa; 
-        border-radius: 4px;
-    } {% endcomment %}
-    button {
-        background-color: #87cefa; 
-        border: none;
-        color: #fff;
-        padding: 10px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #4682b4; 
-    }
-    a {
-        display: inline-block;
-        margin-top: 10px;
-        color: #4682b4; 
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-
-    * {
-        box-sizing: border-box;
-      }
-      input[type=text],textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
-      }
-      
-      label {
-        padding: 10px 25px 10px -2px;
-        display: inline-block;
-        width: 100%;
-        padding: 12px;
-        margin-left : 150px;
-      }
-      
-      input[type=submit]:hover {
-        background-color: #45a049;
-      }
-      
-      
-    .container {
-        {% comment %} background-color: #f2f2f2; {% endcomment %}
-        padding: 20px;
-        height: 100%;
-        width: 200%;
-    }
-      
-      .col-25 {
-        float: left;
-        width: 25%;
-        margin-top: 6px;
-      }
-      
-      .col-75 {
-        float: left;
-        width: 75%;
-        margin-top: 6px;
-      }
-      
-      /* Clear floats after the columns */
-      .row::after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-      
-      /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-      @media screen and (max-width: 600px) {
-        .col-25, .col-75, input[type=submit] {
-          width: 100%;
-          margin-top: 0;
-        }
-      }
-
-
-      button {
-        background-color: #1187d0; 
-        border: none;
-        color: #fff;
-        padding: 10px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-left : 450px;
-    }
-    button:hover {
-        background-color: #4682b4; 
-    }
-    a.button {
-        display: inline-block;
-        margin: 5px;
-        background-color: #1187d0; 
-        color: #fff;
-        padding: 10px 12px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 16px;
-        border: 1px solid #1187d0; 
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-    a.button:hover {
-        background-color: #4682b4; 
-        border-color: #4682b4; 
-    }
-
-    a.link-button {
-        display: inline-block;
-        background-color: #1187d0; 
-        color: #fff;
-        padding: 8px 12px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 14px;
-        border: 1px solid #1187d0; 
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-    .ml-6 {
-        margin-left: 6px;
-    }
-    a.link-button:hover {
-        background-color: #4682b4; 
-        border-color: #4682b4; 
-    }
 </style>
+
+
     <!--0
       # Optional Resources
       Feel free to delete these if you don't need them in your project
@@ -279,6 +281,9 @@
                        </div>
                     </div>
                  </li> {% endcomment %}
+                 <li class="nav-item dropdown d-flex align-items-center mx-2">
+                    Hi, {{ user.username}}
+                </li>
 
                  <li class="nav-item dropdown">
                     <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">

@@ -57,7 +57,7 @@
                     padding:0 8px;
                 }
                 
-             </style>
+            </style>
 </head>
 
 <body>
@@ -223,19 +223,22 @@
 
     </div>
 
+    <br>
     <!-- about section -->
     <div class="row">
         <div class="col-2">
     </div>
     
+    <br>
     <div class="col-8">
         <div class="d-flex justify-content-center">
+            <br>
             <h2 class="heading_style">Inquiry</h2>
         </div><br>
     
     
     
-    <form method="post" action="{% url 'booking-estimate'%}">
+    {% comment %} <form method="post" action="{% url 'booking-estimate'%}">
         {% csrf_token %}
         <div class="form-group">
             <label for="pick_address">From City :</label>
@@ -278,7 +281,53 @@
         </ul>
         {% endif %}
     
+    </form> {% endcomment %}
+
+
+    <form method="post" action="{% url 'booking-estimate' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="pick_address">From City :</label>
+            <select id="pick_address" class="form-control" name="pick_address" required>
+                <option value="">From City</option>
+                {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="deliver_address">To City:</label>
+            <select id="deliver_address" class="form-control" name="deliver_address" required>
+                <option value="">To City</option>
+                {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="parcel_type">Parcel Type:</label>
+            <select id="parcel_type" class="form-control" name="parcel_type" required>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <button class="booking-button" type="submit" name="action" value="estimate">Get Estimate</button>
+        </div>
+    
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </form>
+    
     <!-- end about section -->
 
 

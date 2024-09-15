@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-between">
 
     <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2>
-    <a class="button" href="/booking-list/" class="mr-4">Back</a>
+    <a class="button" href="/booking-list/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
 </div>
     <form method="post" style="padding-top:10px" action="{% url 'update-admin-booking' id %}">
         {% csrf_token %}    

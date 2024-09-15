@@ -78,7 +78,7 @@
             {% comment %} <label for="date_joined">Date Joined:</label>
             <input type="datetime-local" id="date_joined" name="date_joined" value="{{ user.date_joined|date:'Y-m-dTH:i' }}"><br><br> {% endcomment %}
 
-            <button type="submit">Update Profile</button>
+            <button type="submit" onclick="return confirm('do you want to Update the existing data?');">Update Profile</button>
         </form>
     </div>
 {% endblock %}

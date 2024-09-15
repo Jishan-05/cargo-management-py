@@ -1,0 +1,50 @@
+{% extends 'admin/dsbrd.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Report</title>
+   
+</head>
+<body>
+    {% block content %}
+        <center>
+            <div class="d-flex justify-content-between">
+
+                {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+                <span></span>
+                <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
+            </div>
+    <h1>Admin Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Date Of Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+            <tr>
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.user.username }}</td>
+                <td>{{ admin.phone_number }}</td>
+                <td>{{ admin.address }}</td>
+                <td>{{ admin.user.date_joined }}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    {% for admin in admins %}
+            {% empty %}
+                No Data found
+    {% endfor %}
+</center>
+{% endblock %}
+</body>
+</html>

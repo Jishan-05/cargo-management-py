@@ -1,43 +1,50 @@
-{% extends 'admin/dsbrd.html' %}
+    {% extends 'admin/dsbrd.html' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Table</title>
-    
-</head>
-<body>
-    {% block content %}
-    <center>
-        <h1>Admin Table</h1>
-        <table border="1">
-            <tr>
-                <th>Username</th>
-                <th>Admin Name</th>
-                <th>Contact</th>
-                <th>Email</th>
-                <th>Address</th>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Admin Table</title>
+        
+    </head>
+    <body>
+        {% block content %}
+        <center>
+            <div class="d-flex justify-content-between">
+
+                {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+                <span></span>
+                <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
+            </div>
+            <h1>Admin Table</h1>
+            <table border="1">
+                <tr>
+                    <th>Username</th>
+                    <th>Admin Name</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    
+                </tr>
+                {% for admin in admins %}
+                <tr>
+                    <td>{{ admin.user.username }}</td>
+                    <td>{{ admin.user.first_name }} {{ admin.user.last_name }}</td>
+                    <td>{{ admin.phone_number }}</td>
+                    <td>{{ admin.user.email }}</td>
+                    <td>{{ admin.address }}</td>
+
+                    
+                    
+                </tr>
                 
-            </tr>
+                {% endfor %}
+            </table>
             {% for admin in admins %}
-            <tr>
-                <td>{{ admin.user.username }}</td>
-                <td>{{ admin.user.first_name }} {{ admin.user.last_name }}</td>
-                <td>{{ admin.phone_number }}</td>
-                <td>{{ admin.user.email }}</td>
-                <td>{{ admin.address }}</td>
-
-                
-                
-            </tr>
-            
+            {% empty %}
+                No Data found
             {% endfor %}
-        </table>
-        {% for admin in admins %}
-        {% empty %}
-            No Data found
-        {% endfor %}
-    </center>
-    {% endblock %}
-</body>
-</html>
+            
+        </center>
+        {% endblock %}
+    </body>
+    </html>

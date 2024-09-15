@@ -7,6 +7,12 @@
 <body>
     {% block content %}
     <center>
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
+        </div>
     
     <h1>Feedback Table</h1>
     
@@ -33,8 +39,8 @@
                     <td>{{ feedback.feedback_text }}</td>
                     {% comment %} <td>{{ feedback.created_at }}</td> {% endcomment %}
                     <td>
-                        <a href="/update-feedback/{{ feedback.id }}/" class="button">Edit</a> 
-                        <a href="/delete-feedback/{{ feedback.id }}/" class="button">Delete</a>
+                        <a href="/update-feedback/{{ feedback.id }}/" class="button" onclick="return confirm('do you want to Update the existing data?');">Edit</a> 
+                        <a href="/delete-feedback/{{ feedback.id }}/" class="button" onclick="return confirm('Do you want to Remove the existing data?');">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

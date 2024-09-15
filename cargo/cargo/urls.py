@@ -96,7 +96,6 @@ urlpatterns = [
     # booking
     path('booking-list/',booking_list,name='booking-list'),
 
-    # path('add-admin-booking',addAdminBookingView, name="addadminbooking"),
 
     path('add-admin-booking/',addAdminBookingView, name="add-admin-booking"),
     path('update-admin-booking/<int:id>/',updatebooking,name='update-admin-booking'),
@@ -152,15 +151,26 @@ urlpatterns = [
     path('emp-invoice/<int:id>/',emp_invoice_View,name='emp-invoice'),
     path('emp-invoice-list/', emp_invoice_list, name='emp-invoice-list'),
 
+     # contactlist 
+    path('emp-contactlist/',emp_contactlist),
+
     # CUSTOMER SIDE URL
     path('customer-login/',custlogin, name='customer-login'),
     path('customer-register/',custregister),
     path('customer-change-password/', ccpassword),
     path('customer-profile/', customer_profile),
     path('customer-profile-edit/',cust_edit_profile),
-    
+
+    # estimate 
+    path('booking-estimate/',customerEstimateView,name='booking-estimate'),
+    path('estimate-success/', estimate_success, name='estimate_success'),
+
+
     # booking
     path('customer-booking/', customer_booking_view, name='customer-booking'),
+    path('booking-success/', booking_success_view, name='booking-success'),
+    path('cust-invoice/<int:id>/',cust_invoice_View,name='invoice'),
+
     
     # feedback
     path('feedback/', dofeedback, name='feedback'),
@@ -174,19 +184,31 @@ urlpatterns = [
 
     # cust_my_booking
     path('my-bookings/',my_BookingView, name="myBookings"),
-    # path('accept-payment/',acceptPaymentView, name="acceptPayment")
-    
+    path('delete-booking/<int:booking_id>/', delete_booking, name='delete_booking'),
+
     #  booking-detail
     path('booking-detail/<int:id>/',bookingDetailView, name='booking-detail'),
 
-    # estimate 
-    path('booking-estimate/',customerEstimateView,name='booking-estimate'),
-
+    
     # reports
+    path('admin-report/',adminReportView,name='admin-report'),
     path('booking-report/',bookingReportView,name='booking-report'),
     path('customer-report/',customerReportView,name='customer-report'),
+    path('employee-report/',employeeReportView,name='employee-report'),
+    path('booked-report/', bookedBookingsReportView, name='booked_bookings-report'),
+    path('in-transit-report/', inTransitBookingsReportView, name='in_transit-bookings_report'),
+    path('delivered-report/', deliveredReportView, name='delivered-bookings_report'),
+    path('pending-payment-report/', pendingReportView, name='pending-payment-report'),
+    path('arrived-report/', arrivedAtReportView, name='arrived-report'),
+
+
 
     path('demo/',demo)
-    
+    # path('accept-payment/',acceptPaymentView, name="acceptPayment")   
+    # path('estimate-success/', estimate_success_view, name='estimate-success'),
+    # path('add-admin-booking',addAdminBookingView, name="addadminbooking"),
+
+ 
    
 ]
+

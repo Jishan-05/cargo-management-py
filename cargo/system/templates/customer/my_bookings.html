@@ -1,38 +1,64 @@
 {% extends 'admin/custdsbrd.html' %}
 {% block content %} 
-<h1>My Orders</h1>
-<table border=1>
-    <thead>
-        <tr>
-            <th>Tracking Id</th>
-            <th>Parcel Type</th>
-            <th>Amount Paid</th>
-            <th>Payment Status</th>
-            <th>Status</th>
-            <th>Booking Date</th>
-            <th>Action</th>
+    <div class="d-flex justify-content-between">
 
-        </tr>
-    </thead>
-    <tbody>
-        {% for booking in bookings %}
-        <tr>
-            <td>{{ booking.parcel.tracking_id }}</td>
-            <td>{{ booking.parcel.parcel_type }}</td>
-            <td>{% if booking.payment_status != 'Pending' %}  &#8377; {{ booking.amount_paid }} {% endif %}</td>
-            <td>{{ booking.payment_status }}</td>
-            <td>{{ booking.parcel.status }}</td>
-            <td>{% if booking.payment_status != 'Pending' %}  {{ booking.booking_date }}{% endif %}</td> 
+        {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+        <span></span>
+        {% comment %} <a class="button" href="/customer-profile/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a> {% endcomment %}
+        
+        <a class="button" href="/customer-profile/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
+
+
+
+    </div>
+
+    <h1>My Orders</h1>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>  
+        {% endif %}
+    <table border=1>
+        <thead>
+            <tr>
+                <th>Tracking Id</th>
+                <th>Parcel Type</th>
+                <th>Amount Paid</th>
+                <th>Payment Status</th>
+                <th>Status</th>
+                <th>Booking Date</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
             
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.parcel.tracking_id }}</td>
+                <td>{{ booking.parcel.parcel_type }}</td>
+                <td>{% if booking.payment_status != 'Pending' %}  &#8377; {{ booking.amount_paid }} {% endif %}</td>
+                <td>{{ booking.payment_status }}</td>
+                <td>{{ booking.parcel.status }}</td>
+                <td>{% if booking.payment_status != 'Pending' %}  {{ booking.booking_date }}{% endif %}</td> 
+                
 
-            <td> 
-                <a class="button" href="/booking-detail/{{ booking.id }}/">Details</a>  
-                {% if booking.payment_status != 'Pending' %}
-                <a class="button" href="/invoice/{{ booking.id }}/">Invoice</a>  
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                <td> 
+                    <a class="button" href="/booking-detail/{{ booking.id }}/">Details</a> 
+                    {% if booking.payment_status != 'Pending' %}
+                    <a class="button" href="/cust-invoice/{{ booking.id }}/">Invoice</a>  
+                    {% endif %}
+                    {% comment %} <a href="{% url 'delete_booking' booking.id %}" class="button" onclick="return confirm('Are you sure you want to delete History of this Booking?');">Delete History</a>  {% endcomment %}
+                    <a href="{% url 'delete_booking' booking.id %}" class="button" onclick="return confirm('Are you sure you want to delete History of this Booking?');">Delete History</a> 
+
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -10,6 +10,12 @@
 <body>
     {% block content %}
     <center>
+        <div class="d-flex justify-content-between">
+
+            {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+            <span></span>
+            <a class="button" href="/employee-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
+        </div>
     <h1>Invoice Table</h1>
     <table>
         <thead>
@@ -34,6 +40,7 @@
                 <td>
                     {% if booking.payment_status != 'Pending' %}
                     <a class="button" href="/emp-invoice/{{ invoice.bookingid.id }}/">View Invoice</a>  
+
                     {% endif %}
                 </td>
                 {% comment %} <td>{{ invoice.bookingid.customer.name }}</td>  <!-- Access customer name --> {% endcomment %}

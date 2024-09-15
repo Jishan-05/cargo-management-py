@@ -6,12 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+        
 </head>
 <body>
     {% block content %}
     {% comment %} <center> {% endcomment %}
+        
+
+        
+
     {% comment %} <h1>Edit Profile</h1> {% endcomment %}
     <div class="container">
+        <div class="col-12  ">
+            <div class="d-flex justify-content-center">
+                <h2 class="heading_style">Edit Profile</h2>
+        </div>
         <form method="post">
         {% csrf_token %}
 
@@ -63,9 +72,10 @@
             </div>
 
             {% comment %} <input type="submit" value="Update Profile" class ="button"> {% endcomment %}
+            
             <div class="row">
-                <button type="submit" class="button">Update Profile</button>
-                <a href="/admin-profile/" class="button">Back</a>
+                <button type="submit" class="button" onclick="return confirm('do you want to Update the existing data?');" >Update Profile</button>
+                <a href="/admin-profile/" class="button" onclick="return confirm('Go Back to Previous Page');" style="">Back</a>
             </div>
 
             {% if messages %}

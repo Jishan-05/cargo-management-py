@@ -15,8 +15,8 @@
     <p>Are you sure you want to accept payment of booking id {{id}}?</p>
     <form method="post" action="">
         {% csrf_token %}
-        <button type="submit">Accept</button>
-        <a href="/emp-booking-payment/" class="button">Back</a>
+        <button type="submit" >Accept</button>
+        <a href="/emp-booking-payment/" class="button" onclick="return confirm('Go Back to Previous Page');" >Back</a>
     </form>
     <!-- Display messages -->
     {% if messages %}

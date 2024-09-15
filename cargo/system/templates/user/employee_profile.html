@@ -32,8 +32,8 @@
                 {% else %}
                     <p>No additional employee details available.</p>
                 {% endif %}
-                <a href="/employee-profile-edit/" class="button">Edit Profile</a>
-                <a href="/employee-dashboard/" class="button">Back</a>
+                <a href="/employee-profile-edit/" class="button" onclick="return confirm('do you want to Update the existing data?');">Edit Profile</a>
+                <a href="/employee-dashboard/" class="button"onclick="return confirm('Go Back to Previous Page');">Back</a>
                 {% endblock %}
         </div>
     </div>

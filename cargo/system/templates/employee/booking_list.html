@@ -8,9 +8,15 @@
 <body>
     {% block content %}
     <center>
+    <div class="d-flex justify-content-between">
+
+        {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
+        <span></span>
+        <a class="button" href="/employee-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
+    </div>
         <h1>Booking Table</h1>
 
-        <a class="button" href="/add-emp-booking/">Add</a>
+        <a class="button" href="/add-emp-booking/" onclick="return confirm('do you want to add new data?');">Add</a>
         <table border="1">
             <tr><th>ID</th>
                 <th>Customer</th>
