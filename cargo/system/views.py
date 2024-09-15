@@ -219,12 +219,25 @@ def admin_dashboard_view(request):
                     bookingCounts = { 'totalBookingCount': totalBooking.__len__(),
                            'pendingPaymentCount': totalBooking.filter(payment_status = 'Pending').__len__(),
                            'deliveredBookingCount': parcelLists.filter(status = 'Delivered').__len__(),
-                           'inTransitBookingCount': parcelLists.filter(status = 'In Tansit').__len__()
+                           'inTransitBookingCount': parcelLists.filter(status = 'In Tansit').__len__(),
+                            'ArrivedBookingCount' :parcelLists.filter(status = 'Arrived').__len__()
                            }
+                    
+                    userCount = User.objects.count()
+                    customerCount = Customer.objects.count()
+                    employeeCount = Employee.objects.count()
 
                 except Admin.DoesNotExist:
                     admin = None
-                return render(request, 'user/admin_dashboard.html', {'user': user ,'admin': admin, 'bookingCounts': bookingCounts, 'isUserLoggedIn':isUserLoggedIn})
+                return render(request, 'user/admin_dashboard.html', {
+                    'user': user ,
+                    'admin': admin, 
+                    'bookingCounts': bookingCounts, 
+                    'isUserLoggedIn':isUserLoggedIn,
+                    'userCount': userCount,
+                    'customerCount': customerCount,
+                    'employeeCount': employeeCount
+                    })
             else:
                 messages.error(request, 'Access denied')
                 return redirect('admin-login')
@@ -1359,11 +1372,26 @@ def employee_dashboard(request):
                     bookingCounts = { 'totalBookingCount': totalBooking.__len__(),
                            'pendingPaymentCount': totalBooking.filter(payment_status = 'Pending').__len__(),
                            'deliveredBookingCount': parcelLists.filter(status = 'Delivered').__len__(),
-                           'inTransitBookingCount': parcelLists.filter(status = 'In Tansit').__len__()
+                           'inTransitBookingCount': parcelLists.filter(status = 'In Tansit').__len__(),
+                            'ArrivedBookingCount' :parcelLists.filter(status = 'Arrived').__len__()
+
                            }
+                    
+                    userCount = User.objects.count()
+                    customerCount = Customer.objects.count()
+                    employeeCount = Employee.objects.count()
+
                 except Employee.DoesNotExist:
                     employee = None
-                return render(request, 'user/employee_dashboard.html', {'user': user ,'employee' : employee, 'bookingCounts': bookingCounts,'isUserLoggedIn':isUserLoggedIn})
+                return render(request, 'user/employee_dashboard.html', {
+                    'user': user ,
+                    'employee' : employee, 
+                    'bookingCounts': bookingCounts,
+                    'isUserLoggedIn':isUserLoggedIn,
+                    'userCount': userCount,
+                    'customerCount': customerCount,
+                    'employeeCount': employeeCount
+                    })
             else:
                 messages.error(request, 'Access denied')
                 return redirect('/employee-login/')
@@ -2568,34 +2596,86 @@ def bookingReportView(request):
 
 def adminReportView(request):
     admins = Admin.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            admins = Admin.objects.filter(user__username__icontains = cr )
     return render(request, 'report/admin-report.html',{'admins':admins})
 
 def customerReportView(request):
     customers = Customer.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            customers = Customer.objects.filter(user__username__icontains = cr )
     return render(request,'report/customer-report.html',{'customers': customers})    
 
 def employeeReportView(request):
     employees = Employee.objects.all()
+    if request.method=="GET":
+        cr = request.GET.get('searchinput')
+        if cr!= None:
+            employees = Employee.objects.filter(user__first_name__icontains = cr )
     return render(request,'report/employee-report.html',{'employees' :employees})
 
 def bookedBookingsReportView(request):
     bookings = Booking.objects.filter(parcel__status='Booked')
+    if request.method == "GET":
+        search_input = request.GET.get('searchinput')
+        if search_input:
+            bookings = bookings.filter(
+                customer__user__first_name__icontains=search_input
+            ) | bookings.filter(
+                customer__user__last_name__icontains=search_input
+            )
     return render(request, 'report/booked-bookings-report.html', {'bookings': bookings})
 
 def inTransitBookingsReportView(request):
     bookings = Booking.objects.filter(parcel__status='In Transit')
+    if request.method == "GET":
+        search_input = request.GET.get('searchinput')
+        if search_input:
+            bookings = bookings.filter(
+                customer__user__first_name__icontains=search_input
+            ) | bookings.filter(
+                customer__user__last_name__icontains=search_input
+            )
     return render(request, 'report/in-transit-bookings-report.html', {'bookings': bookings})
 
 def deliveredReportView(request):
     bookings = Booking.objects.filter(parcel__status='Delivered')
+    if request.method == "GET":
+        search_input = request.GET.get('searchinput')
+        if search_input:
+            bookings = bookings.filter(
+                customer__user__first_name__icontains=search_input
+            ) | bookings.filter(
+                customer__user__last_name__icontains=search_input
+            )
     return render(request, 'report/delivered-bookings-report.html', {'bookings': bookings})
 
 def pendingReportView(request):
     bookings = Booking.objects.filter(payment_status='Pending')
+    if request.method == "GET":
+        search_input = request.GET.get('searchinput')
+        if search_input:
+            bookings = bookings.filter(
+                customer__user__first_name__icontains=search_input
+            ) | bookings.filter(
+                customer__user__last_name__icontains=search_input
+            )
     return render(request, 'report/pending-report.html', {'bookings': bookings})
 
 def arrivedAtReportView(request):
     bookings = Booking.objects.filter(parcel__status='Arrived')
+    if request.method == "GET":
+        search_input = request.GET.get('searchinput')
+        if search_input:
+            bookings = bookings.filter(
+                customer__user__first_name__icontains=search_input
+            ) | bookings.filter(
+                customer__user__last_name__icontains=search_input
+            )
     return render(request, 'report/arrived-at-report.html', {'bookings': bookings})
 
 def demo(request):

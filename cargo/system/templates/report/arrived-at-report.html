@@ -18,21 +18,25 @@
             <tr>
                 <th>Id</th>
                 <th>Status</th>
+                <th>Booked By</th>
                 <th>Status Date</th>
                 <th>From</th>
                 <th>To</th>
                 <th>Booking Date</th>
                 <th>Email</th>
+                
             </tr>
             {% for booking in bookings %}
             <tr>
                 <td>{{ booking.id }}</td>
                 <td>{{ booking.parcel.status }}</td>
+                <td>{{ booking.customer.user.first_name }} {{ booking.customer.user.last_name }}</td>
                 <td>{{ booking.parcel.updated_at }}</td>
                 <td>{{ booking.parcel.from_city.name }}</td>
                 <td>{{ booking.parcel.to_city.name }}</td>
                 <td>{{ booking.booking_date }}</td>
                 <td>{{ booking.customer.user.email }}</td>
+
             </tr>
             {% empty %}
             <tr><td colspan="7">No Data found</td></tr>

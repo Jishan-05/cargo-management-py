@@ -563,7 +563,72 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex"> 
+                            <div class="card border-0 bg-primary text-white text-center mb-grid w-100">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="card-icon d-flex align-items-center h-100 justify-content-center">
+                                        <img src="\static\images\delivered.png" alt="" height="40px" width="40px">
+                                    </div> 
+                                    <div class="card-body">
+                                        <div class="card-info-title">Arrived</div>
+                                        <h3 class="card-title mb-0">
+                                            {{bookingCounts.ArrivedBookingCount}}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex">
+                            <div class="card border-0 card text-white bg-info mb-3 text-white text-center mb-grid w-100">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="card-icon d-flex align-items-center h-100 justify-content-center">
+                                        <img src="\static\images\user-icon.png" alt="" height="40px" width="40px">
+                                    </div> 
+                                    <div class="card-body">
+                                        <div class="card-info-title">Users</div>
+                                        <h3 class="card-title mb-0">
+                                            {{ userCount }}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex">
+                            <div class="card bg-light mb-3 text-white text-center mb-grid w-100">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="card-icon d-flex align-items-center h-100 justify-content-center">
+                                        <img src="\static\images\star-user.png" alt="" height="40px" width="40px">
+                                    </div> 
+                                    <div class="card-body">
+                                        <div class="card-info-title" style="color : black; ">Customers</div>
+                                        <h3 class="card-title mb-0" style="color : black; ">
+                                            {{ customerCount }}                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex">
+                            <div class="card border-0 bg-warning text-white text-center mb-grid w-100">
+                                <div class="d-flex flex-row align-items-center h-100">
+                                    <div class="card-icon d-flex align-items-center h-100 justify-content-center">
+                                        <img src="\static\images\man.png" alt="" height="40px" width="40px">
+                                    </div> 
+                                    <div class="card-body">
+                                        <div class="card-info-title">Employees</div>
+                                        <h3 class="card-title mb-0">
+                                            {{ employeeCount }}                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+                    
+
                     
                 </div>
             </div>
