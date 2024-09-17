@@ -27,9 +27,23 @@
                 <a href="/admin-profile-edit/" class= "button">Edit Profile</a>
                 <a href="/admin-dashboard" class="button" onclick="return confirm('Go Back to Previous Page');" >Back</a>
             </div>
-
+        </div>
         
     </div>
+    <div class="d-flex justify-content-center mt-4">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    
+
     {% endblock %}
+    
 </body>
 </html>

@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .models import *
@@ -223,7 +225,7 @@ def admin_dashboard_view(request):
                             'ArrivedBookingCount' :parcelLists.filter(status = 'Arrived').__len__()
                            }
                     
-                    userCount = User.objects.count()
+                    userCount = User.objects.exclude(pk = admin.user.id).count()
                     customerCount = Customer.objects.count()
                     employeeCount = Employee.objects.count()
 
@@ -243,8 +245,8 @@ def admin_dashboard_view(request):
                 return redirect('admin-login')
         except User.DoesNotExist:
             messages.error(request, 'User not found.')
-            return redirect('/admin-login/')
-    return redirect('/admin-login/')
+            return redirect('admin-login')
+    return redirect('admin-login')
 
 def admin_profile(request):
     user_id = request.session.get('user_id')
@@ -397,7 +399,7 @@ def add_Customer_AdminView(request):
             address=address
         )
         messages.success(request, 'Customer added successfully')
-        return redirect('/customer-list/')
+        return redirect('customer-list')
     return render(request, 'admin/add-customer.html')    
 
 def edit_CustomerView(request,id):
@@ -504,14 +506,14 @@ def create_employee(request):
            role='Employee',
            date_joined = timezone.now()
         )
-
+        print(user)
         Employee.objects.create(
             user=user,
             phone_number=phone_number,
             position=position,
             address=address
         )
-        return redirect('../employee-list/')
+        return redirect('employee-list')
     return render(request, 'admin/create_employee.html')
 
 def update_employee(request, id):
@@ -1032,11 +1034,15 @@ def addAdminBookingView(request):
             )
             addInvoice(booking)
             messages.success(request, "Booking confirmed. Your tracking ID is: {} and the estimated price is: Rs{:.2f}".format(tracking_id, estimated_price))
-            return redirect('booking-list')
+            # return redirect('booking-list')
+            return redirect('add-admin-booking')
+
 
         elif action == 'cancel':
             messages.info(request, "Booking has been canceled.")
-            return redirect('booking-list')
+            # return redirect('booking-list')
+            return redirect('add-admin-booking')
+
 
     
     return render(request,'admin/add-admin-booking.html', {'cities': cities,'form':form})
@@ -1377,7 +1383,8 @@ def employee_dashboard(request):
 
                            }
                     
-                    userCount = User.objects.count()
+                    userCount = User.objects.filter(~Q(role='Admin')).count()
+                    print(userCount)
                     customerCount = Customer.objects.count()
                     employeeCount = Employee.objects.count()
 
@@ -1466,11 +1473,11 @@ def emp_edit_profile(request):
             
             user.save()
             messages.success(request, 'Profile updated successfully')
-            return redirect('/employee-profile/')
+            return redirect('employee-profile')
 
         return render(request, 'user/emp_edit_profile.html', {'user': user, 'employee': employee})
     
-    return redirect('/employee-login/')
+    return redirect('employee-login')
 
 # userlist
 def emp_user_list(request):
@@ -1975,13 +1982,20 @@ def ccpassword(request):
             return render(request, 'user/cust_change_password.html')
         
         user = User.objects.get(pk=user_id)
+        # print(user.password)
+        # print(old_password)
+        # hashed = make_password(old_password)
+        # print(hashed)
+        # print(user.password)
         if check_password(old_password, user.password):
+            print('found')
             user.password = make_password(new_password)
             user.save()
             update_session_auth_hash(request, user)  # Keeps the user logged in after password change
             messages.success(request, 'Password changed successfully.')
             return redirect('/customer-profile/')
         else:
+            print('no matched')
             messages.error(request, 'Old password is incorrect.')
 
     return render(request, 'user/cust_change_password.html')
@@ -2073,7 +2087,7 @@ def cust_edit_profile(request):
             
             user.save()
             messages.success(request, 'Profile updated successfully')
-            return redirect('/customer-profile/')
+            return redirect('customer-profile')
 
         return render(request, 'user/cust_edit_profile.html', {'user': user, 'customer': customer,'username': user.username, 'isUserLoggedIn':isUserLoggedIn})
     
@@ -2470,13 +2484,20 @@ def booking_success_view(request):
 
 # invoice
 def cust_invoice_View(request,id):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn = user_id != None
+
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
     booking = Booking.objects.get(id = id )
 
     if booking == None:
         return redirect('/')
     invoice = Invoice.objects.get(bookingid=booking)
     print(invoice)
-    return render(request, 'customer/invoice.html',{'invoice':invoice})
+    return render(request, 'customer/invoice.html',{'invoice':invoice,'isUserLoggedIn': isUserLoggedIn,'username':username})
 
 def dofeedback(request):
     user_id = request.session.get('user_id')
@@ -2506,8 +2527,8 @@ def dofeedback(request):
             created_at=timezone.now()
         )
 
-        messages.success(request, 'Thank you for your feedback!')
-        return redirect('feedback')
+        # messages.success(request, 'Thank you for your feedback!')
+        return redirect('feedback-success')
     
     if user_id:
         try:
@@ -2522,6 +2543,24 @@ def dofeedback(request):
             # return redirect('/customer-login/')
 
     return render(request, 'customer/feedback.html',{'isUserLoggedIn':isUserLoggedIn,'customer' :customer,'username':username,'user' :  user})
+
+def feedback_success(request):
+    user_id = request.session.get('user_id')
+    isUserLoggedIn =user_id != None
+    username=''
+    if isUserLoggedIn == True:
+        userDetail = User.objects.get(pk=user_id)
+        username = userDetail.username
+        try:
+            user = User.objects.get(id=user_id)
+            try:
+                customer = Customer.objects.get(user=user)
+            except Customer.DoesNotExist:
+                customer = None
+        except User.DoesNotExist:
+                messages.error(request, 'User not found.')
+
+    return render(request,'customer/feedback_success.html',{'isUserLoggedIn':isUserLoggedIn,'customer' :customer,'username':username,'user' :  user})
 
 def my_BookingView(request):
     user_id = request.session.get('user_id')
@@ -2682,3 +2721,6 @@ def demo(request):
     username = 'jishan'
     return render (request,'demo.html',{'username' : username})
 
+def clearMessages(request):
+    storage = messages.get_messages(request)
+    storage.used = True

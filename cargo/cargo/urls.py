@@ -42,7 +42,7 @@ urlpatterns = [
     # admin
     path('admin-list/',admin_list),
     # customer
-    path('customer-list/',customer_list, name='customer-list'),
+    path('customer-list/',customer_list, name='customer-list' ),
     path('create-customer/',add_Customer_AdminView, name="create-customer"),
     path('update-customer/<int:id>/',edit_CustomerView, name="update-customer"),
     # emp
@@ -105,7 +105,7 @@ urlpatterns = [
     path('employee-login/',emplogin,name='employee-login'),
     path('employee-change-password/',ecpassword),
     path('employee-dashboard/',employee_dashboard ),
-    path('employee-profile/',employee_profile),
+    path('employee-profile/',employee_profile,name='employee-profile'),
     path('employee-profile-edit/',emp_edit_profile),
     # user
     path('emp-user-list/',emp_user_list),
@@ -135,7 +135,7 @@ urlpatterns = [
     path('customer-login/',custlogin, name='customer-login'),
     path('customer-register/',custregister),
     path('customer-change-password/', ccpassword),
-    path('customer-profile/', customer_profile),
+    path('customer-profile/', customer_profile,name= 'customer-profile'),
     path('customer-profile-edit/',cust_edit_profile),
     # estimate 
     path('booking-estimate/',customerEstimateView,name='booking-estimate'),
@@ -146,6 +146,7 @@ urlpatterns = [
     path('cust-invoice/<int:id>/',cust_invoice_View,name='invoice'),
     # feedback
     path('feedback/', dofeedback, name='feedback'),
+    path('feedback-success/',feedback_success,name='feedback-success'),
     # cust_my_booking
     path('my-bookings/',my_BookingView, name="myBookings"),
     path('delete-booking/<int:booking_id>/', delete_booking, name='delete_booking'),
