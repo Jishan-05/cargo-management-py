@@ -1904,7 +1904,7 @@ def custlogin(request):
             user = User.objects.get(email=email.lower(), role='Customer')
             if check_password(password, user.password):  # Use check_password to verify hashed password
                 request.session['user_id'] = user.id
-                return redirect('/customer-profile/')
+                return redirect('/')
                 # return redirect('/booking/')
             else:
                 messages.error(request, 'Invalid credentials.')
