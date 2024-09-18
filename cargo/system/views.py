@@ -1574,7 +1574,7 @@ def add_Customer_EmpView(request):
             address=address
         )
         messages.success(request, 'Customer added successfully')
-        return redirect('emp=customer-list')
+        return redirect('emp-customer-list')
     return render(request, 'employee/add-customer.html')    
 
 # booking list
