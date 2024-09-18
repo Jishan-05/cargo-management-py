@@ -1193,6 +1193,24 @@ def invoice_list(request):
             invoices = Invoice.objects.filter(customername__icontains = cr )
     return render(request, 'admin/invoicelist.html', {'invoices': invoices})
 
+def admin_invoice_View(request,id):
+    booking = Booking.objects.get(id = id )
+
+    if booking == None:
+        return redirect('/')
+    invoice = Invoice.objects.get(bookingid=booking)
+    print(invoice)
+    return render(request, 'admin/invoices.html',{'invoice':invoice})
+
+def adminaddInvoice(booking):
+     Invoice.objects.create(
+            createdon = timezone.now(),
+            customername = str(booking.customer.user.first_name) + str(' ') + str(booking.customer.user.last_name),
+            description = str(booking.parcel.from_city.name) + str(' to ') + str(booking.parcel.to_city.name),
+            price=booking.parcel.price,
+            bookingid = booking
+        )
+     return booking
 
 # parcel list
 def parcel_list(request):
@@ -1873,6 +1891,26 @@ def emp_invoice_View(request,id):
     invoice = Invoice.objects.get(bookingid=booking)
     print(invoice)
     return render(request, 'employee/invoice.html',{'invoice':invoice})
+
+def emp_invoices_View(request,id):
+    booking = Booking.objects.get(id = id )
+
+    if booking == None:
+        return redirect('/')
+    invoice = Invoice.objects.get(bookingid=booking)
+    print(invoice)
+    return render(request, 'employee/invoices.html',{'invoice':invoice})
+
+def adminaddInvoice(booking):
+     Invoice.objects.create(
+            createdon = timezone.now(),
+            customername = str(booking.customer.user.first_name) + str(' ') + str(booking.customer.user.last_name),
+            description = str(booking.parcel.from_city.name) + str(' to ') + str(booking.parcel.to_city.name),
+            price=booking.parcel.price,
+            bookingid = booking
+        )
+     return booking
+
 
 # contactlist
 def emp_contactlist(request):

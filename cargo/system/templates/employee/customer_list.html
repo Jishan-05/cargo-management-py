@@ -20,8 +20,9 @@
             <tr>
                 <th>Username</th>
                 <th>Customer Name</th>
-                <th>Password</th>
+                {% comment %} <th>Password</th> {% endcomment %}
                 <th>Phone Number</th>
+                <th>Email</th>
                 <th>Address</th>
                 {% comment %} <th>Action</th> {% endcomment %}
             </tr>
@@ -29,8 +30,9 @@
             <tr>
                 <td>{{ customer.user.username }}</td>
                 <td>{{ customer.user.first_name }} {{ customer.user.last_name }}</td>
-                <td>{{ customer.user.password }}</td>
+                {% comment %} <td>{{ customer.user.password }}</td> {% endcomment %}
                 <td>{{ customer.phone_number }}</td>
+                <td>{{ customer.user.email}}</td>
                 <td>{{ customer.address }}</td>
                 
                 {% comment %} <td>

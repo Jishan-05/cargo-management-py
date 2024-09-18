@@ -39,7 +39,7 @@
                 <td>{{ invoice.price }}</td>
                 <td>
                     {% if booking.payment_status != 'Pending' %}
-                    <a class="button" href="/invoice/{{ invoice.bookingid.id }}/">View Invoice</a>  
+                    <a class="button" href="/admin-invoice/{{ invoice.bookingid.id }}/">View Invoice</a>  
                     {% endif %}
                 </td>
                 {% comment %} <td>{{ invoice.bookingid.customer.name }}</td>  <!-- Access customer name --> {% endcomment %}

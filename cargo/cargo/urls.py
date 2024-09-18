@@ -91,6 +91,7 @@ urlpatterns = [
     # invoice
     path('invoice/<int:id>/',invoice_View,name='invoice'),
     path('invoice-list/', invoice_list, name='invoice-list'),
+    path('admin-invoice/<int:id>/',admin_invoice_View,name='admin-invoice'),
     # parcel
     path('parcel-list/',parcel_list),
     # feedback
@@ -128,6 +129,7 @@ urlpatterns = [
     # invoice
     path('emp-invoice/<int:id>/',emp_invoice_View,name='emp-invoice'),
     path('emp-invoice-list/', emp_invoice_list, name='emp-invoice-list'),
+    path('emp-invoices/<int:id>/',emp_invoices_View,name='emp-invoice'),
      # contactlist 
     path('emp-contactlist/',emp_contactlist),
 

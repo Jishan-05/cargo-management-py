@@ -22,6 +22,7 @@
         <tr>
             <th>Employee</th>
             <th>Phone Number</th>
+            <th>Email</th>
             <th>Position</th>
             <th>Address</th>
             {% comment %} <th>Actions</th> {% endcomment %}
@@ -31,6 +32,7 @@
             {% comment %} <td>{{ employee.employee_id }} {% endcomment %}
             <td>{{ employee.user.first_name }} {{ employee.user.last_name }}</td>
             <td>{{ employee.phone_number }}</td>
+            <td>{{ employee.user.email}}</td>
             <td>{{ employee.position }}</td>
             <td>{{ employee.address }}</td>
              {% comment %} <td>
