@@ -1974,10 +1974,10 @@ def custregister(request):
             return render(request, 'user/custregister.html')
         if len(username) < 5:
             messages.error(request, 'Username must be at least 5 characters long.')
-            return render(request, 'user/register.html')
+            return render(request, 'user/custregister.html')
         if len(password) < 8:
             messages.error(request, 'Password must be at least 8 characters long.')
-            return render(request, 'user/register.html')
+            return render(request, 'user/custregister.html')
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists.')
             return render(request, 'user/custregister.html')
