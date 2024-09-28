@@ -1,4 +1,7 @@
-{% extends 'admin/dsbrd.html' %}
+{% extends 'admin/rpblock.html' %}
+
+
+{% comment %} {% extends 'admin/dsbrd.html' %} {% endcomment %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +18,7 @@
             <span></span>
             <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');" >Back</a>
         </div> 
-    <h1>Employee Report</h1>
+    <h1><b>Employee Report</b></h1>
     {% comment %} <a href="/create-employee/" class="button" onclick="return confirm('do you want to add new data?');">Add</a> {% endcomment %}
     <table border="1">     
         <tr>

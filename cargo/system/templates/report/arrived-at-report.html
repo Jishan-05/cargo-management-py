@@ -1,9 +1,11 @@
-{% extends 'admin/dsbrd.html' %}
+{% extends 'admin/rpblock.html' %}
+
+{% comment %} {% extends 'admin/dsbrd.html' %} {% endcomment %}
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booked Bookings Report</title>
+    <title>Arrived Bookings Report</title>
 </head>
 <body>
     {% block content %}
@@ -12,8 +14,8 @@
             <span></span>
             <a class="button" href="/admin-dashboard/" onclick="return confirm('Go Back to Previous Page');">Back</a>
         </div>
-        <h1>Arrived Bookings Report</h1>
-        <hr>
+        <h1><b>Arrived Bookings Report</b></h1>
+
         <table border="1">
             <tr>
                 <th>Id</th>
@@ -36,10 +38,9 @@
                 <td>{{ booking.parcel.to_city.name }}</td>
                 <td>{{ booking.booking_date }}</td>
                 <td>{{ booking.customer.user.email }}</td>
-
             </tr>
             {% empty %}
-            <tr><td colspan="7">No Data found</td></tr>
+            <tr><td colspan="8">No Data found</td></tr>
             {% endfor %}
         </table>
     </center>

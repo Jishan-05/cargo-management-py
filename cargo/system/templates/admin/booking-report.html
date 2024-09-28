@@ -1,9 +1,11 @@
-{% extends 'admin/dsbrd.html' %}
+{% extends 'admin/rpblock.html' %}
+
+{% comment %} {% extends 'admin/dsbrd.html' %} {% endcomment %}
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bokking Report</title>
+    <title>Booking Report</title>
 </head>
 <body>
     {% block content %}
@@ -14,9 +16,9 @@
             <span></span>
             <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
         </div>
-        <h1>Booking Report</h1>
+        <h1><b>Booking Report</b></h1>
         <hr>
-        <h3>In Transit</h3>
+        <h3><b>In Transit</b></h3>
         <table border="1">
             <tr>
                 <th>Id</th>
@@ -46,7 +48,7 @@
         {% endfor %}
 
         <hr>
-        <h3>Booked</h3>
+        <h3><b>Booked</b></h3>
         <table border="1">
             <tr>
                 <th>Id</th>
@@ -76,7 +78,7 @@
         {% endfor %}
 
         <hr>
-        <h3>Arrived at destination</h3>
+        <h3><b>Arrived at destination</b></h3>
         <table border="1">
             <tr>
                 <th>Id</th>
@@ -106,7 +108,7 @@
         {% endfor %}
 
         <hr>
-        <h3>Delivered</h3>
+        <h3><b>Delivered</b></h3>
         <table border="1">
             <tr>
                 <th>Id</th>
@@ -136,7 +138,7 @@
         {% endfor %}
 
         <hr>
-        <h3>Pending Payments</h3>
+        <h3><b>Pending Payments</b></h3>
         <table border="1">
             <tr>
                 <th>Id</th>
