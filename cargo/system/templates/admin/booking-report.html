@@ -10,12 +10,14 @@
 <body>
     {% block content %}
     <center>
+
         <div class="d-flex justify-content-between">
 
             {% comment %} <h2>Order is #<b>{{ booking.parcel.tracking_id }}</b></h2> {% endcomment %}
             <span></span>
             <a class="button" href="/admin-dashboard/" class="mr-4" onclick="return confirm('Go Back to Previous Page');">Back</a>
         </div>
+        
         <h1><b>Booking Report</b></h1>
         <hr>
         <h3><b>In Transit</b></h3>
@@ -105,9 +107,8 @@
         {% for booking in bookings.arrivedAtDestinationPayments %}
         {% empty %}
             No Data found
-        {% endfor %}
-
-        <hr>
+        {% endfor %} <hr>
+        
         <h3><b>Delivered</b></h3>
         <table border="1">
             <tr>
