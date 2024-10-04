@@ -221,7 +221,7 @@ def admin_dashboard_view(request):
                     bookingCounts = { 'totalBookingCount': totalBooking.__len__(),
                            'pendingPaymentCount': totalBooking.filter(payment_status = 'Pending').__len__(),
                            'deliveredBookingCount': parcelLists.filter(status = 'Delivered').__len__(),
-                           'inTransitBookingCount': parcelLists.filter(status = 'In Tansit').__len__(),
+                           'inTransitBookingCount': parcelLists.filter(status = 'In Transit').__len__(),
                             'ArrivedBookingCount' :parcelLists.filter(status = 'Arrived').__len__()
                            }
                     
@@ -601,7 +601,8 @@ def update_country(request, id):
         if name : 
             if name != country.name and Country.objects.filter(name=name).exists():
                 messages.error(request, 'Country already exists')
-                return redirect('update-country', id=id) 
+                return redirect('update-country', id=id)
+        country.name = name 
         country.save()
         messages.success(request, 'Country updated successfully')
         return redirect('country-list')
@@ -1396,7 +1397,7 @@ def employee_dashboard(request):
                     bookingCounts = { 'totalBookingCount': totalBooking.__len__(),
                            'pendingPaymentCount': totalBooking.filter(payment_status = 'Pending').__len__(),
                            'deliveredBookingCount': parcelLists.filter(status = 'Delivered').__len__(),
-                           'inTransitBookingCount': parcelLists.filter(status = 'In Tansit').__len__(),
+                           'inTransitBookingCount': parcelLists.filter(status = 'In Transit').__len__(),
                             'ArrivedBookingCount' :parcelLists.filter(status = 'Arrived').__len__()
 
                            }
