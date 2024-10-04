@@ -398,7 +398,7 @@ def add_Customer_AdminView(request):
             phone_number=contact,
             address=address
         )
-        messages.success(request, 'Customer added successfully')
+        # messages.success(request, 'Customer added successfully')
         return redirect('customer-list')
     return render(request, 'admin/add-customer.html')    
 
@@ -1574,7 +1574,7 @@ def add_Customer_EmpView(request):
             phone_number=contact,
             address=address
         )
-        messages.success(request, 'Customer added successfully')
+        # messages.success(request, 'Customer added successfully')
         return redirect('emp-customer-list')
     return render(request, 'employee/add-customer.html')    
 
