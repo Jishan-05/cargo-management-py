@@ -322,7 +322,7 @@ def admin_edit_profile(request):
             return redirect('admin-login')
     return redirect('admin-login')
 
-# users
+# users-list
 def user_list(request):
     users = User.objects.all()
     if request.method=="GET":
