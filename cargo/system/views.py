@@ -105,7 +105,6 @@ def admin_login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         if not username :
             messages.error(request, 'username is required.')
             # return render(request, 'user/admin-login.html')
@@ -114,7 +113,6 @@ def admin_login_view(request):
             messages.error(request, 'password is required.')
             # return render(request, 'user/admin-login.html')
             return redirect('admin-login')
-
         try:
             user = User.objects.get(username=username)
             if user.password == password:  
